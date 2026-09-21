@@ -30,15 +30,14 @@ python3 -m http.server 8000
 
 Não há etapa de build — a Vercel serve a raiz do repositório como estático.
 
-Pelo painel: **Add New → Project**, importar `matsuch/portfolio` e confirmar.
-Framework Preset fica em **Other**, e os campos de Build e Output ficam vazios.
+O projeto `matheus-such` já está conectado a este repositório: cada push na
+branch de produção gera um deploy de produção, e as demais branches geram
+deploys de preview. Framework Preset fica em **Other**, com Build e Output
+vazios.
 
-Pela CLI:
+Deploy manual pela CLI, se precisar:
 
 ```bash
 npx vercel        # preview
 npx vercel --prod # produção
 ```
-
-Cada push na branch de produção gera um novo deploy; as demais branches geram
-deploys de preview.
