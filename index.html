@@ -1,0 +1,2792 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="author" content="Matheus Rosa Such">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<title>Matheus Rosa Such | Produto e IA</title>
+<meta name="description" content="Portfólio de Matheus Rosa Such, Product Manager: produtos com IA, dados e CRM, cases profissionais e um case estratégico interativo.">
+<meta property="og:title" content="Matheus Rosa Such | Produto e IA">
+<meta property="og:description" content="Product Manager trabalhando entre estratégia, dados e engenharia.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 fill=%27%23171613%27/%3E%3Ctext x=%2716%27 y=%2723%27 font-family=%27Arial,sans-serif%27 font-size=%2719%27 font-weight=%27700%27 fill=%27%23F7F5F2%27 text-anchor=%27middle%27%3EM%3C/text%3E%3C/svg%3E">
+<script>document.documentElement.classList.add("js")</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700&family=Geist+Mono:wght@400;500&family=Geist:wght@300;400;500;600&display=swap">
+
+<style>
+/* ============================================================
+   TOKENS
+   Radius rule (locked): interactive = pill (999px).
+   Everything else = 0. Editorial, sem caixas arredondadas.
+   ============================================================ */
+:root{
+  --paper:#F7F5F2;
+  --paper-2:#F1EEE9;
+  --ink:#171613;
+  --ink-2:#55534C;
+  --ink-3:#8C8981;
+  --rule:#E1DDD5;
+  --rule-soft:#EBE7E0;
+  --accent:#2E4FA3;
+  --accent-ink:#FFFFFF;
+  --accent-wash:#E8EAF4;
+
+  --font-display:"Bricolage Grotesque","Geist","Segoe UI",system-ui,sans-serif;
+  --font-body:"Geist","Segoe UI",system-ui,-apple-system,sans-serif;
+  --font-mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+
+  --ease-out:cubic-bezier(0.23,1,0.32,1);
+  --ease-in-out:cubic-bezier(0.77,0,0.175,1);
+
+  --gutter:clamp(20px,5vw,72px);
+  --band:clamp(20px,6.5vw,96px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#121211;
+    --paper-2:#1A1A18;
+    --ink:#F2F0EB;
+    --ink-2:#A8A59D;
+    --ink-3:#77746C;
+    --rule:#2B2A26;
+    --rule-soft:#232220;
+    --accent:#9CB4F2;
+    --accent-ink:#101017;
+    --accent-wash:#1C2233;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#121211;
+  --paper-2:#1A1A18;
+  --ink:#F2F0EB;
+  --ink-2:#A8A59D;
+  --ink-3:#77746C;
+  --rule:#2B2A26;
+  --rule-soft:#232220;
+  --accent:#9CB4F2;
+  --accent-ink:#101017;
+  --accent-wash:#1C2233;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-size:16px;
+  line-height:1.6;
+  font-weight:400;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{font-family:var(--font-display);font-weight:500;letter-spacing:-.03em;margin:0;text-wrap:balance}
+p{margin:0}
+
+.shell{max-width:1320px;margin:0 auto;padding-inline:var(--gutter)}
+.rule{height:1px;background:var(--rule);border:0;margin:0}
+
+/* small utility label — the only place mono is allowed besides numbers */
+.label{
+  font-family:var(--font-mono);font-size:11px;font-weight:400;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.masthead{
+  position:sticky;top:env(safe-area-inset-top,0px);z-index:20;
+  background:var(--paper);
+}
+.masthead-in{
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
+  padding-block:20px;
+}
+.identity{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;min-width:0}
+.wordmark{
+  font-family:var(--font-display);font-size:17px;font-weight:600;letter-spacing:-.02em;
+  display:inline-flex;align-items:center;gap:9px;white-space:nowrap;
+}
+.identity .mail{
+  font-size:13.5px;color:var(--ink-3);position:relative;padding-bottom:2px;
+  transition:color 180ms ease;
+}
+.identity .mail::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;
+  transform:scaleX(0);transform-origin:left;transition:transform 200ms var(--ease-out);
+}
+.identity .mail:hover{color:var(--ink)}
+@media (hover:hover) and (pointer:fine){ .identity .mail:hover::after{transform:scaleX(1)} }
+.pulse{
+  width:6px;height:6px;border-radius:999px;background:var(--accent);
+  flex:none;
+}
+.nav{display:flex;align-items:center;gap:26px}
+.nav a{
+  font-size:14px;color:var(--ink-2);position:relative;padding-block:3px;
+  transition:color 180ms ease;
+}
+.nav a::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;
+  transform:scaleX(0);transform-origin:left;transition:transform 200ms var(--ease-out);
+}
+.nav a:hover{color:var(--ink)}
+@media (hover:hover) and (pointer:fine){
+  .nav a:hover::after{transform:scaleX(1)}
+}
+.nav .ext{color:var(--ink)}
+.theme-toggle{
+  font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:none;border:0;color:var(--ink-3);cursor:pointer;padding:6px 2px;
+  transition:color 180ms ease;
+}
+.theme-toggle:hover{color:var(--ink)}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{padding-block:clamp(56px,10vw,132px) clamp(48px,8vw,104px)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.42fr);gap:clamp(32px,6vw,88px);align-items:start}
+.hero h1{
+  font-size:clamp(42px,8.2vw,112px);
+  line-height:.96;
+  letter-spacing:-.045em;
+  font-weight:500;
+  margin-block:22px 0;
+  max-width:16ch;
+}
+.hero h1 .soft{color:var(--ink-3)}
+.hero h1 .accentword{color:var(--accent);font-weight:600}
+.hero-sub{
+  margin-top:clamp(24px,3.4vw,40px);
+  font-size:clamp(16px,1.35vw,19px);
+  line-height:1.55;color:var(--ink-2);max-width:52ch;font-weight:300;
+}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:32px}
+
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:14px;font-weight:500;border-radius:999px;
+  padding:11px 20px;cursor:pointer;border:1px solid transparent;
+  transition:transform 140ms var(--ease-out), background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+}
+.btn:active{transform:scale(.975)}
+.btn-solid{background:var(--ink);color:var(--paper)}
+.btn-solid:hover{background:var(--accent);color:var(--accent-ink)}
+.btn-quiet{border-color:var(--rule);color:var(--ink-2)}
+.btn-quiet:hover{border-color:var(--ink);color:var(--ink)}
+.btn .arrow{transition:transform 200ms var(--ease-out)}
+@media (hover:hover) and (pointer:fine){
+  .btn:hover .arrow{transform:translateX(3px)}
+}
+
+/* right-hand signal: typographic, no box */
+.signal{display:flex;flex-direction:column;gap:22px;padding-top:6px}
+.signal-item{display:grid;gap:2px}
+.signal-item .k{
+  font-family:var(--font-display);font-size:clamp(26px,2.6vw,36px);
+  font-weight:500;letter-spacing:-.03em;line-height:1;
+  font-variant-numeric:tabular-nums;
+}
+.signal-item .v{font-size:13.5px;color:var(--ink-3);line-height:1.4}
+.signal-rule{height:1px;background:var(--rule)}
+
+/* competências, dentro da coluna direita do hero */
+.skills{display:grid;gap:14px;margin-top:2px}
+.skills-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 24px}
+.skill h3{
+  font-family:var(--font-display);font-size:clamp(15px,1.25vw,18px);
+  font-weight:500;letter-spacing:-.02em;line-height:1.15;
+}
+.skill p{
+  margin-top:5px;font-size:12.5px;line-height:1.5;color:var(--ink-2);font-weight:300;
+}
+
+/* ============================================================
+   SECTION SCAFFOLD
+   ============================================================ */
+.band{padding-block:var(--band)}
+.band-tight{padding-block:clamp(34px,4.8vw,68px)}
+.band-slim{padding-block:clamp(24px,3.2vw,44px)}
+.sec-label{display:flex;align-items:baseline;justify-content:space-between;gap:20px;margin-bottom:clamp(22px,3vw,40px)}
+.sec-title{
+  font-family:var(--font-display);font-size:clamp(22px,2.4vw,32px);
+  font-weight:500;letter-spacing:-.03em;line-height:1.1;color:var(--ink);
+}
+
+/* ============================================================
+   FEATURED CASE
+   ============================================================ */
+.featured{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:clamp(28px,5vw,72px);align-items:start}
+.case-index{font-family:var(--font-mono);font-size:12px;color:var(--ink-3);letter-spacing:.08em}
+.featured h3{
+  font-size:clamp(30px,4.4vw,58px);line-height:1.02;letter-spacing:-.035em;
+  margin-block:14px 16px;max-width:15ch;font-weight:500;
+}
+.case-tags{font-size:13.5px;color:var(--ink-3);letter-spacing:.01em}
+.featured .case-body{margin-top:22px;font-size:17px;line-height:1.6;color:var(--ink-2);max-width:52ch;font-weight:300}
+
+.impact{display:flex;flex-wrap:wrap;gap:clamp(26px,4vw,56px);margin-top:clamp(28px,4vw,44px)}
+.impact-item{display:grid;gap:4px;min-width:120px}
+.impact-item .n{
+  font-family:var(--font-display);font-weight:500;
+  font-size:clamp(40px,5.4vw,68px);line-height:.94;letter-spacing:-.045em;
+  font-variant-numeric:tabular-nums;color:var(--ink);
+}
+.impact-item .n em{font-style:normal;color:var(--ink-3);font-weight:300}
+.impact-item .c{font-size:13px;color:var(--ink-3);line-height:1.35;max-width:18ch}
+
+/* abstract product signal — CSS composition, no fake data */
+.artifact{
+  position:relative;aspect-ratio:16/9;max-width:100%;
+  background:var(--paper-2);overflow:hidden;
+  display:grid;align-content:end;gap:8px;padding:23px;
+}
+.artifact .stripe{height:1px;background:var(--rule);width:100%}
+.artifact .float{
+  font-family:var(--font-display);letter-spacing:-.03em;line-height:1.05;
+  font-size:clamp(17px,1.8vw,23px);color:var(--ink-3);font-weight:400;
+}
+.artifact .float.lead{color:var(--ink);font-weight:500}
+.artifact .artifact-tags{
+  position:absolute;top:22px;left:23px;right:23px;
+  font-size:13px;line-height:1.45;color:var(--ink-3);
+}
+.artifact .corner{
+  position:absolute;top:22px;right:23px;font-family:var(--font-mono);
+  font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);
+}
+
+/* ============================================================
+   CASE LIST (compact)
+   ============================================================ */
+.cases{border-top:1px solid var(--rule)}
+.case{border-bottom:1px solid var(--rule)}
+.case-head{
+  width:100%;background:none;border:0;padding:clamp(22px,2.6vw,34px) 0;cursor:pointer;
+  color:inherit;font:inherit;text-align:left;
+  display:grid;grid-template-columns:56px minmax(0,1fr) minmax(0,.42fr) 34px;
+  gap:clamp(14px,2vw,32px);align-items:baseline;
+  transition:opacity 200ms ease;
+}
+.case-head h3{
+  font-size:clamp(22px,2.5vw,32px);line-height:1.08;letter-spacing:-.03em;font-weight:500;
+  transition:transform 220ms var(--ease-out), color 200ms ease;
+}
+.case-head .meta{margin-top:9px;font-size:13.5px;color:var(--ink-3)}
+.case-head .side{display:grid;gap:3px}
+.case-head .side .n{
+  font-family:var(--font-display);font-size:clamp(22px,2.2vw,30px);font-weight:500;
+  letter-spacing:-.035em;line-height:1;font-variant-numeric:tabular-nums;
+}
+.case-head .side .c{font-size:12.5px;color:var(--ink-3)}
+.open-mark{
+  justify-self:end;font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-3);white-space:nowrap;
+  transition:color 200ms ease;
+}
+@media (hover:hover) and (pointer:fine){
+  .case-head:hover h3{transform:translateX(6px);color:var(--accent)}
+  .case-head:hover .open-mark{color:var(--ink)}
+}
+.case-head[aria-expanded="true"] h3{color:var(--accent)}
+
+.case-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows 280ms var(--ease-out)}
+.case-panel[data-open="true"]{grid-template-rows:1fr}
+.case-panel > .inner{overflow:hidden;min-height:0}
+.panel-grid{
+  display:grid;grid-template-columns:56px minmax(0,1fr) minmax(0,.62fr);
+  gap:clamp(14px,2vw,32px);padding-bottom:clamp(30px,3.4vw,46px);
+  opacity:0;transform:translateY(6px);
+  transition:opacity 220ms ease 40ms, transform 260ms var(--ease-out) 40ms;
+}
+.case-panel[data-open="true"] .panel-grid{opacity:1;transform:none}
+.panel-grid .spacer{display:block}
+.pblock + .pblock{margin-top:22px}
+.pblock h4{font-family:var(--font-body);font-size:13px;font-weight:500;color:var(--ink-3);margin:0 0 6px;letter-spacing:0}
+.pblock p{font-size:15.5px;line-height:1.62;color:var(--ink-2);max-width:56ch;font-weight:300}
+.stack-line{font-family:var(--font-mono);font-size:11.5px;color:var(--ink-3);letter-spacing:.04em;line-height:1.9}
+.flow{
+  font-family:var(--font-mono);font-size:11.5px;line-height:2;color:var(--ink-2);
+  white-space:pre;overflow-x:auto;padding:18px 20px;background:var(--paper-2);
+}
+.priv{font-size:12.5px;color:var(--ink-3);margin-top:16px}
+
+/* ============================================================
+   STATEMENT BANDS
+   ============================================================ */
+.statement{
+  font-family:var(--font-display);font-weight:400;
+  font-size:clamp(28px,4.6vw,62px);line-height:1.06;letter-spacing:-.04em;
+  max-width:19ch;
+}
+.pov{display:grid;gap:0}
+.pov-item{
+  padding-block:clamp(24px,3vw,38px);border-top:1px solid var(--rule);
+  display:grid;grid-template-columns:56px minmax(0,1fr);gap:clamp(14px,2vw,32px);align-items:start;
+}
+.pov-item:last-child{border-bottom:1px solid var(--rule)}
+.pov-item p{
+  font-family:var(--font-display);font-weight:400;
+  font-size:clamp(20px,2.7vw,34px);line-height:1.18;letter-spacing:-.03em;max-width:24ch;
+}
+
+/* ============================================================
+   PROCESS
+   ============================================================ */
+.process{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;border-top:1px solid var(--rule)}
+.step{padding:26px 22px 26px 0;position:relative}
+.step::before{
+  content:"";position:absolute;top:-1px;left:0;width:0;height:1px;background:var(--accent);
+  transition:width 320ms var(--ease-out);
+}
+@media (hover:hover) and (pointer:fine){
+  .step:hover::before{width:100%}
+  .step:hover .step-name{color:var(--accent)}
+}
+.step-n{font-family:var(--font-mono);font-size:11px;color:var(--ink-3);letter-spacing:.12em}
+.step-name{
+  font-family:var(--font-display);font-size:clamp(17px,1.7vw,22px);font-weight:500;
+  letter-spacing:-.025em;margin-block:8px 6px;transition:color 200ms ease;
+}
+.step p{font-size:13.5px;color:var(--ink-3);line-height:1.5;max-width:22ch;font-weight:300}
+
+/* ============================================================
+   CAPABILITIES
+   ============================================================ */
+.caps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(20px,3vw,44px)}
+.cap{border-top:1px solid var(--rule);padding-top:20px}
+.cap h3{font-size:clamp(19px,1.9vw,25px);font-weight:500;letter-spacing:-.03em;margin-bottom:10px}
+.cap p{font-size:14px;color:var(--ink-2);line-height:1.65;font-weight:300}
+
+/* ============================================================
+   CONTACT
+   ============================================================ */
+.contact{padding-block:clamp(80px,12vw,180px)}
+.contact .statement{max-width:14ch}
+.contact-row{display:flex;align-items:flex-end;justify-content:space-between;gap:32px;flex-wrap:wrap;margin-top:clamp(28px,4vw,44px)}
+.contact-links{display:flex;gap:22px;flex-wrap:wrap;font-size:14px;color:var(--ink-2)}
+.contact-links a{position:relative;padding-bottom:2px}
+.contact-links a::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;
+  transform:scaleX(0);transform-origin:left;transition:transform 200ms var(--ease-out);
+}
+@media (hover:hover) and (pointer:fine){ .contact-links a:hover::after{transform:scaleX(1)} }
+.colophon{
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  padding-block:24px 40px;font-size:12.5px;color:var(--ink-3);
+}
+
+.draft-note{
+  font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;color:var(--ink-3);
+  padding-block:10px;
+}
+
+/* ============================================================
+   MOTION — entrada única no load (tier: raro)
+   ============================================================ */
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.rise{animation:rise 620ms var(--ease-out) both}
+.d1{animation-delay:60ms}
+.d2{animation-delay:120ms}
+.d3{animation-delay:180ms}
+.d4{animation-delay:240ms}
+
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .rise{animation:none}
+  .case-panel{transition:none}
+  .panel-grid{transition:opacity 150ms ease}
+  *{transition-duration:120ms !important}
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:1040px){
+  .caps{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
+  /* 5 passos nunca fecham uma grade de 2 ou 3 colunas — vira sequência vertical */
+  .process{grid-template-columns:1fr;border-top:0}
+  .step{border-top:1px solid var(--rule);padding-block:22px;display:grid;grid-template-columns:56px minmax(0,1fr) minmax(0,1.6fr);gap:clamp(14px,2vw,32px);align-items:baseline}
+  .step-name{margin-block:0}
+  .step p{max-width:46ch}
+}
+@media (max-width:860px){
+  .hero-grid{grid-template-columns:1fr;gap:44px;align-items:start}
+  .signal{flex-direction:row;flex-wrap:wrap;gap:28px 40px}
+  .signal-rule{display:none}
+  .featured{grid-template-columns:1fr;gap:32px}
+  .artifact{aspect-ratio:16/9}
+  .case-head{grid-template-columns:34px minmax(0,1fr);row-gap:14px}
+  .case-head .side{grid-column:2}
+  .open-mark{grid-column:2;justify-self:start}
+  .panel-grid{grid-template-columns:1fr}
+  .panel-grid .spacer{display:none}
+  .pov-item{grid-template-columns:34px minmax(0,1fr)}
+  .step{grid-template-columns:34px minmax(0,1fr);row-gap:6px}
+  .step p{grid-column:2}
+}
+@media (max-width:760px){
+  /* nome e e-mail lado a lado quebram a barra em duas linhas no celular */
+  .identity .mail{display:none}
+}
+@media (max-width:600px){
+  .nav .hide-sm{display:none}
+  .nav{gap:14px}
+  .nav a{font-size:13px}
+  .wordmark{font-size:15px}
+  .caps{grid-template-columns:1fr}
+}
+
+/* ============================================================
+   PERSONAL PROJECTS — lista leve, sem card e sem métrica
+   ============================================================ */
+.personal{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 clamp(28px,5vw,72px)}
+.pp{
+  border-top:1px solid var(--rule);
+  padding-block:clamp(22px,2.6vw,32px);
+  display:grid;grid-template-columns:56px minmax(0,1fr);gap:clamp(14px,2vw,24px);align-items:start;
+}
+.pp h3{font-size:clamp(19px,1.9vw,26px);font-weight:500;letter-spacing:-.03em;line-height:1.1}
+.pp .meta{margin-top:8px;font-size:13px;color:var(--ink-3)}
+.pp p{margin-top:12px;font-size:14.5px;line-height:1.6;color:var(--ink-2);font-weight:300;max-width:38ch}
+
+
+/* ============================================================
+   CARROSSEL — trilho com scroll-snap, sem dots e sem card
+   ============================================================ */
+.rail{--slide-gap:36px;--slide-w:calc((100% - 2 * var(--slide-gap)) / 3);position:relative}
+.rail-controls{display:flex;gap:8px}
+.rail-btn{
+  width:34px;height:34px;border-radius:999px;border:1px solid var(--rule);
+  background:none;color:var(--ink-2);cursor:pointer;display:grid;place-items:center;
+  font-size:14px;line-height:1;
+  transition:border-color 200ms ease, color 200ms ease, transform 140ms var(--ease-out), opacity 200ms ease;
+}
+.rail-btn:hover:not(:disabled){border-color:var(--ink);color:var(--ink)}
+.rail-btn:active:not(:disabled){transform:scale(.94)}
+.rail-btn:disabled{opacity:.3;cursor:default}
+.track{
+  display:grid;grid-auto-flow:column;
+  grid-auto-columns:var(--slide-w);
+  gap:var(--slide-gap);
+  overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;
+  scrollbar-width:none;-ms-overflow-style:none;padding-bottom:2px;
+}
+.track::-webkit-scrollbar{display:none}
+.slide{
+  scroll-snap-align:start;min-width:0;
+  border-top:1px solid var(--rule);padding-top:18px;
+  display:flex;flex-direction:column;gap:0;
+}
+.slide h3{
+  font-size:clamp(20px,2vw,27px);line-height:1.1;letter-spacing:-.03em;font-weight:500;
+  margin-top:12px;transition:color 200ms ease;
+}
+.slide .meta{margin-top:8px;font-size:13px;color:var(--ink-3)}
+.slide p.desc{margin-top:14px;font-size:14.5px;line-height:1.6;color:var(--ink-2);font-weight:300}
+.slide-impact{margin-top:auto;padding-top:26px;display:grid;gap:3px}
+.slide-impact .n{
+  font-family:var(--font-display);font-size:clamp(30px,3.4vw,44px);font-weight:500;
+  letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums;
+}
+.slide-impact .c{font-size:12.5px;color:var(--ink-3);line-height:1.4;max-width:24ch}
+.slide-open{
+  align-self:flex-start;margin-top:20px;background:none;border:0;padding:0;cursor:pointer;
+  font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-3);position:relative;padding-bottom:3px;
+  transition:color 200ms ease;
+}
+.slide-open::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;
+  transform:scaleX(0);transform-origin:left;transition:transform 200ms var(--ease-out);
+}
+.slide-open[aria-expanded="true"]{color:var(--accent)}
+.slide-open[aria-expanded="true"]::after{transform:scaleX(1)}
+@media (hover:hover) and (pointer:fine){
+  .slide:hover h3{color:var(--accent)}
+  .slide-open:hover{color:var(--ink)}
+  .slide-open:hover::after{transform:scaleX(1)}
+}
+/* trilho de largura cheia: o case inteiro e um slide */
+#rail-work{--slide-w:100%}
+.slide-wide{border-top:0;padding-top:0}
+.slide-wide .featured h3{
+  font-size:clamp(30px,4.4vw,58px);line-height:1.02;letter-spacing:-.035em;
+  max-width:15ch;margin-block:14px 16px;
+}
+.slide-wide .slide-open{align-self:flex-start;margin-top:28px}
+.slide-actions{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:28px}
+.slide-actions .slide-open{margin-top:0}
+.repo-link{
+  font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-3);position:relative;padding-bottom:3px;transition:color 200ms ease;
+}
+.repo-link::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;
+  transform:scaleX(0);transform-origin:left;transition:transform 200ms var(--ease-out);
+}
+@media (hover:hover) and (pointer:fine){
+  .repo-link:hover{color:var(--ink)}
+  .repo-link:hover::after{transform:scaleX(1)}
+}
+.slide-wide .impact{margin-top:clamp(24px,3.4vw,40px)}
+.impact-item .c.only{
+  font-family:var(--font-body);font-size:16px;color:var(--ink-2);max-width:26ch;
+  line-height:1.5;
+}
+.rail-controls .label{margin-right:6px;font-variant-numeric:tabular-nums}
+
+.tech-list{
+  margin:0;padding:0;list-style:none;
+  display:grid;gap:7px;
+}
+.tech-list li{
+  position:relative;padding-left:16px;
+  font-size:14.5px;line-height:1.5;color:var(--ink-2);font-weight:300;max-width:42ch;
+}
+.tech-list li::before{
+  content:"";position:absolute;left:0;top:.62em;
+  width:5px;height:1px;background:var(--ink-3);
+}
+.rail-detail{margin-top:clamp(24px,3vw,40px)}
+.rail-detail .panel-grid{grid-template-columns:minmax(0,1fr) minmax(0,.62fr);padding-top:26px;border-top:1px solid var(--rule)}
+.detail-title{
+  font-family:var(--font-display);font-size:clamp(19px,1.9vw,24px);font-weight:500;
+  letter-spacing:-.03em;margin-bottom:4px;color:var(--accent);
+}
+
+#rail-personal{--slide-w:100%}
+
+@media (max-width:1040px){ .rail{--slide-w:calc((100% - var(--slide-gap)) / 2)} }
+@media (max-width:860px){
+  .rail{--slide-gap:24px;--slide-w:86%}
+  #rail-personal{--slide-w:100%}
+  .rail-detail .panel-grid{grid-template-columns:1fr}
+}
+@media (max-width:600px){
+  .rail{--slide-gap:20px;--slide-w:88%}
+  #rail-personal{--slide-w:100%}
+}
+
+/* papel do PM em destaque dentro do case */
+.role-line{
+  display:inline-flex;align-items:center;gap:8px;margin-top:18px;
+  font-size:13.5px;color:var(--ink-2);
+}
+.role-line .k{color:var(--ink);font-weight:500}
+
+@media (max-width:860px){
+  .personal{grid-template-columns:1fr}
+  .pp{grid-template-columns:34px minmax(0,1fr)}
+}
+
+/* ============================================================
+   PRODUCT THINKING — case interativo em etapas (deck)
+   Mesmos tokens e regras: raio 0 no conteúdo, pill no controle,
+   hairline no lugar de caixa. Prefixo pt- para não colidir.
+   ============================================================ */
+.pt-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.pt-deck{border-top:1px solid var(--rule)}
+.pt-deck .btn-quiet{background:none}
+.pt-top{display:flex;align-items:baseline;justify-content:space-between;gap:10px 24px;flex-wrap:wrap;padding-top:18px}
+.pt-kicker{font-family:var(--font-display);font-size:clamp(16px,1.5vw,20px);font-weight:500;letter-spacing:-.02em;min-height:1.3em}
+.pt-steps{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:6px}
+.pt-step{
+  width:100%;display:block;background:none;border:0;border-top:2px solid var(--rule);
+  padding:9px 0 4px;margin:0;cursor:pointer;text-align:left;color:var(--ink-3);
+  font:inherit;font-size:12.5px;line-height:1.3;
+  transition:color 200ms ease,border-color 260ms var(--ease-out);
+}
+.pt-step .n{display:block;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;margin-bottom:3px}
+.pt-step.done{border-top-color:var(--ink-3)}
+.pt-step[aria-current="step"]{border-top-color:var(--accent);color:var(--ink)}
+@media (hover:hover) and (pointer:fine){ .pt-step:hover{color:var(--ink)} }
+.pt-now{display:none}
+.pt-short{display:none}
+
+.pt-stage-wrap{padding-block:clamp(30px,4vw,56px) clamp(24px,3vw,40px);min-height:clamp(430px,38vw,540px);touch-action:pan-y;outline:none}
+@keyframes ptIn{from{opacity:0;transform:translateX(calc(var(--dir,1) * 16px))}to{opacity:1;transform:none}}
+@keyframes ptFade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes ptGrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.pt-stage.in{animation:ptIn 440ms var(--ease-out) both}
+.pt-fade{animation:ptFade 300ms var(--ease-out) both}
+
+.pt-head{margin-bottom:clamp(24px,3.2vw,40px)}
+.pt-h{font-size:clamp(28px,3.6vw,48px);line-height:1.02;letter-spacing:-.035em;font-weight:500;max-width:24ch}
+.pt-lede{margin-top:14px;font-size:clamp(15px,1.2vw,17px);line-height:1.55;color:var(--ink-2);font-weight:300;max-width:60ch}
+.pt-sub{display:block;font-size:13px;font-weight:500;color:var(--ink-3);margin-bottom:10px}
+
+.pt-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid var(--rule);padding-top:18px}
+.pt-foot .btn:disabled{opacity:.35;cursor:default}
+.pt-foot .btn:disabled:active{transform:none}
+
+/* pílulas de seleção: abas e contendores */
+.pt-pills{display:flex;gap:8px;flex-wrap:wrap}
+.pt-pill{
+  font:inherit;font-size:13.5px;font-weight:500;border-radius:999px;padding:8px 16px;cursor:pointer;
+  background:none;color:var(--ink-2);border:1px solid var(--rule);
+  transition:background-color 200ms ease,color 200ms ease,border-color 200ms ease,transform 140ms var(--ease-out);
+}
+.pt-pill:active{transform:scale(.975)}
+.pt-pill:hover{border-color:var(--ink);color:var(--ink)}
+.pt-pill[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.pt-pill .s{font-family:var(--font-mono);font-size:11px;font-weight:400;margin-left:6px;opacity:.7}
+
+/* 01 — desafio */
+.pt-cover{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.42fr);gap:clamp(32px,6vw,88px);align-items:end}
+.pt-cover-h{font-size:clamp(46px,7.6vw,108px);line-height:.95;letter-spacing:-.045em;max-width:10ch}
+.pt-cover-q{margin-top:clamp(20px,2.6vw,32px);font-size:clamp(17px,1.5vw,21px);line-height:1.5;color:var(--ink-2);font-weight:300;max-width:42ch}
+.pt-ratio{display:flex;flex-direction:column;gap:20px}
+
+/* 02 — empresa e restrições */
+.pt-split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.8fr);gap:clamp(32px,6vw,88px);align-items:start}
+.pt-figs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(22px,3vw,40px) clamp(20px,3vw,40px)}
+.pt-fig{display:grid;gap:4px;border-top:1px solid var(--rule);padding-top:14px}
+.pt-fig .n{font-family:var(--font-display);font-size:clamp(32px,3.8vw,52px);font-weight:500;letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
+.pt-fig .c{font-size:13.5px;color:var(--ink-3)}
+.pt-squad{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+.pt-squad li{display:flex;justify-content:space-between;gap:16px;padding-block:11px;border-bottom:1px solid var(--rule-soft);font-size:15px;color:var(--ink-2)}
+.pt-squad li span:last-child{font-family:var(--font-mono);font-size:12px;color:var(--ink-3)}
+.pt-constraint{margin-top:22px;font-family:var(--font-display);font-size:clamp(20px,2vw,26px);line-height:1.2;letter-spacing:-.03em;max-width:22ch}
+.pt-constraint .soft{color:var(--ink-3)}
+
+/* 03 — oportunidades */
+.pt-opps{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(14px,1.6vw,24px)}
+.pt-opp{
+  display:flex;flex-direction:column;gap:6px;min-width:0;min-height:172px;
+  background:none;border:0;border-top:1px solid var(--rule);padding:14px 0 4px;margin:0;
+  font:inherit;color:inherit;text-align:left;cursor:pointer;scroll-snap-align:start;
+  transition:border-color 200ms ease,box-shadow 200ms ease;
+}
+.pt-opp .i{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;color:var(--ink-3)}
+.pt-opp .nm{font-family:var(--font-display);font-size:clamp(17px,1.45vw,21px);font-weight:500;letter-spacing:-.025em;line-height:1.12;margin-top:4px;transition:color 200ms ease}
+.pt-opp .ty{font-size:12.5px;color:var(--ink-3);line-height:1.4}
+.pt-opp .wk{margin-top:auto;padding-top:14px;font-family:var(--font-mono);font-size:11px;color:var(--ink-3);letter-spacing:.04em}
+.pt-opp[aria-expanded="true"]{border-top-color:var(--accent);box-shadow:inset 0 1px 0 var(--accent)}
+.pt-opp[aria-expanded="true"] .nm{color:var(--accent)}
+@media (hover:hover) and (pointer:fine){ .pt-opp:hover .nm{color:var(--accent)} }
+.pt-detail{margin-top:clamp(20px,2.6vw,32px);border-top:1px solid var(--rule);padding-top:22px}
+.pt-detail-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.62fr);gap:clamp(20px,4vw,56px)}
+.pt-detail .impact{margin-top:4px;margin-bottom:24px}
+.pt-detail .impact-item .n{font-size:clamp(34px,4vw,54px)}
+.pt-detail .impact-item .c{max-width:24ch}
+.pt-close{margin-top:22px}
+.pt-hint{font-size:13.5px;color:var(--ink-3);margin-top:18px}
+
+/* 04 — espectro de solução */
+.pt-axis{display:flex;align-items:center;gap:14px;margin-bottom:14px;font-size:12.5px;color:var(--ink-3)}
+.pt-axis .line{flex:1;height:1px;background:var(--rule);position:relative}
+.pt-axis .line::after{content:"";position:absolute;right:0;top:-3.5px;border-style:solid;border-width:4px 0 4px 7px;border-color:transparent transparent transparent var(--ink-3)}
+.pt-spec{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0 clamp(16px,2vw,32px)}
+.pt-spec-col{border-top:1px solid var(--rule);padding-top:16px;display:grid;grid-row:span 5;grid-template-rows:subgrid;row-gap:8px;align-content:start}
+.pt-spec-name{margin:0;font-family:var(--font-display);font-size:clamp(20px,2vw,27px);font-weight:500;letter-spacing:-.03em;line-height:1.08}
+.pt-spec-col p{font-size:14px;line-height:1.5;color:var(--ink-2);font-weight:300;max-width:26ch}
+.pt-spec-col p.use{color:var(--ink-3);font-size:13px}
+.pt-cost{display:flex;align-items:center;gap:4px;margin-top:2px;align-self:start}
+.pt-cost i{width:14px;height:4px;background:var(--rule)}
+.pt-cost i.on{background:var(--ink-2)}
+.pt-cost span{font-size:11.5px;color:var(--ink-3);margin-left:6px}
+.pt-spec-opps{list-style:none;margin:8px 0 0;align-self:start;align-content:start;padding:12px 0 0;border-top:1px solid var(--rule-soft);display:grid;gap:8px}
+.pt-link{background:none;border:0;padding:0;font:inherit;color:var(--ink);cursor:pointer;text-align:left;font-size:14.5px;line-height:1.35;transition:color 200ms ease}
+.pt-link .i{font-family:var(--font-mono);font-size:10.5px;color:var(--ink-3);margin-right:8px;letter-spacing:.06em}
+.pt-link .x{color:var(--ink-3);font-size:12.5px}
+@media (hover:hover) and (pointer:fine){ .pt-link:hover{color:var(--accent)} }
+.pt-note{margin-top:clamp(22px,3vw,34px);font-family:var(--font-display);font-size:clamp(18px,1.8vw,23px);letter-spacing:-.025em;line-height:1.25;max-width:42ch}
+
+/* 05 — capacidade do time */
+.pt-cap{--cols:minmax(0,1.5fr) repeat(4,minmax(52px,.42fr)) minmax(0,1.5fr);border-top:1px solid var(--rule)}
+.pt-cap-row{display:grid;grid-template-columns:var(--cols);column-gap:clamp(8px,1.4vw,20px);border-bottom:1px solid var(--rule-soft)}
+.pt-cap-row > *{padding-block:11px;display:flex;align-items:center;min-width:0}
+.pt-cap-row.hd{border-bottom-color:var(--rule)}
+.pt-cap-row.hd > *{padding-block:6px}
+.pt-cap-name{font-size:14.5px;line-height:1.3}
+.pt-cap-name .i{font-family:var(--font-mono);font-size:10.5px;color:var(--ink-3);margin-right:10px;flex:none}
+.pt-cell{justify-content:center;transition:background-color 200ms ease}
+.pt-cell.on{background:var(--accent-wash)}
+.pt-role{
+  background:none;border:0;padding:6px 2px;margin:0;font:inherit;font-family:var(--font-mono);
+  font-size:10.5px;letter-spacing:.06em;color:var(--ink-3);cursor:pointer;position:relative;white-space:nowrap;
+  transition:color 200ms ease;
+}
+.pt-role .short{display:none}
+.pt-role:hover{color:var(--ink)}
+.pt-role[aria-pressed="true"]{color:var(--accent)}
+.pt-load{display:block;width:14px;height:14px;flex:none}
+.pt-load.l2{background:var(--ink-2)}
+.pt-load.l1{border:1px solid var(--ink-3)}
+.pt-load.l0{width:8px;height:1px;background:var(--ink-3);opacity:.5}
+.pt-cell.on .pt-load.l2{background:var(--accent)}
+.pt-cell.on .pt-load.l1{border-color:var(--accent)}
+.pt-weeks{gap:10px}
+.pt-track{flex:1;height:6px;background:var(--rule-soft);position:relative;min-width:40px}
+.pt-track .a{position:absolute;left:0;top:0;bottom:0;background:var(--ink-3);transform-origin:left}
+.pt-track .b{position:absolute;top:0;bottom:0;background:var(--rule)}
+.pt-weeks .t{font-family:var(--font-mono);font-size:11px;color:var(--ink-3);white-space:nowrap;min-width:48px;text-align:right}
+.pt-legend{display:flex;gap:8px 20px;flex-wrap:wrap;margin-top:14px;font-size:12.5px;color:var(--ink-3)}
+.pt-legend span{display:inline-flex;align-items:center;gap:8px}
+.pt-insight{margin-top:clamp(20px,2.6vw,30px);display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px clamp(16px,2vw,28px);align-items:baseline}
+.pt-insight .n{font-family:var(--font-display);font-size:clamp(30px,3.2vw,44px);font-weight:500;letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums;color:var(--accent)}
+.pt-insight p{font-size:15px;line-height:1.55;color:var(--ink-2);font-weight:300;max-width:56ch}
+.pt-insight .who{display:block;font-weight:500;color:var(--ink)}
+
+/* 06 — framework */
+.pt-stack{display:flex;gap:3px;height:14px;margin-bottom:clamp(20px,2.6vw,30px)}
+.pt-seg{height:100%;border:0;padding:0;margin:0;cursor:pointer;background:var(--rule);min-width:0;transition:background-color 200ms ease}
+.pt-seg:hover{background:var(--ink-3)}
+.pt-seg[aria-pressed="true"],.pt-seg[aria-pressed="true"]:hover{background:var(--accent)}
+.pt-fw-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,72px);align-items:start}
+.pt-crit{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+.pt-crit button{
+  width:100%;display:flex;justify-content:space-between;align-items:baseline;gap:16px;
+  background:none;border:0;border-bottom:1px solid var(--rule-soft);padding:12px 0;margin:0;
+  font:inherit;font-size:15.5px;color:var(--ink-2);cursor:pointer;text-align:left;transition:color 200ms ease;
+}
+.pt-crit button .w{font-family:var(--font-mono);font-size:12px;color:var(--ink-3)}
+.pt-crit button:hover{color:var(--ink)}
+.pt-crit button[aria-pressed="true"],.pt-crit button[aria-pressed="true"] .w{color:var(--accent)}
+.pt-def{border-top:1px solid var(--rule);padding-top:16px}
+.pt-def .w{font-family:var(--font-display);font-size:clamp(46px,5.4vw,72px);font-weight:500;letter-spacing:-.045em;line-height:.95;color:var(--accent);font-variant-numeric:tabular-nums}
+.pt-def h4{font-family:var(--font-display);font-size:clamp(20px,2vw,26px);font-weight:500;letter-spacing:-.03em;margin:12px 0 8px}
+.pt-def p{font-size:15px;line-height:1.6;color:var(--ink-2);font-weight:300;max-width:44ch}
+.pt-def .tech-list{margin-top:12px}
+
+/* 07 — score e revisão estratégica */
+.pt-tabs{margin-bottom:clamp(22px,3vw,34px)}
+.pt-score-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);grid-template-areas:"rank brk" "chal brk";column-gap:clamp(28px,5vw,72px);align-items:start}
+.pt-score-grid .pt-rank{grid-area:rank}
+.pt-score-grid .pt-brk{grid-area:brk}
+.pt-score-grid .pt-challenge{grid-area:chal}
+.pt-rank{border-top:1px solid var(--rule)}
+.pt-row{
+  width:100%;display:grid;grid-template-columns:24px minmax(0,1.1fr) minmax(0,1fr) 46px;gap:14px;align-items:center;
+  background:none;border:0;border-bottom:1px solid var(--rule-soft);padding:12px 0;margin:0;
+  font:inherit;color:var(--ink-2);text-align:left;cursor:pointer;transition:color 200ms ease;
+}
+.pt-row .r{font-family:var(--font-mono);font-size:11px;color:var(--ink-3)}
+.pt-row .nm{font-size:15px;line-height:1.3;min-width:0}
+.pt-row .v{font-family:var(--font-display);font-size:19px;font-weight:500;letter-spacing:-.02em;text-align:right;font-variant-numeric:tabular-nums;color:var(--ink)}
+.pt-row:hover{color:var(--ink)}
+.pt-row[aria-pressed="true"]{color:var(--ink)}
+.pt-row[aria-pressed="true"] .nm{color:var(--accent)}
+.pt-bar{height:8px;background:var(--rule-soft);position:relative}
+.pt-bar i{position:absolute;left:0;top:0;bottom:0;background:var(--ink-3);transform-origin:left}
+.pt-row[aria-pressed="true"] .pt-bar i{background:var(--accent)}
+.pt-cutline{display:flex;align-items:center;gap:12px;padding:8px 0;font-size:12px;color:var(--ink-3)}
+.pt-cutline::after{content:"";flex:1;height:0;border-top:1px dashed var(--ink-3)}
+.pt-total{font-family:var(--font-display);font-size:clamp(42px,4.6vw,62px);font-weight:500;letter-spacing:-.045em;line-height:1;margin:6px 0 18px;font-variant-numeric:tabular-nums}
+.pt-total span{font-family:var(--font-body);font-size:14px;font-weight:400;letter-spacing:0;color:var(--ink-3);margin-left:8px}
+.pt-brow{display:grid;grid-template-columns:minmax(0,1fr) auto 50px;gap:14px;align-items:center;padding-block:9px;border-bottom:1px solid var(--rule-soft);font-size:14px;color:var(--ink-2)}
+.pt-brow:first-of-type{border-top:1px solid var(--rule)}
+.pt-brow .w{font-family:var(--font-mono);font-size:10.5px;color:var(--ink-3);margin-left:6px}
+.pt-dots{display:flex;gap:3px}
+.pt-dots i{width:10px;height:10px;border:1px solid var(--ink-3)}
+.pt-dots i.on{background:var(--ink-2);border-color:var(--ink-2)}
+.pt-brow .c{font-family:var(--font-mono);font-size:12px;text-align:right;color:var(--ink);font-variant-numeric:tabular-nums}
+.pt-challenge{margin-top:clamp(22px,3vw,32px)}
+.pt-challenge p{font-family:var(--font-display);font-size:clamp(18px,1.8vw,23px);letter-spacing:-.025em;line-height:1.25;max-width:40ch;margin-bottom:18px}
+.pt-qa{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 clamp(20px,3vw,40px);margin-top:clamp(18px,2.4vw,28px)}
+.pt-q{border-top:1px solid var(--rule);padding-block:14px 18px}
+.pt-q h4{font-family:var(--font-body);font-size:13px;font-weight:500;color:var(--ink-3);margin:0 0 6px;letter-spacing:0}
+.pt-q p{font-size:15px;line-height:1.5;color:var(--ink);max-width:34ch}
+.pt-verdict{margin-top:6px;font-family:var(--font-display);font-size:clamp(19px,2vw,26px);letter-spacing:-.03em;line-height:1.2;max-width:46ch;border-top:1px solid var(--ink);padding-top:16px}
+
+/* 08 — decisão (o único momento orquestrado do case) */
+.pt-bets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(28px,5vw,72px)}
+.pt-bet{border-top:2px solid var(--ink);padding-top:16px;display:grid;grid-row:span 4;grid-template-rows:subgrid;row-gap:0;align-content:start}
+.pt-bet.second{border-top-color:var(--accent)}
+.pt-bet-k{display:flex;justify-content:space-between;gap:12px;font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.pt-bet-k b{font-weight:500;color:var(--ink)}
+.pt-bet.second .pt-bet-k b{color:var(--accent)}
+.pt-bet-name{font-family:var(--font-display);font-size:clamp(34px,4.6vw,62px);font-weight:500;letter-spacing:-.04em;line-height:.98;margin:16px 0 10px;max-width:12ch}
+.pt-bet-type{font-size:14px;color:var(--ink-3);align-self:start}
+.pt-bet-out{align-self:start;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:clamp(18px,2.4vw,26px) 0}
+.pt-bet-out .n{font-family:var(--font-display);font-size:clamp(26px,2.8vw,38px);font-weight:500;letter-spacing:-.035em;font-variant-numeric:tabular-nums}
+.pt-bet-out .c{font-size:13px;color:var(--ink-3)}
+.pt-thesis{margin-top:clamp(28px,4vw,48px);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(28px,5vw,72px);border-top:1px solid var(--rule);padding-top:18px}
+.pt-thesis p{font-family:var(--font-display);font-size:clamp(20px,2.3vw,30px);letter-spacing:-.03em;line-height:1.15}
+.pt-thesis p + p{color:var(--accent)}
+.pt-stage.in .pt-bet{animation:rise 640ms var(--ease-out) both}
+.pt-stage.in .pt-bet.second{animation-delay:240ms}
+.pt-stage.in .pt-thesis{animation:rise 640ms var(--ease-out) 480ms both}
+.pt-others{margin-top:clamp(22px,3vw,32px)}
+.pt-others summary{list-style:none}
+.pt-others summary::-webkit-details-marker{display:none}
+.pt-others[open] summary{border-color:var(--ink);color:var(--ink)}
+.pt-others ul{list-style:none;margin:16px 0 0;padding:0;border-top:1px solid var(--rule)}
+.pt-other{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:8px 24px;padding-block:11px;border-bottom:1px solid var(--rule-soft);font-size:14.5px;line-height:1.5}
+.pt-other span:last-child{color:var(--ink-2);font-weight:300}
+
+/* 09 — sequência de seis meses */
+.pt-road{border-top:1px solid var(--rule)}
+.pt-lane{
+  width:100%;display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,2fr);gap:10px clamp(20px,3vw,40px);align-items:center;
+  background:none;border:0;border-bottom:1px solid var(--rule-soft);padding:14px 0;margin:0;
+  font:inherit;color:inherit;text-align:left;cursor:pointer;
+}
+.pt-lane.hd{cursor:default;padding-block:8px}
+.pt-months{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));font-family:var(--font-mono);font-size:10.5px;letter-spacing:.08em;color:var(--ink-3)}
+.pt-months span{padding-left:8px;border-left:1px solid var(--rule)}
+.pt-lane-name{display:block;font-family:var(--font-display);font-size:clamp(17px,1.6vw,21px);font-weight:500;letter-spacing:-.025em;line-height:1.15;transition:color 200ms ease}
+.pt-lane-when{display:block;margin-top:3px;font-size:12.5px;color:var(--ink-3)}
+.pt-lane[aria-pressed="true"] .pt-lane-name{color:var(--accent)}
+@media (hover:hover) and (pointer:fine){ .pt-lane:not(.hd):hover .pt-lane-name{color:var(--accent)} }
+.pt-lane-track{
+  display:grid;grid-template-columns:repeat(6,minmax(0,1fr));align-items:center;min-height:40px;
+  background-image:linear-gradient(to right,var(--rule-soft) 1px,transparent 1px);background-size:calc(100% / 6) 100%;
+}
+.pt-block{height:40px;display:flex;align-items:center;padding-inline:12px;font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transform-origin:left;min-width:0}
+.pt-block.b1{background:var(--ink);color:var(--paper)}
+.pt-block.b2{background:var(--accent);color:var(--accent-ink)}
+.pt-block.b3{background:var(--paper-2);color:var(--ink-2);box-shadow:inset 0 0 0 1px var(--rule)}
+.pt-stage.in .pt-block{animation:ptGrow 720ms var(--ease-out) both}
+.pt-road-detail{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,2fr);gap:14px clamp(20px,3vw,40px);margin-top:clamp(20px,2.6vw,30px);align-items:start}
+.pt-road-detail .impact-item .n{font-size:clamp(30px,3.4vw,46px)}
+.pt-road-detail p{font-size:15px;line-height:1.6;color:var(--ink-2);font-weight:300;max-width:52ch}
+.pt-check{margin-top:14px;font-size:13.5px;color:var(--ink-3)}
+.pt-check b{font-weight:500;color:var(--ink)}
+
+/* 10 — conclusão */
+.pt-final{max-width:21ch}
+.pt-final .soft{color:var(--ink-3)}
+.pt-end{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-top:clamp(28px,4vw,44px)}
+
+/* barras crescem só ao entrar na etapa — resposta à navegação */
+.pt-stage.in .pt-bar i,.pt-stage.in .pt-track .a{animation:ptGrow 760ms var(--ease-out) both}
+
+@media (prefers-reduced-motion: reduce){
+  .pt-stage.in,.pt-fade,.pt-stage.in .pt-bet,.pt-stage.in .pt-thesis,.pt-stage.in .pt-block,
+  .pt-stage.in .pt-bar i,.pt-stage.in .pt-track .a{animation:none}
+}
+
+@media (max-width:1040px){
+  .pt-opps{
+    grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:calc((100% - 40px) / 3);gap:20px;
+    overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none;
+  }
+  .pt-opps::-webkit-scrollbar{display:none}
+  .pt-spec{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 24px}
+  .pt-qa{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:860px){
+  .pt-steps{gap:4px}
+  .pt-step{height:20px;padding:0}
+  .pt-step .n,.pt-step .t{display:none}
+  .pt-now{display:block;margin-top:10px;font-size:13.5px;color:var(--ink-2)}
+  .pt-now .n{font-family:var(--font-mono);font-size:11px;color:var(--ink-3);margin-right:8px;letter-spacing:.08em}
+  .pt-stage-wrap{min-height:0}
+  .pt-cover,.pt-split,.pt-detail-grid,.pt-fw-grid,.pt-score-grid,.pt-bets,.pt-thesis{grid-template-columns:1fr}
+  .pt-score-grid{grid-template-areas:"rank" "brk" "chal";row-gap:28px}
+  .pt-full{display:none}
+  .pt-short{display:inline}
+  .pt-cover{align-items:start}
+  .pt-ratio{flex-direction:row;flex-wrap:wrap;gap:22px 36px}
+  .pt-ratio .signal-rule{display:none}
+  .pt-opps{grid-auto-columns:44%}
+  .pt-cap{--cols:minmax(0,1fr) repeat(4,34px) 50px}
+  .pt-role .full{display:none}
+  .pt-role .short{display:inline}
+  .pt-track{display:none}
+  .pt-lane,.pt-road-detail{grid-template-columns:1fr}
+  .pt-lane.hd > span:first-child{display:none}
+  .pt-block{font-size:0;padding:0;height:20px}
+  .pt-lane-track{min-height:20px}
+  .pt-bets{gap:36px}
+  .pt-thesis{gap:6px}
+}
+@media (max-width:600px){
+  .pt-opps{grid-auto-columns:76%}
+  .pt-spec,.pt-qa{grid-template-columns:1fr}
+  .pt-spec{gap:0}
+  .pt-spec-col{display:flex;flex-direction:column;gap:6px;grid-row:auto;padding-block:14px 16px}
+  .pt-spec-col p.use{display:none}
+  .pt-spec-opps{margin-top:2px;padding-top:8px}
+  .pt-row{grid-template-columns:22px minmax(0,1fr) 44px;row-gap:8px}
+  .pt-row .pt-bar{grid-column:2 / 3;grid-row:2}
+  .pt-other{grid-template-columns:1fr}
+  .pt-foot .btn{padding:10px 16px}
+}
+
+/* ============================================================
+   IDIOMA — seletor PT/EN no topo (controle = pill)
+   ============================================================ */
+.lang{display:inline-flex;align-items:center;gap:2px;padding:2px;border:1px solid var(--rule);border-radius:999px}
+.lang-btn{
+  display:inline-flex;align-items:center;gap:6px;border:0;background:none;border-radius:999px;
+  padding:4px 9px 4px 7px;margin:0;cursor:pointer;color:var(--ink-3);
+  font-family:var(--font-mono);font-size:10.5px;letter-spacing:.08em;line-height:1;
+  transition:background-color 200ms ease,color 200ms ease,transform 140ms var(--ease-out);
+}
+.lang-btn svg{width:18px;height:12px;display:block;flex:none;box-shadow:0 0 0 1px var(--rule)}
+.lang-btn:hover{color:var(--ink)}
+.lang-btn:active{transform:scale(.96)}
+.lang-btn[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.lang-btn[aria-pressed="true"] svg{box-shadow:none}
+@media (max-width:600px){
+  .lang-btn{padding:5px 6px}
+  .lang-btn span{display:none}
+}
+@media (max-width:480px){ .nav .hide-xs{display:none} }
+
+/* ============================================================
+   SEPARADOR ENTRE BLOCOS — linha cheia, mais marcada que as
+   hairlines internas, para a página ler como capítulos
+   ============================================================ */
+.sep{height:1px;border:0;margin:0;background:var(--ink-3);opacity:.55}
+.projeto-open{background:none}
+
+/* ============================================================
+   MOVIMENTO E ACABAMENTO
+   Base: Emil Kowalski (emil-design-eng) + taste-skill/redesign-skill.
+   Regras: só transform/opacity/clip-path; ease-out forte na entrada;
+   nada anima em ação de teclado; hover só em ponteiro fino;
+   movimento reduzido mantém só opacidade.
+   ============================================================ */
+
+/* pular para o conteúdo */
+.skip{
+  position:absolute;left:12px;top:-64px;z-index:50;background:var(--ink);color:var(--paper);
+  padding:10px 16px;border-radius:999px;font-size:14px;transition:transform 200ms var(--ease-out);
+}
+.skip:focus{transform:translateY(76px)}
+
+/* grão fixo: quebra a chapa digital sem custo de repaint no scroll */
+body::after{
+  content:"";position:fixed;inset:0;z-index:40;pointer-events:none;opacity:.045;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+:root[data-theme="dark"] body::after{mix-blend-mode:screen;opacity:.05;filter:invert(1)}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) body::after{mix-blend-mode:screen;opacity:.05;filter:invert(1)} }
+
+/* progresso de leitura: linha de acento sob o topo, dirigida pelo scroll (CSS puro) */
+.masthead::after{
+  content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:var(--accent);
+  transform:scaleX(0);transform-origin:left;pointer-events:none;
+}
+@keyframes lerProgresso{to{transform:scaleX(1)}}
+@supports (animation-timeline: scroll()){
+  @media (prefers-reduced-motion: no-preference){
+    .masthead::after{animation:lerProgresso linear both;animation-timeline:scroll(root)}
+  }
+}
+
+/* seção atual no menu */
+.nav a[aria-current="true"]{color:var(--ink)}
+.nav a[aria-current="true"]::after{transform:scaleX(1)}
+
+/* ---------- hero: título em até duas linhas, com máscara por palavra ---------- */
+.hero .hero-title{
+  font-size:clamp(42px,7.1vw,100px);line-height:.98;letter-spacing:-.045em;font-weight:500;
+  margin-block:22px 0;max-width:19ch;
+}
+.hero-title .soft{color:var(--ink-3)}
+.hero-title .accentword{color:var(--accent);font-weight:600;position:relative;display:inline-block}
+.hero-title .accentword::after{
+  content:"";position:absolute;left:0;right:0;bottom:.02em;height:.055em;background:currentColor;
+  transform:scaleX(0);transform-origin:left;
+}
+.hero-grid{margin-top:clamp(28px,3.6vw,48px)}
+.hero .hero-sub{margin-top:0}
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.1em;margin-bottom:-.1em}
+.w > span{display:inline-block}
+@keyframes palavraSobe{from{transform:translateY(108%)}to{transform:none}}
+@keyframes sublinha{to{transform:scaleX(1)}}
+@media (prefers-reduced-motion: no-preference){
+  .hero-title.play .w > span{animation:palavraSobe 900ms var(--ease-out) both;animation-delay:calc(var(--i) * 55ms + 80ms)}
+  .hero-title.play .accentword::after{animation:sublinha 700ms var(--ease-in-out) 950ms both}
+  .hero .d2{animation-delay:420ms}
+  .hero .d3{animation-delay:500ms}
+  .hero .d4{animation-delay:580ms}
+}
+.hero-title:not(.play) .accentword::after{transform:scaleX(1)}
+@media (prefers-reduced-motion: reduce){ .hero-title .accentword::after{transform:scaleX(1)} }
+
+/* ---------- revelação ao entrar na tela ---------- */
+.js .reveal{opacity:0;transition:opacity 700ms var(--ease-out),transform 800ms var(--ease-out)}
+@media (prefers-reduced-motion: no-preference){ .js .reveal{transform:translateY(18px)} }
+.js .reveal.in{opacity:1;transform:none}
+
+/* ---------- painéis dos cases: a sequência problema → abordagem → resultado se escreve ---------- */
+.js .slide .artifact .float{opacity:0;transition:opacity 500ms var(--ease-out) calc(var(--k) * 90ms + 120ms),transform 600ms var(--ease-out) calc(var(--k) * 90ms + 120ms)}
+.js .slide .artifact .stripe{transform:scaleX(0);transform-origin:left;transition:transform 700ms var(--ease-in-out) calc(var(--k) * 90ms + 120ms)}
+@media (prefers-reduced-motion: no-preference){ .js .slide .artifact .float{transform:translateY(10px)} }
+.js .slide.in .artifact .float{opacity:1;transform:none}
+.js .slide.in .artifact .stripe{transform:none}
+
+/* luz que segue o cursor (só ponteiro fino, interpolada em JS) */
+.artifact::before{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity 320ms ease;
+  background:radial-gradient(380px circle at var(--mx,50%) var(--my,50%), color-mix(in srgb, var(--accent) 14%, transparent), transparent 70%);
+}
+@media (hover:hover) and (pointer:fine){ .artifact:hover::before{opacity:1} }
+
+/* botão principal do hero: leve atração magnética */
+.magnet{will-change:transform}
+
+/* ---------- troca de idioma e de tema: transições de página ---------- */
+@keyframes vtSai{to{opacity:0;filter:blur(4px)}}
+@keyframes vtEntra{from{opacity:0;filter:blur(4px)}}
+@keyframes vtCirculo{from{clip-path:circle(0 at var(--vx) var(--vy))}to{clip-path:circle(var(--vr) at var(--vx) var(--vy))}}
+html[data-vt="lang"]::view-transition-old(root){animation:vtSai 200ms ease both}
+html[data-vt="lang"]::view-transition-new(root){animation:vtEntra 380ms var(--ease-out) both}
+html[data-vt="theme"]::view-transition-old(root){animation:none}
+html[data-vt="theme"]::view-transition-new(root){animation:vtCirculo 620ms var(--ease-in-out) both}
+
+/* ---------- case estratégico: refinamentos ---------- */
+@keyframes ptIn{from{opacity:0;transform:translateX(calc(var(--dir,1) * 16px));filter:blur(3px)}to{opacity:1;transform:none;filter:none}}
+.pt-bar,.pt-track{background:none}
+.pt-bar{box-shadow:inset 0 -1px 0 var(--rule-soft)}
+@media (prefers-reduced-motion: no-preference){
+  .pt-stage.in .pt-final .w > span{animation:palavraSobe 900ms var(--ease-out) both;animation-delay:calc(var(--i) * 45ms + 60ms)}
+}
+
+/* competências: rótulo em caixa normal (limite de rótulos em caixa-alta por página) */
+.skills-title{font-size:13px;font-weight:500;color:var(--ink-3)}
+.tech-inline{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.tech-inline li{font-size:14.5px;line-height:1.5;color:var(--ink-2)}
+
+/* ============================================================
+   CONTATO — cartão de apresentação
+   Monograma + nome + função + local; à direita, os canais,
+   cada um com uma ação direta (copiar, abrir).
+   ============================================================ */
+.cc{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(28px,5vw,72px);align-items:center;
+  background:var(--paper-2);padding:clamp(24px,4vw,48px);position:relative;
+  box-shadow:inset 0 0 0 1px var(--rule-soft);
+}
+.cc-id{display:flex;align-items:center;gap:clamp(16px,2vw,24px);min-width:0}
+.cc-mono{
+  flex:none;width:clamp(56px,6vw,76px);aspect-ratio:1;display:grid;place-items:center;
+  background:var(--ink);color:var(--paper);font-family:var(--font-display);font-weight:600;
+  font-size:clamp(20px,2.2vw,27px);letter-spacing:-.03em;
+}
+.cc-name{font-family:var(--font-display);font-size:clamp(26px,3vw,40px);font-weight:500;letter-spacing:-.035em;line-height:1.05}
+.cc-role{margin-top:8px;font-size:15px;color:var(--ink-2)}
+.cc-place{margin-top:2px;font-size:13.5px;color:var(--ink-3)}
+.cc-links{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+.cc-links li{display:grid;grid-template-columns:76px minmax(0,1fr) auto;gap:14px;align-items:center;padding-block:14px;border-bottom:1px solid var(--rule)}
+.cc-k{font-size:13px;color:var(--ink-3)}
+.cc-v{font-family:var(--font-display);font-size:clamp(17px,1.6vw,21px);letter-spacing:-.02em;min-width:0;overflow-wrap:anywhere;transition:color 180ms ease}
+@media (hover:hover) and (pointer:fine){ .cc-v:hover{color:var(--accent)} }
+.cc-copy{
+  display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:13px;font-weight:500;color:var(--ink);
+  background:none;border:1px solid var(--rule);border-radius:999px;padding:7px 14px;cursor:pointer;white-space:nowrap;
+  transition:border-color 200ms ease,background-color 200ms ease,transform 140ms var(--ease-out);
+}
+.cc-copy:hover{border-color:var(--ink)}
+.cc-copy:active{transform:scale(.97)}
+.cc-copy span{transition:filter 200ms ease,opacity 200ms ease}
+.cc-copy.troca span{filter:blur(2px);opacity:.4}
+.cc-copy.ok{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+@media (max-width:860px){
+  .cc{grid-template-columns:1fr}
+}
+@media (max-width:600px){
+  .cc-links li{grid-template-columns:minmax(0,1fr) auto;row-gap:2px}
+  .cc-k{grid-column:1 / -1}
+}
+</style>
+<style>
+/* Acompanha o tema da página: afeta scrollbars e controles nativos. */
+:root{color-scheme:light}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){color-scheme:dark} }
+:root[data-theme="dark"]{color-scheme:dark}
+img{max-width:100%}
+</style>
+</head>
+<body>
+<a class="skip" href="#top" data-i18n="skip">Pular para o conteúdo</a>
+<header class="masthead">
+  <div class="shell masthead-in">
+    <div class="identity">
+      <a class="wordmark" href="#top"><span class="pulse" aria-hidden="true"></span>Matheus Rosa Such</a>
+      <a class="mail" href="mailto:matsuch@gmail.com">matsuch@gmail.com</a>
+      <a class="mail" href="https://www.linkedin.com/in/matheus-such" target="_blank" rel="noopener">LinkedIn ↗</a>
+    </div>
+    <nav class="nav">
+      <a href="#work" class="hide-xs" data-i18n="nav.work">Trabalho</a>
+      <a href="#thinking" class="hide-sm" data-i18n="nav.thinking">Estratégia</a>
+      <a href="#personal" class="hide-sm" data-i18n="nav.projects">Projetos</a>
+      <a href="#contact" class="hide-sm" data-i18n="nav.contact">Contato</a>
+      <div class="lang" role="group" aria-label="Idioma / Language">
+        <button class="lang-btn" type="button" data-lang="pt" aria-pressed="true" aria-label="Português" title="Português">
+          <svg viewBox="0 0 20 14" aria-hidden="true"><rect width="20" height="14" fill="#009C3B"/><path d="M10 1.7 18.3 7 10 12.3 1.7 7Z" fill="#FFDF00"/><circle cx="10" cy="7" r="3.3" fill="#002776"/><path d="M6.8 6.3c1.9-.6 4.4-.3 6.3 1.1" stroke="#fff" stroke-width=".7" fill="none"/></svg>
+          <span>PT</span>
+        </button>
+        <button class="lang-btn" type="button" data-lang="en" aria-pressed="false" aria-label="English" title="English">
+          <svg viewBox="0 0 19 10" preserveAspectRatio="none" aria-hidden="true"><rect width="19" height="10" fill="#fff"/><g fill="#B22234"><rect y="0" width="19" height=".77"/><rect y="1.54" width="19" height=".77"/><rect y="3.08" width="19" height=".77"/><rect y="4.62" width="19" height=".77"/><rect y="6.15" width="19" height=".77"/><rect y="7.69" width="19" height=".77"/><rect y="9.23" width="19" height=".77"/></g><rect width="7.6" height="5.38" fill="#3C3B6E"/></svg>
+          <span>EN</span>
+        </button>
+      </div>
+      <button class="theme-toggle" id="theme" type="button" data-i18n="nav.theme">Tema</button>
+    </nav>
+  </div>
+</header>
+<hr class="rule">
+
+<main id="top">
+
+  <!-- ===================== HERO ===================== -->
+  <section class="shell hero">
+    <p class="label rise" data-i18n="hero.label">Produto, IA, dados, crescimento e CRM</p>
+    <h1 class="hero-title" data-i18n-html="hero.h1">Construo produtos onde a IA <span class="accentword">vira</span> <span class="soft">útil.</span></h1>
+    <div class="hero-grid">
+      <div>
+        <p class="hero-sub rise d2" data-i18n="hero.sub">Product Manager trabalhando entre estratégia, dados e engenharia para transformar problemas complexos em produtos simples e mensuráveis.</p>
+        <div class="hero-actions rise d3">
+          <a class="btn btn-solid" href="#work"><span data-i18n="hero.cta">Ver os cases</span> <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+      <aside class="signal rise d4" data-i18n-aria="hero.aside" aria-label="Resumo">
+        <div class="signal-item">
+          <span class="k" data-i18n="hero.years">6+ anos</span>
+          <span class="v" data-i18n="hero.yearsSub">em produtos e IA</span>
+        </div>
+        <div class="signal-rule"></div>
+        <div class="signal-item">
+          <span class="k" data-i18n="hero.place">Joinville, Brasil</span>
+          <span class="v" data-i18n="hero.placeSub">remoto · aberto a novas oportunidades</span>
+        </div>
+
+        <div class="skills">
+          <p class="skills-title" data-i18n="skills.title">Competências</p>
+          <div class="signal-rule"></div>
+          <div class="skills-grid">
+            <div class="skill"><h3 data-i18n="skills.product">Produto</h3><p data-i18n="skills.productSub">Estratégia, descoberta e priorização</p></div>
+            <div class="skill"><h3 data-i18n="skills.ai">IA</h3><p data-i18n="skills.aiSub">Agentes, RAG, UX de IA e avaliação</p></div>
+            <div class="skill"><h3 data-i18n="skills.data">Dados</h3><p data-i18n="skills.dataSub">Métricas, experimentação e análise de dados</p></div>
+            <div class="skill"><h3 data-i18n="skills.build">Construção</h3><p data-i18n="skills.buildSub">Automação, prototipagem, APIs e engenharia</p></div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <div class="shell" aria-hidden="true"><hr class="sep"></div>
+
+  <!-- ===================== PROFESSIONAL WORK (carrossel) ===================== -->
+  <section class="shell band" id="work">
+    <div class="sec-label">
+      <span class="sec-title" data-i18n="work.title">Trabalho profissional</span>
+      <div class="rail-controls">
+        <span class="label" id="work-count"></span>
+        <button class="rail-btn" type="button" data-rail="work" data-dir="-1" data-i18n-aria="work.prev" aria-label="Case anterior">&#8592;</button>
+        <button class="rail-btn" type="button" data-rail="work" data-dir="1" data-i18n-aria="work.next" aria-label="Próximo case">&#8594;</button>
+      </div>
+    </div>
+    <div class="rail rail-wide" id="rail-work">
+      <div class="track" id="track-work" tabindex="0" role="group" data-i18n-aria="work.aria" aria-label="Carrossel de cases profissionais"></div>
+      <div class="case-panel rail-detail" data-open="false" id="detail-work">
+        <div class="inner"><div id="detail-work-body"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="shell" aria-hidden="true"><hr class="sep"></div>
+
+  <!-- ===================== PRODUCT THINKING (case interativo) ===================== -->
+  <section class="shell band-tight" id="thinking">
+    <div class="sec-label">
+      <span class="sec-title" data-i18n="pt.title">Estratégia de produto</span>
+      <div class="rail-controls">
+        <span class="label" id="pt-count"></span>
+        <button class="rail-btn" type="button" id="pt-prev" data-i18n-aria="pt.prev" aria-label="Etapa anterior">&#8592;</button>
+        <button class="rail-btn" type="button" id="pt-next" data-i18n-aria="pt.next" aria-label="Próxima etapa">&#8594;</button>
+      </div>
+    </div>
+    <div class="pt-deck" id="pt-deck" role="region" aria-roledescription="apresentação" data-i18n-aria="pt.aria" aria-label="Case interativo: Onde devemos usar IA?">
+      <div class="pt-top">
+        <p class="pt-kicker" id="pt-kicker"></p>
+        <p class="label" data-i18n="pt.tag">Exercício estratégico · Dados sintéticos</p>
+      </div>
+      <ol class="pt-steps" id="pt-steps" data-i18n-aria="pt.steps" aria-label="Etapas do case"></ol>
+      <p class="pt-now" id="pt-now" aria-hidden="true"></p>
+      <div class="pt-stage-wrap" id="pt-stage" tabindex="-1"></div>
+      <p class="pt-sr" id="pt-live" aria-live="polite"></p>
+      <div class="pt-foot">
+        <button class="btn btn-quiet" type="button" id="pt-back" data-i18n="pt.back">Voltar</button>
+        <button class="btn btn-solid" type="button" id="pt-fwd"></button>
+      </div>
+    </div>
+  </section>
+
+  <div class="shell" aria-hidden="true"><hr class="sep"></div>
+
+  <!-- ===================== PERSONAL PROJECTS ===================== -->
+  <section class="shell band-tight" id="personal">
+    <div class="sec-label">
+      <span class="sec-title" data-i18n="personal.title">Projetos pessoais</span>
+      <div class="rail-controls">
+        <span class="label" id="personal-count"></span>
+        <button class="rail-btn" type="button" data-rail="personal" data-dir="-1" data-i18n-aria="personal.prev" aria-label="Projeto anterior">&#8592;</button>
+        <button class="rail-btn" type="button" data-rail="personal" data-dir="1" data-i18n-aria="personal.next" aria-label="Próximo projeto">&#8594;</button>
+      </div>
+    </div>
+    <div class="rail rail-wide" id="rail-personal">
+      <div class="track" id="track-personal" tabindex="0" role="group" data-i18n-aria="personal.aria" aria-label="Carrossel de projetos pessoais"></div>
+      <div class="case-panel rail-detail" data-open="false" id="detail-personal">
+        <div class="inner"><div id="detail-personal-body"></div></div>
+      </div>
+    </div>
+  </section>
+
+
+  <div class="shell" aria-hidden="true"><hr class="sep"></div>
+
+  <!-- ===================== CONTATO (cartão de apresentação) ===================== -->
+  <section class="shell band" id="contact">
+    <div class="sec-label"><span class="sec-title" data-i18n="contact.title">Contato</span></div>
+    <div class="cc" id="contact-card">
+      <div class="cc-id">
+        <span class="cc-mono" aria-hidden="true">MS</span>
+        <div>
+          <p class="cc-name">Matheus Rosa Such</p>
+          <p class="cc-role" data-i18n="contact.role">Product Manager, produto, IA e dados</p>
+          <p class="cc-place" data-i18n="contact.place">Joinville, Brasil · remoto</p>
+        </div>
+      </div>
+      <ul class="cc-links">
+        <li>
+          <span class="cc-k" data-i18n="contact.email">E-mail</span>
+          <a class="cc-v" href="mailto:matsuch@gmail.com">matsuch@gmail.com</a>
+          <button class="cc-copy" type="button" data-copy="matsuch@gmail.com"><span data-i18n="contact.copy">Copiar</span></button>
+        </li>
+        <li>
+          <span class="cc-k">LinkedIn</span>
+          <a class="cc-v" href="https://www.linkedin.com/in/matheus-such" target="_blank" rel="noopener">linkedin.com/in/matheus-such</a>
+          <a class="cc-copy" href="https://www.linkedin.com/in/matheus-such" target="_blank" rel="noopener"><span data-i18n="contact.open">Abrir</span> <span aria-hidden="true">↗</span></a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<script>
+/* ============================================================
+   IDIOMA — português é o padrão; inglês é tradução completa.
+   Textos fixos da página: data-i18n (texto), data-i18n-html
+   (com marcação) e data-i18n-aria (aria-label).
+   ============================================================ */
+const LANGS = ["pt", "en"];
+let LANG = (() => { try { const l = localStorage.getItem("idioma"); if (LANGS.includes(l)) return l; } catch (_) {} return "pt"; })();
+const onLang = []; // quem precisa re-renderizar quando o idioma muda
+
+const SITE = {
+  pt: {
+    "doc.title":"Matheus Rosa Such | Produto e IA",
+    "nav.work":"Trabalho", "nav.thinking":"Estratégia", "nav.projects":"Projetos", "nav.contact":"Contato", "nav.theme":"Tema",
+    "hero.label":"Produto, IA, dados, crescimento e CRM", "skip":"Pular para o conteúdo",
+    "hero.h1":'Construo produtos onde a IA <span class="accentword">vira</span> <span class="soft">útil.</span>',
+    "hero.sub":"Product Manager trabalhando entre estratégia, dados e engenharia para transformar problemas complexos em produtos simples e mensuráveis.",
+    "hero.cta":"Ver os cases", "hero.aside":"Resumo",
+    "hero.years":"6+ anos", "hero.yearsSub":"em produtos e IA",
+    "hero.place":"Joinville, Brasil", "hero.placeSub":"remoto · aberto a novas oportunidades",
+    "skills.title":"Competências",
+    "skills.product":"Produto", "skills.productSub":"Estratégia, descoberta e priorização",
+    "skills.ai":"IA", "skills.aiSub":"Agentes, RAG, UX de IA e avaliação",
+    "skills.data":"Dados", "skills.dataSub":"Métricas, experimentação e análise de dados",
+    "skills.build":"Construção", "skills.buildSub":"Automação, prototipagem, APIs e engenharia",
+    "work.title":"Trabalho profissional", "work.prev":"Case anterior", "work.next":"Próximo case", "work.aria":"Carrossel de cases profissionais",
+    "pt.title":"Estratégia de produto", "pt.prev":"Etapa anterior", "pt.next":"Próxima etapa",
+    "pt.aria":"Case interativo: Onde devemos usar IA?", "pt.tag":"Exercício estratégico · Dados sintéticos",
+    "pt.steps":"Etapas do case", "contact.title":"Contato", "contact.role":"Product Manager, produto, IA e dados", "contact.place":"Joinville, Brasil · remoto", "contact.email":"E-mail", "contact.copy":"Copiar", "contact.copied":"Copiado", "contact.open":"Abrir", "pt.back":"Voltar",
+    "personal.title":"Projetos pessoais", "personal.prev":"Projeto anterior", "personal.next":"Próximo projeto", "personal.aria":"Carrossel de projetos pessoais",
+    /* dinâmicos */
+    "c.featured":"Destaque", "c.open":"Ver o case", "c.close":"Fechar o case",
+    "c.problem":"Problema", "c.role":"Meu papel", "c.decisions":"Decisões-chave", "c.solution":"Solução", "c.impact":"Impacto",
+    "c.tech":"Abordagem de IA", "c.priv":"Produto proprietário, código fechado. Apresento o produto ao vivo em uma call.",
+    "p.kind":"Projeto pessoal", "p.open":"Ver o projeto", "p.close":"Fechar o projeto", "p.repo":"Repositório ↗",
+    "p.what":"O que é", "p.why":"Por que construí", "p.tech":"Abordagem técnica", "p.github":"Ver no GitHub ↗"
+  },
+  en: {
+    "doc.title":"Matheus Rosa Such | Product and AI",
+    "nav.work":"Work", "nav.thinking":"Thinking", "nav.projects":"Projects", "nav.contact":"Contact", "nav.theme":"Theme",
+    "hero.label":"Product, AI, data, growth and CRM", "skip":"Skip to content",
+    "hero.h1":'I build products where AI <span class="accentword">becomes</span> <span class="soft">useful.</span>',
+    "hero.sub":"Product Manager working across strategy, data and engineering to turn complex problems into simple, measurable products.",
+    "hero.cta":"See the cases", "hero.aside":"Summary",
+    "hero.years":"6+ years", "hero.yearsSub":"in product and AI",
+    "hero.place":"Joinville, Brazil", "hero.placeSub":"remote · open to new opportunities",
+    "skills.title":"Skills",
+    "skills.product":"Product", "skills.productSub":"Strategy, discovery and prioritization",
+    "skills.ai":"AI", "skills.aiSub":"Agents, RAG, AI UX and evaluation",
+    "skills.data":"Data", "skills.dataSub":"Metrics, experimentation and data analysis",
+    "skills.build":"Building", "skills.buildSub":"Automation, prototyping, APIs and engineering",
+    "work.title":"Professional work", "work.prev":"Previous case", "work.next":"Next case", "work.aria":"Professional cases carousel",
+    "pt.title":"Product Thinking", "pt.prev":"Previous stage", "pt.next":"Next stage",
+    "pt.aria":"Interactive case: Where should we use AI?", "pt.tag":"Strategic exercise · Synthetic data",
+    "pt.steps":"Case stages", "contact.title":"Contact", "contact.role":"Product Manager, product, AI and data", "contact.place":"Joinville, Brazil · remote", "contact.email":"Email", "contact.copy":"Copy", "contact.copied":"Copied", "contact.open":"Open", "pt.back":"Back",
+    "personal.title":"Personal projects", "personal.prev":"Previous project", "personal.next":"Next project", "personal.aria":"Personal projects carousel",
+    "c.featured":"Featured", "c.open":"See the case", "c.close":"Close the case",
+    "c.problem":"Problem", "c.role":"My role", "c.decisions":"Key decisions", "c.solution":"Solution", "c.impact":"Impact",
+    "c.tech":"AI approach", "c.priv":"Proprietary product, closed source. I can walk through it live on a call.",
+    "p.kind":"Personal project", "p.open":"See the project", "p.close":"Close the project", "p.repo":"Repository ↗",
+    "p.what":"What it is", "p.why":"Why I built it", "p.tech":"Technical approach", "p.github":"View on GitHub ↗"
+  }
+};
+const T = k => SITE[LANG][k] ?? SITE.pt[k] ?? k;
+const root = document.documentElement;
+
+/* ============================================================
+   PROFESSIONAL WORK - um objeto por case, na ordem do carrossel.
+   CASES.pt e CASES.en têm a mesma ordem e os mesmos campos.
+   impacto: [numero, legenda]. Numero vazio = so a legenda.
+   sinal: as tres linhas da composicao a direita.
+   ============================================================ */
+const CASES = {
+  pt: [
+    {
+      nome: "Assistente de Atendimento com IA",
+      tags: "IA · Experiência do Cliente · Serviços Financeiros",
+      papelCurto: "Product Manager / AI Product Lead",
+      corpo: "Um sistema de atendimento com IA e RAG para uma operação de serviços financeiros. O produto não nasceu da tecnologia: nasceu do volume de perguntas repetidas que consumia o time e fazia o cliente esperar por algo que já estava documentado.",
+      impacto: ["~50%", "das interações de clientes atendidas pelo assistente"],
+      sinalRotulo: "Abordagem",
+      sinal: ["pergunta repetida", "resposta com fonte", "tempo devolvido ao time"],
+      problema: "Grande parte do contato dos clientes era pergunta repetida, com resposta já existente na documentação interna. Cada uma ocupava um atendente e adiava os casos que realmente precisavam de uma pessoa.",
+      papel: "Product Manager e AI Product Lead: discovery com atendimento e clientes, recorte do escopo, definição da métrica de sucesso, e condução do time técnico e das áreas de risco e compliance ao longo da entrega.",
+      decisoes: "Responder apenas a partir da base documentada da empresa, em vez de conhecimento aberto do modelo. Entregar a fonte junto com a resposta. E definir que ausência de fonte confiável significa transferência para o time humano, não uma resposta aproximada: num contexto financeiro, errar com confiança custa mais do que não responder.",
+      solucao: "Assistente de atendimento que recupera o trecho pertinente da base interna, responde em linguagem do cliente com a fonte anexa e transfere para o time humano quando a pergunta sai do que está documentado.",
+      impactoTexto: "Aproximadamente 50% das interações de clientes passaram a ser atendidas pelo assistente, devolvendo o tempo do time para os casos de maior valor.",
+      tecnica: "RAG sobre base interna · citação de fonte · regra de transferência · medição por interação"
+    },
+    {
+      nome: "Retenção em Renda Fixa",
+      tags: "IA · Retenção · Serviços Financeiros",
+      papelCurto: "Product Manager",
+      corpo: "Identificação antecipada dos clientes próximos ao vencimento, personalização da oferta com apoio de IA e automação do contato no momento certo.",
+      impacto: ["45%", "de retenção, contra 30% do comportamento orgânico"],
+      sinalRotulo: "Abordagem",
+      sinal: ["vencimento previsto", "oferta personalizada", "contato automatizado"],
+      problema: "Clientes com aplicações de renda fixa chegavam ao vencimento e saíam sem reinvestir. O resgate era tratado como evento, quando na verdade era previsível semanas antes.",
+      papel: "Product Manager: definição do público, da janela de antecedência e do que contava como retenção. Trabalhei junto com dados e com o time comercial.",
+      decisoes: "Agir antes do vencimento, não depois do resgate. Personalizar a abordagem por perfil de cliente em vez de disparar uma régua única. E comparar sempre contra o comportamento orgânico, para não creditar ao produto o que já aconteceria sozinho.",
+      solucao: "Identificação antecipada dos clientes próximos ao vencimento, personalização da oferta com apoio de IA e automação do contato no momento certo.",
+      impactoTexto: "45% de retenção no público trabalhado, contra 30% de linha de base orgânica.",
+      tecnica: "Segmentação por perfil · personalização assistida por IA · automação de jornada · leitura contra a linha de base"
+    },
+    {
+      nome: "CRM e Inteligência Comercial",
+      tags: "Produto · Dados · Vendas",
+      papelCurto: "Product Manager",
+      corpo: "CRM reorganizado em torno de pontuação de leads, priorização da fila de contato e automação das etapas repetitivas do processo comercial.",
+      impacto: ["8% → 20%", "conversão de SDR"],
+      sinalRotulo: "Abordagem",
+      sinal: ["lead pontuado", "fila priorizada", "repetição automatizada"],
+      problema: "O time de SDR tratava a base inteira com o mesmo peso. O tempo do vendedor ia para o lead mais recente, não para o mais provável.",
+      papel: "Product Manager: reformulação do CRM, definição do modelo de priorização com o time comercial e acompanhamento da adoção.",
+      decisoes: "Priorizar a fila, e não aumentar o volume de contatos. Deixar o critério de score visível para o SDR, porque um ranking que ninguém entende não é seguido. E automatizar só o que era repetição, mantendo a conversa com a pessoa.",
+      solucao: "CRM reorganizado em torno de pontuação de leads, priorização da fila de contato e automação das etapas repetitivas do processo comercial.",
+      impactoTexto: "Conversão de SDR de 8% para 20%.",
+      tecnica: "Pontuação de leads · priorização de fila · automação de processo comercial · instrumentação do funil"
+    },
+    {
+      nome: "Plataforma de Conteúdo com IA",
+      tags: "IA · Conteúdo · Marketing e Jurídico",
+      papelCurto: "Product Manager",
+      corpo: "Plataforma de criação de conteúdo com IA que já produz a peça dentro das diretrizes legais e de marketing, encurtando o ciclo de revisão.",
+      impacto: ["", "redução no tempo de criação"],
+      sinalRotulo: "Abordagem",
+      sinal: ["guideline na origem", "peça gerada", "aprovação humana"],
+      problema: "A criação de conteúdo travava na revisão: cada peça voltava de marketing e do jurídico com ajustes que poderiam ter sido evitados na origem.",
+      papel: "Product Manager: mapeamento do fluxo de aprovação, tradução das regras de marketing e jurídico em requisito de produto e definição do que a plataforma podia gerar sozinha.",
+      decisoes: "Colocar as diretrizes legais e de marketing dentro da geração, e não em um checklist depois. Manter a aprovação humana como etapa final, porque o risco jurídico não é delegável.",
+      solucao: "Plataforma de criação de conteúdo com IA que já produz a peça dentro das diretrizes legais e de marketing, encurtando o ciclo de revisão.",
+      impactoTexto: "Redução no tempo de criação de conteúdo.",
+      tecnica: "Geração assistida por IA · diretrizes como restrição do produto · aprovação humana na etapa final"
+    }
+  ],
+  en: [
+    {
+      nome: "AI Customer Service Assistant",
+      tags: "AI · Customer Experience · Financial Services",
+      papelCurto: "Product Manager / AI Product Lead",
+      corpo: "An AI and RAG customer service system for a financial services operation. The product didn't start from the technology: it started from the volume of repeated questions that consumed the team and made customers wait for answers that were already documented.",
+      impacto: ["~50%", "of customer interactions handled by the assistant"],
+      sinalRotulo: "Approach",
+      sinal: ["repeated question", "answer with source", "time given back to the team"],
+      problema: "Most customer contacts were repeated questions whose answers already existed in internal documentation. Each one took up an agent and delayed the cases that truly needed a person.",
+      papel: "Product Manager and AI Product Lead: discovery with service teams and customers, scoping, defining the success metric, and leading the technical team and the risk and compliance areas through delivery.",
+      decisoes: "Answer only from the company's documented knowledge base, not from the model's open knowledge. Deliver the source with the answer. And define that the absence of a reliable source means handing off to the human team, not an approximate answer: in a financial context, being confidently wrong costs more than not answering.",
+      solucao: "A service assistant that retrieves the relevant passage from the internal base, answers in the customer's language with the source attached, and hands off to the human team when the question goes beyond what's documented.",
+      impactoTexto: "About 50% of customer interactions came to be handled by the assistant, giving the team's time back to higher-value cases.",
+      tecnica: "RAG over the internal knowledge base · source citation · handoff rule · per-interaction measurement"
+    },
+    {
+      nome: "Fixed Income Retention",
+      tags: "AI · Retention · Financial Services",
+      papelCurto: "Product Manager",
+      corpo: "Early identification of customers approaching maturity, AI-assisted offer personalization and automated outreach at the right moment.",
+      impacto: ["45%", "retention, versus 30% organic behavior"],
+      sinalRotulo: "Approach",
+      sinal: ["predicted maturity", "personalized offer", "automated outreach"],
+      problema: "Customers with fixed income investments reached maturity and left without reinvesting. Redemption was treated as an event, when it was actually predictable weeks in advance.",
+      papel: "Product Manager: defined the audience, the lead-time window and what counted as retention. Worked alongside data and the sales team.",
+      decisoes: "Act before maturity, not after redemption. Personalize the approach by customer profile instead of firing a single sequence. And always compare against organic behavior, so the product doesn't take credit for what would have happened anyway.",
+      solucao: "Early identification of customers approaching maturity, AI-assisted offer personalization and automated outreach at the right moment.",
+      impactoTexto: "45% retention in the targeted audience, versus a 30% organic baseline.",
+      tecnica: "Profile segmentation · AI-assisted personalization · journey automation · reading against the baseline"
+    },
+    {
+      nome: "CRM and Sales Intelligence",
+      tags: "Product · Data · Sales",
+      papelCurto: "Product Manager",
+      corpo: "A CRM reorganized around lead scoring, contact queue prioritization and automation of the repetitive steps in the sales process.",
+      impacto: ["8% → 20%", "SDR conversion"],
+      sinalRotulo: "Approach",
+      sinal: ["scored lead", "prioritized queue", "automated repetition"],
+      problema: "The SDR team gave the entire base the same weight. Sellers' time went to the most recent lead, not the most likely one.",
+      papel: "Product Manager: CRM redesign, defining the prioritization model with the sales team and tracking adoption.",
+      decisoes: "Prioritize the queue rather than increase contact volume. Keep the scoring criteria visible to SDRs, because a ranking nobody understands isn't followed. And automate only what was repetition, keeping the conversation with the person.",
+      solucao: "A CRM reorganized around lead scoring, contact queue prioritization and automation of the repetitive steps in the sales process.",
+      impactoTexto: "SDR conversion from 8% to 20%.",
+      tecnica: "Lead scoring · queue prioritization · sales process automation · funnel instrumentation"
+    },
+    {
+      nome: "AI Content Platform",
+      tags: "AI · Content · Marketing and Legal",
+      papelCurto: "Product Manager",
+      corpo: "An AI content creation platform that produces each piece within legal and marketing guidelines from the start, shortening the review cycle.",
+      impacto: ["", "reduced content creation time"],
+      sinalRotulo: "Approach",
+      sinal: ["guidelines at the source", "generated piece", "human approval"],
+      problema: "Content creation stalled at review: each piece came back from marketing and legal with adjustments that could have been avoided at the source.",
+      papel: "Product Manager: mapped the approval flow, translated marketing and legal rules into product requirements and defined what the platform could generate on its own.",
+      decisoes: "Put legal and marketing guidelines inside generation, not in a checklist afterwards. Keep human approval as the final step, because legal risk can't be delegated.",
+      solucao: "An AI content creation platform that produces each piece within legal and marketing guidelines from the start, shortening the review cycle.",
+      impactoTexto: "Reduced content creation time.",
+      tecnica: "AI-assisted generation · guidelines as product constraints · human approval as the final step"
+    }
+  ]
+};
+
+/* ============================================================
+   PERSONAL PROJECTS - editar aqui (mesma ordem nos dois idiomas).
+   ============================================================ */
+const PERSONAIS = {
+  pt: [
+    {
+      nome: "Prumo",
+      repo: "prumo",
+      tags: "Finanças pessoais · Open Finance · IA",
+      papelCurto: "Produto próprio · do zero ao ar",
+      corpo: "Um lugar só para o dinheiro da casa: as contas de vários bancos chegam sozinhas, o gasto se classifica, e um assistente diz onde investir e o que está se movendo no mercado.",
+      marca: "Privado · produto próprio",
+      sinalRotulo: "Sinal do produto",
+      sinal: ["conta conectada", "gasto classificado", "resumo semanal por e-mail"],
+      oque: "Quem cuida das próprias finanças perde tempo juntando extrato de banco, planilha e corretora antes de conseguir decidir qualquer coisa. O Prumo elimina esse trabalho: conecta as contas por Open Finance, classifica o gasto sem digitação, e transforma o que sobra em decisão: recomendação de investimento, assistente financeiro para tirar dúvida e leitura de mercado para antecipar movimento em renda variável. Toda semana chega um resumo por e-mail com notícias e mercado, para quem não quer abrir o aplicativo todo dia.",
+      porque: "Para ter controle dos meus gastos financeiros e um assistente de investimentos.",
+      tecnica: [
+        "Pluggy para a integração Open Finance",
+        "Múltiplas contas bancárias em uma visão só",
+        "Classificação de gastos e recomendação de investimentos",
+        "Assistente financeiro e inteligência de mercado para renda variável",
+        "Resend para o resumo semanal de notícias e mercado"
+      ],
+      situacao: "Repositório privado."
+    },
+    {
+      nome: "Concursos Quiz Brasil",
+      repo: "concursos-quiz-brasil",
+      repoUrl: "https://github.com/matsuch/concursos-quiz-brasil",
+      tags: "Educação · Pagamentos · SaaS",
+      papelCurto: "Produto próprio · do zero ao ar",
+      corpo: "Plataforma de quiz para quem estuda para concurso, montada para ser vendida como produto de influenciador: conta, cobrança e conteúdo funcionando de ponta a ponta.",
+      marca: "Público · produto próprio",
+      sinalRotulo: "Sinal do produto",
+      sinal: ["conta criada", "pagamento processado", "conteúdo entregue"],
+      oque: "Quem produz conteúdo para concurso vende PDF e aula, mas não tem como cobrar por prática. A ideia era entregar isso pronto: o influenciador sobe o material, o aluno cria a conta, paga pelo cartão e estuda por quiz. O produto foi ao ar inteiro (cadastro, assinatura via Stripe e gestão de conteúdo e arquivos), mas a venda para influenciadores não avançou. O site segue publicado, caso a oportunidade reapareça.",
+      porque: "Feito para tentar vender como produto para influenciadores. Não deu certo, e decidi manter o site no ar caso apareça uma oportunidade no futuro.",
+      tecnica: [
+        "Stripe para pagamento e assinatura",
+        "Cadastro e gerenciamento de contas",
+        "Upload e gestão de arquivos de conteúdo"
+      ],
+      situacao: ""
+    },
+    {
+      nome: "Meu Apito",
+      repo: "meu-apito",
+      tags: "Esporte · Dados · Projeto em dupla",
+      papelCurto: "Projeto em dupla · do zero ao ar",
+      corpo: "Carreira de árbitro de futebol tratada como dado: cada partida apitada vira registro, e o histórico vira argumento na hora de subir de divisão.",
+      marca: "Privado · projeto em dupla",
+      sinalRotulo: "Sinal do produto",
+      sinal: ["partida registrada", "métrica acumulada", "carreira acompanhada"],
+      oque: "Árbitro de futebol é avaliado a cada rodada, mas guarda a própria trajetória de cabeça ou em caderno. Feito com um colega, o Meu Apito organiza esse histórico: registra cada partida, acompanha as métricas ao longo das temporadas e mostra a evolução da carreira com dado, não com memória: o tipo de material que pesa em avaliação e em indicação para competição maior.",
+      porque: "Feito com um colega para auxiliar árbitros de futebol na gestão da carreira, usando o histórico das partidas que eles apitaram.",
+      tecnica: [
+        "Registro de partidas apitadas",
+        "Métricas de carreira por temporada",
+        "Histórico consolidado do árbitro"
+      ],
+      situacao: "Repositório privado."
+    },
+    {
+      nome: "Diário do Bebê",
+      repo: "diario-do-bebe",
+      repoUrl: "https://github.com/matsuch/diario-do-bebe",
+      tags: "Web app · Família · Tempo real",
+      papelCurto: "Produto próprio · do zero ao ar",
+      corpo: "O acompanhamento do bebê dividido entre dois pais: o que um registra no celular aparece no outro, com aviso por push.",
+      marca: "Público · produto próprio",
+      sinalRotulo: "Sinal do produto",
+      sinal: ["registro em um telefone", "dado compartilhado", "push no outro aparelho"],
+      oque: "Cuidar de um bebê é revezamento, e quem está fora de casa fica sem saber o que já aconteceu no dia. Este web app resolve isso: o registro feito em um celular chega no outro na hora, e a notificação push avisa sem que ninguém precise perguntar ou abrir o aplicativo para conferir. O resultado é o acompanhamento da evolução da minha filha em um lugar só, com os dois pais vendo a mesma coisa.",
+      porque: "Fiz para ter controle da evolução da minha filha.",
+      tecnica: [
+        "Web app instalável no celular",
+        "Dados compartilhados entre dispositivos",
+        "Notificações push integradas"
+      ],
+      situacao: ""
+    }
+  ],
+  en: [
+    {
+      nome: "Prumo",
+      repo: "prumo",
+      tags: "Personal finance · Open Finance · AI",
+      papelCurto: "Own product · zero to launch",
+      corpo: "One place for household money: accounts from several banks arrive on their own, spending gets categorized, and an assistant says where to invest and what's moving in the market.",
+      marca: "Private · own product",
+      sinalRotulo: "Product signal",
+      sinal: ["account connected", "spending categorized", "weekly email summary"],
+      oque: "People who manage their own finances waste time stitching together bank statements, spreadsheets and brokerage accounts before they can decide anything. Prumo removes that work: it connects accounts through Open Finance, categorizes spending without typing, and turns what's left into decisions: investment recommendations, a financial assistant for questions and market intelligence to anticipate moves in equities. Every week a news and market summary arrives by email, for anyone who doesn't want to open the app every day.",
+      porque: "To keep track of my spending and have an investment assistant.",
+      tecnica: [
+        "Pluggy for the Open Finance integration",
+        "Multiple bank accounts in a single view",
+        "Spending categorization and investment recommendations",
+        "Financial assistant and market intelligence for equities",
+        "Resend for the weekly news and market summary"
+      ],
+      situacao: "Private repository."
+    },
+    {
+      nome: "Concursos Quiz Brasil",
+      repo: "concursos-quiz-brasil",
+      repoUrl: "https://github.com/matsuch/concursos-quiz-brasil",
+      tags: "Education · Payments · SaaS",
+      papelCurto: "Own product · zero to launch",
+      corpo: "A quiz platform for people studying for Brazilian civil service exams, built to be sold as an influencer product: accounts, billing and content working end to end.",
+      marca: "Public · own product",
+      sinalRotulo: "Product signal",
+      sinal: ["account created", "payment processed", "content delivered"],
+      oque: "Exam-prep creators sell PDFs and classes, but have no way to charge for practice. The idea was to deliver that ready-made: the influencer uploads the material, the student creates an account, pays by card and studies through quizzes. The product launched complete (sign-up, Stripe subscriptions and content and file management), but sales to influencers didn't take off. The site stays live in case the opportunity comes back.",
+      porque: "Built to try selling as a product to influencers. It didn't work out, and I decided to keep the site live in case an opportunity comes up.",
+      tecnica: [
+        "Stripe for payments and subscriptions",
+        "Account sign-up and management",
+        "Upload and management of content files"
+      ],
+      situacao: ""
+    },
+    {
+      nome: "Meu Apito",
+      repo: "meu-apito",
+      tags: "Sports · Data · Built with a partner",
+      papelCurto: "Built with a partner · zero to launch",
+      corpo: "A football referee's career treated as data: every match refereed becomes a record, and the history becomes an argument when it's time to move up a division.",
+      marca: "Private · built with a partner",
+      sinalRotulo: "Product signal",
+      sinal: ["match logged", "metric accumulated", "career tracked"],
+      oque: "Football referees are evaluated every round, but keep their own track record in their heads or in a notebook. Built with a colleague, Meu Apito organizes that history: it logs every match, tracks metrics across seasons and shows career progress with data, not memory: the kind of material that weighs in evaluations and in nominations for bigger competitions.",
+      porque: "Built with a colleague to help football referees manage their careers using the history of the matches they've refereed.",
+      tecnica: [
+        "Log of refereed matches",
+        "Career metrics by season",
+        "Consolidated referee history"
+      ],
+      situacao: "Private repository."
+    },
+    {
+      nome: "Diário do Bebê",
+      repo: "diario-do-bebe",
+      repoUrl: "https://github.com/matsuch/diario-do-bebe",
+      tags: "Web app · Family · Real time",
+      papelCurto: "Own product · zero to launch",
+      corpo: "Baby tracking shared between two parents: what one logs on their phone shows up on the other's, with a push notification.",
+      marca: "Public · own product",
+      sinalRotulo: "Product signal",
+      sinal: ["logged on one phone", "shared data", "push on the other device"],
+      oque: "Caring for a baby is a relay, and whoever is away from home doesn't know what has already happened that day. This web app solves that: a log made on one phone reaches the other instantly, and a push notification lets you know without anyone having to ask or open the app to check. The result is my daughter's progress tracked in one place, with both parents seeing the same thing.",
+      porque: "I built it to keep track of my daughter's progress.",
+      tecnica: [
+        "Web app installable on the phone",
+        "Data shared across devices",
+        "Integrated push notifications"
+      ],
+      situacao: ""
+    }
+  ]
+};
+
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* ---------- slides dos cases ---------- */
+function renderWork(){
+  document.getElementById("track-work").innerHTML = CASES[LANG].map((c, i) => {
+    const impacto = c.impacto[0]
+      ? `<span class="n">${esc(c.impacto[0])}</span><span class="c">${esc(c.impacto[1])}</span>`
+      : `<span class="c only">${esc(c.impacto[1])}</span>`;
+    const linhas = c.sinal.map((t, k) =>
+      `${k ? `<div class="stripe" style="--k:${2 * k - 1}"></div>` : ''}<p class="float${k === c.sinal.length - 1 ? ' lead' : ''}" style="--k:${2 * k}">${esc(t)}</p>`
+    ).join("");
+    return `
+    <article class="slide slide-wide">
+      <div class="featured">
+        <div>
+          <h3>${esc(c.nome)}</h3>
+          <p class="case-body">${esc(c.corpo)}</p>
+          <div class="impact"><div class="impact-item">${impacto}</div></div>
+          <button class="btn btn-quiet slide-open" type="button" data-case="${i}" aria-expanded="false" aria-controls="detail-work">${esc(T("c.open"))} <span class="arrow">→</span></button>
+        </div>
+        <div class="artifact" aria-hidden="true">
+          <p class="artifact-tags">${esc(c.tags.split(" · ").join(", "))}</p>
+          ${linhas}
+        </div>
+      </div>
+    </article>`;
+  }).join("");
+}
+
+/* ---------- slides dos projetos pessoais (mesma estrutura dos cases) ---------- */
+function renderPersonal(){
+  document.getElementById("track-personal").innerHTML = PERSONAIS[LANG].map((c, i) => {
+    const linhas = c.sinal.map((t, k) =>
+      `${k ? `<div class="stripe" style="--k:${2 * k - 1}"></div>` : ''}<p class="float${k === c.sinal.length - 1 ? ' lead' : ''}" style="--k:${2 * k}">${esc(t)}</p>`
+    ).join("");
+    return `
+    <article class="slide slide-wide">
+      <div class="featured">
+        <div>
+          <h3>${esc(c.nome)}</h3>
+          <p class="case-body">${esc(c.corpo)}</p>
+          <div class="impact"><div class="impact-item"><span class="c only">${esc(c.marca)}</span></div></div>
+          <div class="slide-actions">
+            <button class="btn btn-quiet projeto-open" type="button" data-projeto="${i}" aria-expanded="false" aria-controls="detail-personal">${esc(T("p.open"))} <span class="arrow">→</span></button>
+            ${c.repoUrl ? `<a class="repo-link" href="${esc(c.repoUrl)}" target="_blank" rel="noopener">${esc(T("p.repo"))}</a>` : ""}
+          </div>
+        </div>
+        <div class="artifact" aria-hidden="true">
+          <p class="artifact-tags">${esc(c.tags.split(" · ").join(", "))}</p>
+          ${linhas}
+        </div>
+      </div>
+    </article>`;
+  }).join("");
+}
+
+/* ---------- detalhe do case, abaixo do trilho ---------- */
+const detalhe = document.getElementById("detail-work");
+const corpoDetalhe = document.getElementById("detail-work-body");
+let caseAberto = null;
+
+function conteudoDetalhe(c){
+  return `
+  <div class="panel-grid">
+    <div>
+      <p class="detail-title">${esc(c.nome)}</p>
+      <div class="pblock"><h4>${esc(T("c.problem"))}</h4><p>${esc(c.problema)}</p></div>
+      <div class="pblock"><h4>${esc(T("c.role"))}</h4><p>${esc(c.papel)}</p></div>
+      <div class="pblock"><h4>${esc(T("c.decisions"))}</h4><p>${esc(c.decisoes)}</p></div>
+      <div class="pblock"><h4>${esc(T("c.solution"))}</h4><p>${esc(c.solucao)}</p></div>
+      <div class="pblock"><h4>${esc(T("c.impact"))}</h4><p>${esc(c.impactoTexto)}</p></div>
+    </div>
+    <div>
+      <div class="pblock"><h4>${esc(c.rotuloTecnica || T("c.tech"))}</h4><ul class="tech-list">${c.tecnica.split(" · ").map(t => `<li>${esc(t)}</li>`).join("")}</ul></div>
+      <p class="priv">${esc(c.priv || T("c.priv"))}</p>
+    </div>
+  </div>`;
+}
+
+function fechaTodos(){
+  document.querySelectorAll(".slide-open").forEach(o => {
+    o.setAttribute("aria-expanded", "false");
+    o.firstChild.textContent = T("c.open") + " ";
+  });
+}
+
+function abreCase(idx){
+  fechaTodos();
+  corpoDetalhe.innerHTML = conteudoDetalhe(CASES[LANG][idx]);
+  detalhe.dataset.open = "true";
+  const b = document.querySelector(`.slide-open[data-case="${idx}"]`);
+  if (b){
+    b.setAttribute("aria-expanded", "true");
+    b.firstChild.textContent = T("c.close") + " ";
+  }
+  caseAberto = idx;
+}
+
+function fechaCase(){
+  fechaTodos();
+  detalhe.dataset.open = "false";
+  caseAberto = null;
+}
+
+document.getElementById("track-work").addEventListener("click", e => {
+  const b = e.target.closest(".slide-open");
+  if (!b) return;
+  const idx = Number(b.dataset.case);
+  if (caseAberto === idx) fechaCase(); else abreCase(idx);
+});
+
+/* ---------- detalhe do projeto pessoal ---------- */
+function conteudoProjeto(c){
+  const itens = c.tecnica.map(t => `<li>${esc(t)}</li>`).join("");
+  const situacao = c.situacao ? `<p class="priv">${esc(c.situacao)}</p>` : "";
+  return `
+  <div class="panel-grid">
+    <div>
+      <p class="detail-title">${esc(c.nome)}</p>
+      <div class="pblock"><h4>${esc(T("p.what"))}</h4><p>${esc(c.oque)}</p></div>
+      <div class="pblock"><h4>${esc(T("p.why"))}</h4><p>${esc(c.porque)}</p></div>
+    </div>
+    <div>
+      <div class="pblock"><h4>${esc(T("p.tech"))}</h4><ul class="tech-list">${itens}</ul></div>
+      ${situacao}
+      ${c.repoUrl ? `<p class="priv"><a class="repo-link" href="${esc(c.repoUrl)}" target="_blank" rel="noopener">${esc(T("p.github"))}</a></p>` : ""}
+    </div>
+  </div>`;
+}
+
+const detalheP = document.getElementById("detail-personal");
+const corpoP = document.getElementById("detail-personal-body");
+let projetoAberto = null;
+
+function fechaTodosProjetos(){
+  document.querySelectorAll(".projeto-open").forEach(o => {
+    o.setAttribute("aria-expanded", "false");
+    o.firstChild.textContent = T("p.open") + " ";
+  });
+}
+
+function abreProjeto(idx){
+  fechaTodosProjetos();
+  corpoP.innerHTML = conteudoProjeto(PERSONAIS[LANG][idx]);
+  detalheP.dataset.open = "true";
+  const b = document.querySelector(`.projeto-open[data-projeto="${idx}"]`);
+  if (b){
+    b.setAttribute("aria-expanded", "true");
+    b.firstChild.textContent = T("p.close") + " ";
+  }
+  projetoAberto = idx;
+}
+
+function fechaProjeto(){
+  fechaTodosProjetos();
+  detalheP.dataset.open = "false";
+  projetoAberto = null;
+}
+
+document.getElementById("track-personal").addEventListener("click", e => {
+  const b = e.target.closest(".projeto-open");
+  if (!b) return;
+  const idx = Number(b.dataset.projeto);
+  if (projetoAberto === idx) fechaProjeto(); else abreProjeto(idx);
+});
+
+/* ---------- controles do carrossel ---------- */
+const semMovimento = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function ligaTrilho(nome, contador){
+  const track = document.getElementById("track-" + nome);
+  const botoes = [...document.querySelectorAll(`.rail-btn[data-rail="${nome}"]`)];
+  const slides = () => [...track.children];
+  const base = () => (track.firstElementChild ? track.firstElementChild.offsetLeft : 0);
+
+  const indiceAtual = () => {
+    const alvo = track.scrollLeft + base();
+    let melhor = 0, dist = Infinity;
+    slides().forEach((el, k) => {
+      const d = Math.abs(el.offsetLeft - alvo);
+      if (d < dist){ dist = d; melhor = k; }
+    });
+    return melhor;
+  };
+
+  const vai = n => {
+    const lista = slides();
+    const k = Math.max(0, Math.min(lista.length - 1, n));
+    track.scrollTo({
+      left: lista[k].offsetLeft - base(),
+      behavior: semMovimento() ? "auto" : "smooth"
+    });
+  };
+
+  const atualiza = () => {
+    const fim = track.scrollWidth - track.clientWidth - 2;
+    botoes[0].disabled = track.scrollLeft <= 2;
+    botoes[1].disabled = track.scrollLeft >= fim;
+    if (contador){
+      const total = track.children.length;
+      contador.textContent =
+        String(indiceAtual() + 1).padStart(2, "0") + " / " + String(total).padStart(2, "0");
+    }
+  };
+
+  let sincronizando;
+  const sincronizaDetalhe = () => {
+    clearTimeout(sincronizando);
+    sincronizando = setTimeout(() => {
+      const k = indiceAtual();
+      if (nome === "work" && caseAberto !== null && caseAberto !== k) abreCase(k);
+      if (nome === "personal" && projetoAberto !== null && projetoAberto !== k) abreProjeto(k);
+    }, 120);
+  };
+
+  botoes.forEach(b => b.addEventListener("click", () => vai(indiceAtual() + Number(b.dataset.dir))));
+  track.addEventListener("scroll", () => { atualiza(); sincronizaDetalhe(); }, { passive: true });
+  addEventListener("resize", atualiza);
+  atualiza();
+  return atualiza;
+}
+
+/* ---------- aplica o idioma na página inteira ---------- */
+function aplicaIdioma(l, salvar){
+  LANG = LANGS.includes(l) ? l : "pt";
+  document.documentElement.lang = LANG === "pt" ? "pt-BR" : "en";
+  document.title = T("doc.title");
+  document.querySelectorAll("[data-i18n]").forEach(el => { el.textContent = T(el.dataset.i18n); });
+  document.querySelectorAll("[data-i18n-html]").forEach(el => { el.innerHTML = T(el.dataset.i18nHtml); });
+  document.querySelectorAll("[data-i18n-aria]").forEach(el => { el.setAttribute("aria-label", T(el.dataset.i18nAria)); });
+  document.querySelectorAll(".lang-btn").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === LANG)));
+
+  const sw = document.getElementById("track-work").scrollLeft;
+  const sp = document.getElementById("track-personal").scrollLeft;
+  renderWork(); renderPersonal();
+  document.getElementById("track-work").scrollLeft = sw;
+  document.getElementById("track-personal").scrollLeft = sp;
+  if (caseAberto !== null) abreCase(caseAberto);
+  if (projetoAberto !== null) abreProjeto(projetoAberto);
+  onLang.forEach(fn => fn(LANG));
+  if (salvar){ try { localStorage.setItem("idioma", LANG); } catch (_) {} }
+}
+
+document.querySelectorAll(".lang-btn").forEach(b =>
+  b.addEventListener("click", () => {
+    if (b.dataset.lang === LANG) return;
+    comTransicao("lang", () => aplicaIdioma(b.dataset.lang, true));
+  })
+);
+
+renderWork(); renderPersonal();
+onLang.push(ligaTrilho("work", document.getElementById("work-count")));
+onLang.push(ligaTrilho("personal", document.getElementById("personal-count")));
+
+/* tema */
+document.getElementById("theme").addEventListener("click", e => {
+  const r = e.currentTarget.getBoundingClientRect();
+  const x = r.left + r.width / 2, y = r.top + r.height / 2;
+  root.style.setProperty("--vx", x + "px");
+  root.style.setProperty("--vy", y + "px");
+  root.style.setProperty("--vr", Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y)) + "px");
+  comTransicao("theme", () => {
+  const escuro = root.getAttribute("data-theme") === "dark"
+    || (!root.hasAttribute("data-theme") && matchMedia("(prefers-color-scheme: dark)").matches);
+  root.setAttribute("data-theme", escuro ? "light" : "dark");
+  try { localStorage.setItem("tema", escuro ? "light" : "dark"); } catch (_) {}
+  });
+});
+
+/* transição de página (troca de idioma e de tema), com fallback direto */
+function comTransicao(tipo, fn){
+  if (!document.startViewTransition || semMovimento()){ fn(); return; }
+  root.dataset.vt = tipo;
+  const t = document.startViewTransition(fn);
+  t.finished.finally(() => { delete root.dataset.vt; });
+}
+try { const t = localStorage.getItem("tema"); if (t) root.setAttribute("data-theme", t); } catch (_) {}
+</script>
+
+<script>
+/* ============================================================
+   ESTRATÉGIA DE PRODUTO — "Onde devemos usar IA?"
+   Exercício estratégico com dados sintéticos (HealthOS é fictícia).
+   Números ficam em DATA (um lugar só); textos em TX.pt / TX.en.
+   O score é calculado aqui, a partir dos pesos e das notas.
+   ============================================================ */
+(function(){
+  const deck = document.getElementById("pt-deck");
+  if (!deck) return;
+
+  const pad = n => String(n).padStart(2, "0");
+  const pct = w => Math.round(w * 100) + "%";
+
+  /* ---------- números do cenário ---------- */
+  const DATA = {
+    bets: 2, totalWeeks: 26,
+    weights: [.30, .20, .15, .15, .10, .10],
+    roles: ["pm", "pd", "fs", "ml"],
+    spectrum: [["process",1],["automation",2],["ml",3],["genai",4]],
+    /* load: 2 = núcleo, 1 = apoio, 0 = não precisa */
+    opps: [
+      { id:1, spec:"genai",      weeks:[10,12], scores:[5,5,2,2,3,5], load:{pm:2,pd:2,fs:2,ml:2} },
+      { id:2, spec:"genai",      weeks:[8,10],  scores:[4,4,3,3,3,4], load:{pm:2,pd:2,fs:2,ml:2} },
+      { id:3, spec:"process",    weeks:[6,8],   scores:[5,5,5,5,5,4], load:{pm:2,pd:2,fs:2,ml:1} },
+      { id:4, spec:"automation", weeks:[6,8],   scores:[4,4,4,5,5,5], load:{pm:2,pd:1,fs:2,ml:0} },
+      { id:5, spec:"ml",         weeks:[10,12], scores:[5,5,2,2,2,5], load:{pm:2,pd:1,fs:2,ml:2} },
+      { id:6, spec:"ml",         weeks:[8,10],  scores:[5,4,3,4,4,5], load:{pm:2,pd:1,fs:2,ml:2} }
+    ],
+    contenders: [4, 6, 1],
+    betIds: [3, 1],
+    lanes: [ { from:1, to:2, cls:"b1", opp:3 }, { from:3, to:5, cls:"b2", opp:1 }, { from:6, to:6, cls:"b3", opp:null } ]
+  };
+
+  /* ---------- textos ---------- */
+  const TX = {
+    pt: {
+      ui: {
+        title:"Onde devemos usar IA?", next:"Próximo", restart:"Recomeçar", tag:"Exercício estratégico · Dados sintéticos",
+        live:(n,t,s) => `Etapa ${n} de ${t}: ${s}`, weeks:"semanas", wk:"sem", of5:"de 5"
+      },
+      stages:["Desafio","HealthOS","Oportunidades","Espectro","Capacidade","Critérios","Scores","Decisão","Roadmap","Conclusão"],
+      cover:{ q:"Com seis oportunidades e capacidade para apenas duas apostas, onde devemos investir, e em que ordem?",
+        aria:"A restrição", opps:"oportunidades na mesa", bets:"apostas que o squad consegue entregar",
+        months:"6 meses", monthsSub:"um squad, uma aposta por vez" },
+      company:{ lede:"Uma health tech B2B fictícia que fornece software para clínicas e redes de saúde.",
+        figs:[["120","clientes B2B"],["5.500","profissionais de saúde"],["380 mil","pacientes por mês"],["760 mil","consultas por mês"]],
+        squad:["Product Manager","Product Designer","Engenheiros full-stack","Engenheiro de dados/ML"],
+        squadSub:n => `Um squad, ${n} pessoas`,
+        constraint:"Capacidade para duas iniciativas em seis meses.", constraintSoft:"Uma depois da outra, nunca em paralelo." },
+      opps:{
+        h:"Seis oportunidades", lede:"Todas resolvem um problema real. Só duas cabem. Selecione uma para ver o problema, a hipótese e o que está em jogo.",
+        hint:"Selecione uma oportunidade para abri-la aqui.", aria:"Oportunidades",
+        problem:"Problema", findings:"O que a investigação mostrou", hypothesis:"Hipótese", outcome:"Resultado potencial: ", tradeoff:"Trade-off", close:"Fechar",
+        items:{
+          1:{ name:"Copiloto de Documentação Clínica", type:"IA generativa / LLM",
+              problem:"Profissionais gastam cerca de 11,8 minutos por consulta documentando o atendimento.",
+              approach:"Usar um LLM para gerar um primeiro rascunho da documentação. O profissional continua responsável pela revisão.",
+              outcome:["11,8 → 7,0 min","tempo de documentação por consulta"],
+              tradeoff:"Alto impacto para o negócio e para o cliente, com mais risco e complexidade." },
+          2:{ name:"Assistente de Comunicação com Pacientes", type:"IA generativa / LLM",
+              problem:"Pacientes enviam um alto volume de solicitações administrativas recorrentes.",
+              approach:"Um assistente que responde às solicitações administrativas recorrentes dos pacientes.",
+              tradeoff:"Oportunidade de alto volume, mas exige uma fronteira clara entre conversas administrativas e clínicas." },
+          3:{ name:"Redução de No-show", type:"Redesenho de processo + automação", specNote:"+ automação",
+              problem:"8,4% das consultas terminam em no-show.",
+              findings:["38% dos pacientes não confirmam a consulta","24% recebem apenas um lembrete","17% são contatados tarde demais para uma intervenção eficiente","As clínicas usam processos de confirmação diferentes"],
+              approach:"O primeiro instinto é um modelo preditivo. A decisão é não usar IA por enquanto: redesenhar primeiro o fluxo de confirmação e lembretes.",
+              outcome:["8,4% → 6,5%","taxa de no-show"],
+              tradeoff:"Os achados apontam para o fluxo, não para um problema de previsão." },
+          4:{ name:"Fluxos Operacionais", type:"Automação",
+              problem:"31% dos tickets administrativos seguem fluxos previsíveis.",
+              approach:"Automatizar processos determinísticos: atualização cadastral, documentos, confirmações e reagendamentos.",
+              tradeoff:"Não requer IA." },
+          5:{ name:"Inteligência de Plano de Cuidado", type:"Machine learning",
+              problem:"34% dos pacientes não completam o plano de tratamento no período esperado.",
+              approach:"Usar modelos preditivos para identificar sinais de abandono e recomendar intervenções.",
+              tradeoff:"Alto potencial de impacto, com alto risco clínico e de dados." },
+          6:{ name:"Inteligência de Capacidade", type:"Machine learning + analytics",
+              problem:"14% da capacidade das agendas fica ociosa.",
+              approach:"Usar dados históricos e modelos para encontrar padrões de demanda e recomendar ações que melhorem a utilização.",
+              tradeoff:"Depende de os padrões de demanda serem reais e estáveis o bastante para agir." }
+        }
+      },
+      spectrum:{
+        h:"Nem todo problema precisa de IA.", lede:"Quatro formas de resolver um problema. Cada passo para a direita adiciona capacidade, mas também custo, risco e tempo até o valor.",
+        left:"Mais simples, barato e reversível", right:"Mais capaz", cost:"custo e risco",
+        costAria:(c,t) => `Custo, risco e tempo até o valor: ${c} de ${t}`,
+        note:"Avance para a direita só quando o passo à esquerda não resolve o problema.",
+        cols:{
+          process:["Processo","Mudar como o trabalho é feito.","Quando o problema está no próprio fluxo."],
+          automation:["Automação","Executar passos previsíveis sem pessoas.","Quando as regras são conhecidas e determinísticas."],
+          ml:["Machine learning","Prever a partir de padrões históricos.","Quando o padrão é real e os dados estão prontos."],
+          genai:["IA generativa","Gerar linguagem onde regras não alcançam.","Quando o trabalho é desestruturado e uma pessoa pode revisar o resultado."]
+        }
+      },
+      capacity:{
+        h:"Um squad. Um engenheiro de dados/ML.", lede:"Quem cada iniciativa precisa no núcleo. Selecione um papel para ver onde a pressão cai.",
+        initiative:"Iniciativa", delivery:t => `Entrega, de ~${t} semanas`, deliveryShort:"Semanas",
+        load:["não precisa","apoio","núcleo"],
+        count:(n,t) => `${n} de ${t}`, who:(r,n,t) => `${r} é núcleo em ${n} de ${t} iniciativas.`,
+        roles:{
+          pm:{ name:"Product Manager", short:"PM", tiny:"PM", note:"Lidera todas as iniciativas. Sequenciar mantém descoberta e entrega em um problema por vez." },
+          pd:{ name:"Product Designer", short:"Design", tiny:"PD", note:"Núcleo sempre que o fluxo ou a conversa muda para quem usa." },
+          fs:{ name:"Engenheiros full-stack (2)", short:"Eng ×2", tiny:"FS", note:"Os dois engenheiros constroem todas as iniciativas. É por isso que as apostas acontecem uma depois da outra." },
+          ml:{ name:"Engenheiro de dados/ML", short:"Dados/ML", tiny:"ML", note:"O perfil mais escasso. Duas apostas pesadas em ML seguidas colocariam o plano inteiro em uma pessoa." }
+        }
+      },
+      framework:{
+        h:"Seis critérios, com pesos.", lede:"Cada oportunidade recebe nota de 1 a 5. O score organiza a discussão. Ele não decide o roadmap.", aria:"Pesos",
+        criteria:[
+          { name:"Impacto no negócio", desc:"Quanto move receita, retenção ou custo para a HealthOS e para as clínicas que ela atende." },
+          { name:"Valor para o cliente", desc:"Quanto muda o dia de profissionais, equipes das clínicas e pacientes." },
+          { name:"Viabilidade", desc:"Se este squad consegue entregar bem, e logo.",
+            factors:["Complexidade técnica","Prontidão dos dados","Capacidades disponíveis no time","Capacidade necessária","Tempo até o valor"] },
+          { name:"Risco", desc:"Escala invertida: 5 significa baixo risco, 1 significa alto risco. Em saúde, uma resposta errada pode chegar ao paciente." },
+          { name:"Reversibilidade", desc:"Com que facilidade conseguimos nos recuperar se estivermos errados?" },
+          { name:"Alavancagem estratégica", desc:"O que isso torna possível depois, além do próprio resultado." }
+        ]
+      },
+      scores:{
+        tabs:["Score ponderado","Revisão estratégica"], view:"Visão",
+        h:"O score organiza a discussão.", lede:"Score ponderado de 1 a 5. Selecione uma oportunidade para ver como ele se compõe.",
+        cut:n => `Linha de capacidade · ${n} apostas`,
+        challenge:(a,b) => `Levado ao pé da letra, o score escolhe ${a} e ${b}.`,
+        overlap:" Duas apostas na mesma operação, com escopo sobreposto.",
+        challengeBtn:"Desafiar o score",
+        rh:"A revisão pergunta o que o score não responde.",
+        rlede:f => `${f} fica com a primeira vaga em qualquer leitura. Seis perguntas para a segunda, entre os três próximos candidatos.`,
+        raria:"Candidatos à segunda vaga",
+        questions:["Quão forte é a evidência?","Isso realmente precisa de IA?","Os dados estão prontos?","Quão rápido provamos valor?","O que acontece se estivermos errados?","O que isso habilita depois?"],
+        review:{
+          4:{ a:["Forte. 31% dos tickets administrativos seguem caminhos previsíveis.","Não. Regras resolvem trabalho determinístico.","Não é um bloqueio. Roda com regras, não com modelos.","Rápido: 6-8 semanas.","Fácil voltar ao fluxo manual.","Libera tempo administrativo, mas confirmações e reagendamentos se sobrepõem ao redesenho de No-show."],
+              verdict:"Uma boa aposta, na vaga errada. Metade dela já está coberta pela primeira aposta." },
+          6:{ a:["Média. 14% da capacidade está ociosa; os padrões de demanda por trás disso não estão comprovados.","Em parte. Analytics pode explicar boa parte antes de qualquer modelo.","Depende de quão limpos estão os dados históricos de agenda.","8-10 semanas, e mais tempo até a utilização se mover.","Baixo dano. As recomendações podem ser ignoradas.","Um modelo de demanda para decisões de agenda."],
+              verdict:"Promissora, mas mais lenta para provar. E seu valor depende de padrões que ninguém confirmou ainda." },
+          1:{ a:["Forte. 11,8 minutos de documentação em cada consulta.","Sim. Redigir notas clínicas é trabalho de linguagem que nenhuma regra faz.","A entrada é a própria consulta. A qualidade precisa ser provada com avaliação.","10-12 semanas, com um rascunho nas mãos dos profissionais cedo.","O profissional revisa cada rascunho, então erros são pegos antes de serem salvos.","Uma base reutilizável de IA generativa, ponto de partida para a Comunicação com Pacientes depois."],
+              verdict:"Score menor, teto maior. O único candidato que precisa de IA, e o que constrói uma capacidade que a HealthOS não tem." }
+        }
+      },
+      decision:{
+        bets:[
+          { order:"Primeira aposta", when:"Meses 1-2",
+            reasons:["Evidência forte","Impacto direto no negócio","Baixo risco","Alta reversibilidade","Tempo até o valor curto","A IA não resolve melhor o problema fundamental neste momento"] },
+          { order:"Segunda aposta", when:"Meses 3-5",
+            reasons:["Um problema relevante e recorrente","Forte valor para o cliente","A IA permite algo que automação determinística não consegue","Cria uma capacidade estratégica de IA para a HealthOS","O profissional continua no controle com revisão humana"] }
+        ],
+        thesis:["Uma aposta melhora o sistema.","Uma aposta expande o que o produto pode fazer."],
+        others:"Por que não as outras quatro",
+        notNow:{
+          4:"Segunda no score, mas se sobrepõe à primeira aposta: confirmações e reagendamentos fazem parte do redesenho de No-show.",
+          6:"Score sólido. O valor depende de padrões de demanda que ainda precisam de prova.",
+          5:"Alto impacto, mas o risco clínico e de dados é alto demais para um squad agora.",
+          2:"Precisa de uma linha clara entre conversas administrativas e clínicas. Pode aproveitar a base de IA do Copiloto depois."
+        }
+      },
+      roadmap:{
+        h:"Seis meses, em sequência.", lede:"Uma aposta por vez, com o último mês reservado para rollout e medição.",
+        month:k => `M${k}`,
+        lanes:[
+          { when:"Meses 1-2", text:"Redesenhar confirmação e lembretes em todas as clínicas e depois automatizar o novo fluxo." },
+          { when:"Meses 3-5", text:"Gerar um primeiro rascunho da documentação. O profissional revisa e é o responsável." },
+          { name:"Rollout, medição e iteração", when:"Mês 6", text:"Fazer o rollout das duas apostas, medir contra as linhas de base e iterar antes de escolher o que vem depois." }
+        ],
+        measure:"Medir, depois decidir", delivery:w => ` Entrega estimada: ${w}.`,
+        check:(a,b,s,t,r) => `Checagem de capacidade: no pior caso são <b>${a} + ${b} = ${s} semanas</b> de ~${t}, sobrando ${r} para rollout e medição.`
+      },
+      takeaway:["IA não é a estratégia.","É uma das ferramentas disponíveis para executar a estratégia."]
+    },
+
+    en: {
+      ui: {
+        title:"Where should we use AI?", next:"Next", restart:"Start over", tag:"Strategic exercise · Synthetic data",
+        live:(n,t,s) => `Stage ${n} of ${t}: ${s}`, weeks:"weeks", wk:"wk", of5:"of 5"
+      },
+      stages:["Challenge","HealthOS","Opportunities","Spectrum","Team capacity","Framework","Scores","Decision","Roadmap","Takeaway"],
+      cover:{ q:"With six opportunities and capacity for only two bets, where should we invest, and in what order?",
+        aria:"The constraint", opps:"opportunities on the table", bets:"bets the squad can deliver",
+        months:"6 months", monthsSub:"one squad, one bet at a time" },
+      company:{ lede:"A fictional B2B health tech that provides software to clinics and healthcare networks.",
+        figs:[["120","B2B customers"],["5,500","healthcare professionals"],["380k","patients per month"],["760k","appointments per month"]],
+        squad:["Product Manager","Product Designer","Full-stack Engineers","Data/ML Engineer"],
+        squadSub:n => `One squad, ${n} people`,
+        constraint:"Capacity for two initiatives in six months.", constraintSoft:"One after the other, never in parallel." },
+      opps:{
+        h:"Six opportunities", lede:"Each one solves a real problem. Only two fit. Select one to see the problem, the hypothesis and what's at stake.",
+        hint:"Select an opportunity to open it here.", aria:"Opportunities",
+        problem:"Problem", findings:"What the investigation found", hypothesis:"Hypothesis", outcome:"Potential outcome: ", tradeoff:"Trade-off", close:"Close",
+        items:{
+          1:{ name:"Clinical Documentation Copilot", type:"Generative AI / LLM",
+              problem:"Professionals spend about 11.8 minutes per appointment documenting care.",
+              approach:"Use an LLM to generate a first draft of the documentation. The professional stays responsible for reviewing it.",
+              outcome:["11.8 → 7.0 min","documentation time per appointment"],
+              tradeoff:"High business and customer impact, with higher risk and complexity." },
+          2:{ name:"Patient Communication Assistant", type:"Generative AI / LLM",
+              problem:"Patients send a high volume of recurring administrative requests.",
+              approach:"An assistant that answers recurring administrative requests from patients.",
+              tradeoff:"High-volume opportunity, but it needs a clear boundary between administrative and clinical conversations." },
+          3:{ name:"No-show Reduction", type:"Process redesign + automation", specNote:"+ automation",
+              problem:"8.4% of appointments end in a no-show.",
+              findings:["38% of patients don't confirm the appointment","24% receive only one reminder","17% are contacted too late for an effective intervention","Clinics run different confirmation processes"],
+              approach:"The first instinct is a predictive model. The decision is not to use AI yet: redesign the confirmation and reminder workflow first.",
+              outcome:["8.4% → 6.5%","no-show rate"],
+              tradeoff:"The findings point to the workflow, not to a prediction problem." },
+          4:{ name:"Operations Workflow", type:"Automation",
+              problem:"31% of administrative tickets follow predictable workflows.",
+              approach:"Automate deterministic processes: registration updates, documents, confirmations and rescheduling.",
+              tradeoff:"Doesn't require AI." },
+          5:{ name:"Care Plan Intelligence", type:"Machine learning",
+              problem:"34% of patients don't complete their treatment plan within the expected period.",
+              approach:"Use predictive models to identify signs of drop-off and recommend interventions.",
+              tradeoff:"High potential impact, with high clinical and data risk." },
+          6:{ name:"Capacity Intelligence", type:"Machine learning + analytics",
+              problem:"14% of schedule capacity sits idle.",
+              approach:"Use historical data and models to find demand patterns and recommend actions that improve utilization.",
+              tradeoff:"Depends on demand patterns being real and stable enough to act on." }
+        }
+      },
+      spectrum:{
+        h:"Not every problem needs AI.", lede:"Four ways to solve a problem. Each step to the right adds capability, but also cost, risk and time to value.",
+        left:"Simpler, cheaper, reversible", right:"More capable", cost:"cost & risk",
+        costAria:(c,t) => `Cost, risk and time to value: ${c} of ${t}`,
+        note:"Move right only when the step to the left can't solve the problem.",
+        cols:{
+          process:["Process","Change how the work is done.","When the problem lives in the workflow."],
+          automation:["Automation","Run predictable steps without people.","When the rules are known and deterministic."],
+          ml:["Machine learning","Predict from historical patterns.","When the pattern is real and the data is ready."],
+          genai:["Generative AI","Generate language where rules can't reach.","When the work is unstructured and a person can review the result."]
+        }
+      },
+      capacity:{
+        h:"One squad. One Data/ML engineer.", lede:"Who each initiative needs at its core. Select a role to see where the pressure lands.",
+        initiative:"Initiative", delivery:t => `Delivery, of ~${t} weeks`, deliveryShort:"Weeks",
+        load:["not needed","supporting","core"],
+        count:(n,t) => `${n} of ${t}`, who:(r,n,t) => `${r} is core on ${n} of ${t} initiatives.`,
+        roles:{
+          pm:{ name:"Product Manager", short:"PM", tiny:"PM", note:"Leads every initiative. Sequencing keeps discovery and delivery on one problem at a time." },
+          pd:{ name:"Product Designer", short:"Design", tiny:"PD", note:"Core wherever the workflow or the conversation changes for the person using it." },
+          fs:{ name:"Full-stack Engineers (2)", short:"Eng ×2", tiny:"FS", note:"Both engineers build every initiative. That is why the bets run one after the other." },
+          ml:{ name:"Data/ML Engineer", short:"Data/ML", tiny:"ML", note:"The scarcest profile. Two ML-heavy bets in a row would run the whole plan through one person." }
+        }
+      },
+      framework:{
+        h:"Six criteria, weighted.", lede:"Each opportunity is scored from 1 to 5. The score organizes the discussion. It doesn't decide the roadmap.", aria:"Weights",
+        criteria:[
+          { name:"Business impact", desc:"How much it moves revenue, retention or cost for HealthOS and the clinics it serves." },
+          { name:"Customer value", desc:"How much it changes the day of professionals, clinic teams and patients." },
+          { name:"Feasibility", desc:"Whether this squad can deliver it well, and soon.",
+            factors:["Technical complexity","Data readiness","Available team capabilities","Capacity required","Time to value"] },
+          { name:"Risk", desc:"Inverted scale: 5 means low risk, 1 means high risk. In healthcare, a wrong answer can reach a patient." },
+          { name:"Reversibility", desc:"How easily can we recover if we're wrong?" },
+          { name:"Strategic leverage", desc:"What this makes possible next, beyond its own result." }
+        ]
+      },
+      scores:{
+        tabs:["Weighted score","Strategic review"], view:"View",
+        h:"The score organizes the discussion.", lede:"Weighted score from 1 to 5. Select an opportunity to see how it adds up.",
+        cut:n => `Capacity line · ${n} bets`,
+        challenge:(a,b) => `Taken literally, the score picks ${a} and ${b}.`,
+        overlap:" Two bets on the same operation, with overlapping scope.",
+        challengeBtn:"Challenge the score",
+        rh:"The review asks what the score can't.",
+        rlede:f => `${f} holds the first slot on any reading. Six questions for the second, across the next three contenders.`,
+        raria:"Contenders for the second slot",
+        questions:["How strong is the evidence?","Does this actually require AI?","Is the data ready?","How quickly can we prove value?","What happens if we're wrong?","What does this enable next?"],
+        review:{
+          4:{ a:["Strong. 31% of admin tickets follow predictable paths.","No. Rules handle deterministic work.","Not a blocker. It runs on rules, not on models.","Fast: 6-8 weeks.","Easy to roll back to the manual flow.","Frees admin time, but confirmations and rescheduling overlap with the No-show redesign."],
+              verdict:"A good bet, in the wrong slot. Half of it is already covered by the first bet." },
+          6:{ a:["Medium. 14% of capacity is idle; the demand patterns behind it are unproven.","Partly. Analytics may explain much of it before any model does.","Depends on how clean the historical scheduling data is.","8-10 weeks, then more time for utilization to move.","Low harm. Recommendations can be ignored.","A demand model for scheduling decisions."],
+              verdict:"Promising, but slower to prove. Its value rests on patterns nobody has confirmed yet." },
+          1:{ a:["Strong. 11.8 minutes of documentation in every appointment.","Yes. Drafting clinical notes is language work no rule can do.","The input is the appointment itself. Quality has to be proven through evaluation.","10-12 weeks, with a draft in professionals' hands early.","The professional reviews every draft, so errors are caught before they're saved.","A reusable generative AI foundation, the base for Patient Communication later."],
+              verdict:"Lower score, higher ceiling. The only contender that needs AI, and the one that builds a capability HealthOS doesn't have." }
+        }
+      },
+      decision:{
+        bets:[
+          { order:"First bet", when:"Months 1-2",
+            reasons:["Strong evidence","Direct business impact","Low risk","High reversibility","Short time to value","AI doesn't solve the fundamental problem better at this stage"] },
+          { order:"Second bet", when:"Months 3-5",
+            reasons:["A significant, recurring problem","Strong customer value","AI enables something deterministic automation can't","Creates a strategic AI capability for HealthOS","The professional stays in control through human review"] }
+        ],
+        thesis:["One bet improves the system.","One bet expands what the product can do."],
+        others:"Why not the other four",
+        notNow:{
+          4:"Second by score, but it overlaps with the first bet: confirmations and rescheduling are part of the No-show redesign.",
+          6:"Solid score. Its value depends on demand patterns that still need proof.",
+          5:"High impact, but the clinical and data risk is too high for one squad right now.",
+          2:"Needs a clear line between administrative and clinical conversations. It can build on the Copilot's AI foundation later."
+        }
+      },
+      roadmap:{
+        h:"Six months, in sequence.", lede:"One bet at a time, with the last month kept for rollout and measurement.",
+        month:k => `M${k}`,
+        lanes:[
+          { when:"Months 1-2", text:"Redesign confirmation and reminders across clinics, then automate the new workflow." },
+          { when:"Months 3-5", text:"Generate a first draft of the documentation. The professional reviews it and owns it." },
+          { name:"Rollout, measurement and iteration", when:"Month 6", text:"Roll out both bets, measure them against their baselines and iterate before choosing what comes next." }
+        ],
+        measure:"Measure, then decide", delivery:w => ` Estimated delivery: ${w}.`,
+        check:(a,b,s,t,r) => `Capacity check: worst case is <b>${a} + ${b} = ${s} weeks</b> of ~${t}, leaving ${r} for rollout and measurement.`
+      },
+      takeaway:["AI is not the strategy.","It is one of the tools available to execute the strategy."]
+    }
+  };
+
+  let L = TX[LANG];
+
+  /* ---------- score (calculado, não fixo) ---------- */
+  const byId = id => DATA.opps.find(o => o.id === id);
+  const txt = id => L.opps.items[id];
+  const weighted = o => DATA.weights.reduce((s, w, i) => s + o.scores[i] * w, 0);
+  const RANKED = DATA.opps.map(o => ({ o, s: weighted(o) })).sort((a, b) => b.s - a.s);
+  const fmt = n => { const v = (Math.round(n * 100) / 100).toFixed(2); return LANG === "pt" ? v.replace(".", ",") : v; };
+  const weeks = o => `${o.weeks[0]}-${o.weeks[1]} ${L.ui.weeks}`;
+
+  /* ---------- estado ---------- */
+  const INICIAL = { opp:null, role:"ml", crit:0, tab:"score", sel:RANKED[0].o.id, contender:DATA.contenders[0], lane:0 };
+  const S = Object.assign({ stage:0 }, INICIAL);
+
+  /* ---------- peças reutilizáveis ---------- */
+  const head = (h, lede) => `<div class="pt-head"><h3 class="pt-h">${esc(h)}</h3>${lede ? `<p class="pt-lede">${esc(lede)}</p>` : ""}</div>`;
+  const pressed = on => `aria-pressed="${on ? "true" : "false"}"`;
+  const load = n => `<span class="pt-load l${n}" aria-hidden="true"></span>`;
+
+  /* ---------- etapas ---------- */
+  function sCover(){
+    const c = L.cover;
+    const sig = (k, v) => `<div class="signal-item"><span class="k">${esc(k)}</span><span class="v">${esc(v)}</span></div>`;
+    return `
+    <div class="pt-cover">
+      <div>
+        <h3 class="pt-cover-h">${esc(L.ui.title)}</h3>
+        <p class="pt-cover-q">${esc(c.q)}</p>
+      </div>
+      <aside class="pt-ratio" aria-label="${esc(c.aria)}">
+        ${sig(String(DATA.opps.length), c.opps)}
+        <div class="signal-rule"></div>
+        ${sig(String(DATA.bets), c.bets)}
+        <div class="signal-rule"></div>
+        ${sig(c.months, c.monthsSub)}
+      </aside>
+    </div>`;
+  }
+
+  function sCompany(){
+    const c = L.company, counts = [1, 1, 2, 1];
+    const size = counts.reduce((s, n) => s + n, 0);
+    return `
+    ${head("HealthOS", c.lede)}
+    <div class="pt-split">
+      <div class="pt-figs">
+        ${c.figs.map(f => `<div class="pt-fig"><span class="n">${esc(f[0])}</span><span class="c">${esc(f[1])}</span></div>`).join("")}
+      </div>
+      <div>
+        <span class="pt-sub">${esc(c.squadSub(size))}</span>
+        <ul class="pt-squad">${c.squad.map((r, i) => `<li><span>${esc(r)}</span><span>${counts[i]}</span></li>`).join("")}</ul>
+        <p class="pt-constraint">${esc(c.constraint)} <span class="soft">${esc(c.constraintSoft)}</span></p>
+      </div>
+    </div>`;
+  }
+
+  function oppDetail(o){
+    const t = txt(o.id), u = L.opps;
+    const findings = t.findings
+      ? `<div class="pblock"><h4>${esc(u.findings)}</h4><ul class="tech-list">${t.findings.map(f => `<li>${esc(f)}</li>`).join("")}</ul></div>` : "";
+    const outcome = t.outcome
+      ? `<div class="impact"><div class="impact-item"><span class="n">${esc(t.outcome[0])}</span><span class="c">${esc(u.outcome + t.outcome[1])}</span></div></div>` : "";
+    return `
+    <div class="pt-detail pt-fade" id="pt-opp-detail">
+      <div class="pt-detail-grid">
+        <div>
+          <p class="detail-title">${esc(t.name)}</p>
+          <div class="pblock"><h4>${esc(u.problem)}</h4><p>${esc(t.problem)}</p></div>
+          ${findings}
+          <div class="pblock"><h4>${esc(u.hypothesis)}</h4><p>${esc(t.approach)}</p></div>
+        </div>
+        <div>
+          ${outcome}
+          <div class="pblock"><h4>${esc(u.tradeoff)}</h4><p>${esc(t.tradeoff)}</p></div>
+          <p class="stack-line" style="margin-top:16px">${esc(t.type)} · ${esc(weeks(o))}</p>
+          <button class="btn btn-quiet pt-close" type="button" data-act="closeopp" data-fk="closeopp">${esc(u.close)}</button>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  function sOpps(){
+    const u = L.opps;
+    const cards = DATA.opps.map(o => `
+      <button class="pt-opp" type="button" data-act="opp" data-id="${o.id}" data-fk="opp-${o.id}"
+        aria-expanded="${S.opp === o.id}" aria-controls="pt-opp-detail">
+        <span class="i">${pad(o.id)}</span>
+        <span class="nm">${esc(txt(o.id).name)}</span>
+        <span class="ty">${esc(txt(o.id).type)}</span>
+        <span class="wk">${esc(weeks(o))}</span>
+      </button>`).join("");
+    return `
+    ${head(u.h, u.lede)}
+    <div class="pt-opps" id="pt-opps" data-noswipe role="group" aria-label="${esc(u.aria)}">${cards}</div>
+    ${S.opp ? oppDetail(byId(S.opp)) : `<p class="pt-hint">${esc(u.hint)}</p>`}`;
+  }
+
+  function sSpectrum(){
+    const u = L.spectrum, n = DATA.spectrum.length;
+    const cols = DATA.spectrum.map(([key, cost]) => {
+      const [name, desc, use] = u.cols[key];
+      const opps = DATA.opps.filter(o => o.spec === key).map(o => {
+        const t = txt(o.id);
+        return `<li><button class="pt-link" type="button" data-act="goopp" data-id="${o.id}" data-fk="go-${o.id}">
+          <span class="i">${pad(o.id)}</span>${esc(t.name)}${t.specNote ? ` <span class="x">${esc(t.specNote)}</span>` : ""}
+        </button></li>`;
+      }).join("");
+      const ticks = Array.from({ length:n }, (_, k) => `<i class="${k < cost ? "on" : ""}"></i>`).join("");
+      return `
+      <div class="pt-spec-col">
+        <h4 class="pt-spec-name">${esc(name)}</h4>
+        <p>${esc(desc)}</p>
+        <p class="use">${esc(use)}</p>
+        <div class="pt-cost" aria-label="${esc(u.costAria(cost, n))}">${ticks}<span>${esc(u.cost)}</span></div>
+        <ul class="pt-spec-opps">${opps}</ul>
+      </div>`;
+    }).join("");
+    return `
+    ${head(u.h, u.lede)}
+    <div class="pt-axis" aria-hidden="true"><span>${esc(u.left)}</span><span class="line"></span><span>${esc(u.right)}</span></div>
+    <div class="pt-spec">${cols}</div>
+    <p class="pt-note">${esc(u.note)}</p>`;
+  }
+
+  function sCapacity(){
+    const u = L.capacity, total = DATA.opps.length, TW = DATA.totalWeeks;
+    const hd = `
+      <div class="pt-cap-row hd">
+        <span class="pt-sub" style="margin:0">${esc(u.initiative)}</span>
+        ${DATA.roles.map(k => { const r = u.roles[k]; return `<span class="pt-cell ${k === S.role ? "on" : ""}">
+          <button class="pt-role" type="button" data-act="role" data-key="${k}" data-fk="role-${k}" ${pressed(k === S.role)} aria-label="${esc(r.name)}" title="${esc(r.name)}">
+            <span class="full">${esc(r.short)}</span><span class="short">${esc(r.tiny)}</span>
+          </button></span>`; }).join("")}
+        <span class="pt-sub" style="margin:0"><span class="pt-full">${esc(u.delivery(TW))}</span><span class="pt-short">${esc(u.deliveryShort)}</span></span>
+      </div>`;
+    const rows = DATA.opps.map(o => {
+      const a = o.weeks[0] / TW * 100, b = (o.weeks[1] - o.weeks[0]) / TW * 100;
+      return `
+      <div class="pt-cap-row">
+        <span class="pt-cap-name"><span class="i">${pad(o.id)}</span>${esc(txt(o.id).name)}</span>
+        ${DATA.roles.map(k => `<span class="pt-cell ${k === S.role ? "on" : ""}" role="img" aria-label="${esc(u.roles[k].name)}: ${esc(u.load[o.load[k]])}">${load(o.load[k])}</span>`).join("")}
+        <span class="pt-weeks">
+          <span class="pt-track" aria-hidden="true"><span class="a" style="width:${a}%"></span><span class="b" style="left:${a}%;width:${b}%"></span></span>
+          <span class="t">${o.weeks[0]}-${o.weeks[1]} ${esc(L.ui.wk)}</span>
+        </span>
+      </div>`;
+    }).join("");
+    const role = u.roles[S.role];
+    const core = DATA.opps.filter(o => o.load[S.role] === 2).length;
+    return `
+    ${head(u.h, u.lede)}
+    <div class="pt-cap">${hd}${rows}</div>
+    <div class="pt-legend" aria-hidden="true">
+      <span>${load(2)} ${esc(u.load[2])}</span><span>${load(1)} ${esc(u.load[1])}</span><span>${load(0)} ${esc(u.load[0])}</span>
+    </div>
+    <div class="pt-insight pt-fade" aria-live="polite">
+      <span class="n">${esc(u.count(core, total))}</span>
+      <p><span class="who">${esc(u.who(role.name, core, total))}</span>${esc(role.note)}</p>
+    </div>`;
+  }
+
+  function sFramework(){
+    const u = L.framework, c = u.criteria[S.crit], w = DATA.weights;
+    const segs = u.criteria.map((k, i) => `<button class="pt-seg" type="button" style="flex:${w[i]}" data-act="crit" data-i="${i}" data-fk="seg-${i}" ${pressed(i === S.crit)} aria-label="${esc(k.name)}, ${pct(w[i])}"></button>`).join("");
+    const list = u.criteria.map((k, i) => `<li><button type="button" data-act="crit" data-i="${i}" data-fk="crit-${i}" ${pressed(i === S.crit)}><span>${esc(k.name)}</span><span class="w">${pct(w[i])}</span></button></li>`).join("");
+    const factors = c.factors ? `<ul class="tech-list">${c.factors.map(f => `<li>${esc(f)}</li>`).join("")}</ul>` : "";
+    return `
+    ${head(u.h, u.lede)}
+    <div class="pt-stack" role="group" aria-label="${esc(u.aria)}">${segs}</div>
+    <div class="pt-fw-grid">
+      <ul class="pt-crit">${list}</ul>
+      <div class="pt-def pt-fade" aria-live="polite">
+        <span class="w">${pct(w[S.crit])}</span>
+        <h4>${esc(c.name)}</h4>
+        <p>${esc(c.desc)}</p>
+        ${factors}
+      </div>
+    </div>`;
+  }
+
+  function breakdown(o){
+    const rows = L.framework.criteria.map((c, i) => {
+      const v = o.scores[i], w = DATA.weights[i];
+      const dots = Array.from({ length:5 }, (_, k) => `<i class="${k < v ? "on" : ""}"></i>`).join("");
+      return `<div class="pt-brow"><span>${esc(c.name)}<span class="w">${pct(w)}</span></span>
+        <span class="pt-dots" role="img" aria-label="${v}/5">${dots}</span><span class="c">+${fmt(v * w)}</span></div>`;
+    }).join("");
+    return `
+    <div class="pt-brk pt-fade" aria-live="polite">
+      <p class="detail-title">${esc(txt(o.id).name)}</p>
+      <p class="pt-total">${fmt(weighted(o))}<span>${esc(L.ui.of5)}</span></p>
+      ${rows}
+    </div>`;
+  }
+
+  function sScores(){
+    const u = L.scores;
+    const tabs = `
+      <div class="pt-pills pt-tabs" role="group" aria-label="${esc(u.view)}">
+        <button class="pt-pill" type="button" data-act="tab" data-tab="score" data-fk="tab-score" ${pressed(S.tab === "score")}>${esc(u.tabs[0])}</button>
+        <button class="pt-pill" type="button" data-act="tab" data-tab="review" data-fk="tab-review" ${pressed(S.tab === "review")}>${esc(u.tabs[1])}</button>
+      </div>`;
+
+    if (S.tab === "score"){
+      const rows = RANKED.map((r, k) => `
+        <button class="pt-row" type="button" data-act="sel" data-id="${r.o.id}" data-fk="sel-${r.o.id}" ${pressed(S.sel === r.o.id)}>
+          <span class="r">${pad(k + 1)}</span><span class="nm">${esc(txt(r.o.id).name)}</span>
+          <span class="pt-bar" aria-hidden="true"><i style="width:${r.s / 5 * 100}%"></i></span>
+          <span class="v">${fmt(r.s)}</span>
+        </button>${k === DATA.bets - 1 ? `<div class="pt-cutline">${esc(u.cut(DATA.bets))}</div>` : ""}`).join("");
+      const [a, b] = RANKED;
+      const overlap = b.o.id === 4 ? u.overlap : "";
+      return `
+      ${head(u.h, u.lede)}
+      ${tabs}
+      <div class="pt-score-grid">
+        <div class="pt-rank">${rows}</div>
+        <div class="pt-challenge">
+          <p>${esc(u.challenge(txt(a.o.id).name, txt(b.o.id).name) + overlap)}</p>
+          <button class="btn btn-quiet" type="button" data-act="tab" data-tab="review" data-fk="challenge">${esc(u.challengeBtn)} <span class="arrow">→</span></button>
+        </div>
+        ${breakdown(byId(S.sel))}
+      </div>`;
+    }
+
+    const r = u.review[S.contender];
+    const pills = DATA.contenders.map(id => `<button class="pt-pill" type="button" data-act="contender" data-id="${id}" data-fk="ct-${id}" ${pressed(id === S.contender)}>${esc(txt(id).name)}<span class="s">${fmt(weighted(byId(id)))}</span></button>`).join("");
+    return `
+    ${head(u.rh, u.rlede(txt(DATA.betIds[0]).name))}
+    ${tabs}
+    <div class="pt-pills" role="group" aria-label="${esc(u.raria)}">${pills}</div>
+    <div class="pt-fade" aria-live="polite">
+      <div class="pt-qa">${u.questions.map((q, i) => `<div class="pt-q"><h4>${esc(q)}</h4><p>${esc(r.a[i])}</p></div>`).join("")}</div>
+      <p class="pt-verdict">${esc(r.verdict)}</p>
+    </div>`;
+  }
+
+  function sDecision(){
+    const u = L.decision;
+    const bets = DATA.betIds.map((id, i) => {
+      const t = txt(id), b = u.bets[i];
+      return `
+      <article class="pt-bet ${i ? "second" : ""}">
+        <p class="pt-bet-k"><b>${esc(b.order)}</b><span>${esc(b.when)}</span></p>
+        <div><h3 class="pt-bet-name">${esc(t.name)}</h3><p class="pt-bet-type">${esc(t.type)}</p></div>
+        ${t.outcome ? `<p class="pt-bet-out"><span class="n">${esc(t.outcome[0])}</span><span class="c">${esc(t.outcome[1])}</span></p>` : "<span></span>"}
+        <ul class="tech-list">${b.reasons.map(x => `<li>${esc(x)}</li>`).join("")}</ul>
+      </article>`;
+    }).join("");
+    const others = DATA.opps.filter(o => !DATA.betIds.includes(o.id))
+      .map(o => `<li class="pt-other"><span>${esc(txt(o.id).name)}</span><span>${esc(u.notNow[o.id])}</span></li>`).join("");
+    return `
+    <div class="pt-bets">${bets}</div>
+    <div class="pt-thesis"><p>${esc(u.thesis[0])}</p><p>${esc(u.thesis[1])}</p></div>
+    <details class="pt-others">
+      <summary class="btn btn-quiet" data-fk="others">${esc(u.others)}</summary>
+      <ul>${others}</ul>
+    </details>`;
+  }
+
+  function sRoadmap(){
+    const u = L.roadmap, TW = DATA.totalWeeks;
+    const months = Array.from({ length:6 }, (_, k) => `<span>${esc(u.month(k + 1))}</span>`).join("");
+    const laneName = (l, i) => u.lanes[i].name || txt(l.opp).name;
+    const lanes = DATA.lanes.map((l, i) => `
+      <button class="pt-lane" type="button" data-act="lane" data-i="${i}" data-fk="lane-${i}" ${pressed(i === S.lane)}>
+        <span><span class="pt-lane-name">${esc(laneName(l, i))}</span><span class="pt-lane-when">${esc(u.lanes[i].when)}</span></span>
+        <span class="pt-lane-track" aria-hidden="true">
+          <span class="pt-block ${l.cls}" style="grid-column:${l.from} / ${l.to + 1};animation-delay:${i * 180}ms"></span>
+        </span>
+      </button>`).join("");
+    const l = DATA.lanes[S.lane], o = l.opp ? byId(l.opp) : null, t = o ? txt(o.id) : null;
+    const [b1, b2] = DATA.betIds.map(byId);
+    const worst = b1.weeks[1] + b2.weeks[1];
+    return `
+    ${head(u.h, u.lede)}
+    <div class="pt-road">
+      <div class="pt-lane hd" aria-hidden="true"><span></span><span class="pt-months">${months}</span></div>
+      ${lanes}
+    </div>
+    <div class="pt-road-detail pt-fade" aria-live="polite">
+      ${t && t.outcome
+        ? `<div class="impact-item"><span class="n">${esc(t.outcome[0])}</span><span class="c">${esc(t.outcome[1])}</span></div>`
+        : `<div class="impact-item"><span class="c only">${esc(u.measure)}</span></div>`}
+      <div>
+        <p>${esc(u.lanes[S.lane].text)}${o ? esc(u.delivery(weeks(o))) : ""}</p>
+        <p class="pt-check">${u.check(b1.weeks[1], b2.weeks[1], worst, TW, TW - worst)}</p>
+      </div>
+    </div>`;
+  }
+
+  const palavras = (t, i0) => t.split(" ").map((w, k) => `<span class="w"><span style="--i:${i0 + k}">${esc(w)}</span></span>`).join(" ");
+
+  function sTakeaway(){
+    return `
+    <p class="statement pt-final">${palavras(L.takeaway[0], 0)}<br><span class="soft">${palavras(L.takeaway[1], L.takeaway[0].split(" ").length)}</span></p>
+    <div class="pt-end"><span class="label">${esc(L.ui.tag)}</span></div>`;
+  }
+
+  const RENDER = [sCover, sCompany, sOpps, sSpectrum, sCapacity, sFramework, sScores, sDecision, sRoadmap, sTakeaway];
+  const OPPS_STAGE = RENDER.indexOf(sOpps);
+  const LAST = RENDER.length - 1;
+  const titulo = n => L.stages[n];
+
+  /* ---------- montagem e navegação ---------- */
+  const $ = id => document.getElementById(id);
+  const wrap = $("pt-stage"), steps = $("pt-steps");
+  const semMov = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function renderSteps(){
+    steps.innerHTML = RENDER.map((_, i) => `
+      <li><button class="pt-step" type="button" data-act="go" data-n="${i}" aria-label="${i + 1}. ${esc(titulo(i))}">
+        <span class="n">${pad(i + 1)}</span><span class="t">${esc(titulo(i))}</span>
+      </button></li>`).join("");
+  }
+
+  function chrome(){
+    const n = S.stage;
+    steps.querySelectorAll(".pt-step").forEach((b, i) => {
+      if (i === n) b.setAttribute("aria-current", "step"); else b.removeAttribute("aria-current");
+      b.classList.toggle("done", i < n);
+    });
+    $("pt-count").textContent = pad(n + 1) + " / " + pad(RENDER.length);
+    $("pt-now").innerHTML = `<span class="n">${pad(n + 1)}</span>${esc(titulo(n))}`;
+    $("pt-kicker").textContent = n ? L.ui.title : "";
+    $("pt-prev").disabled = n === 0;
+    $("pt-next").disabled = n === LAST;
+    $("pt-back").disabled = n === 0;
+    $("pt-fwd").innerHTML = n < LAST ? `${esc(L.ui.next)}: ${esc(titulo(n + 1))} <span class="arrow">→</span>` : esc(L.ui.restart);
+  }
+
+  function paint(anim, dir){
+    wrap.innerHTML = `<div class="pt-stage${anim ? " in" : ""}" style="--dir:${dir || 1}">${RENDER[S.stage]()}</div>`;
+    chrome();
+    if (S.stage === OPPS_STAGE && S.opp){
+      const track = $("pt-opps"), btn = track && track.querySelector(`[data-id="${S.opp}"]`);
+      if (btn && track.scrollWidth > track.clientWidth) track.scrollLeft = btn.offsetLeft - track.firstElementChild.offsetLeft;
+    }
+  }
+
+  /* re-render da etapa atual sem trocar de etapa, preservando o foco */
+  function repaint(){
+    const fk = document.activeElement && document.activeElement.dataset ? document.activeElement.dataset.fk : null;
+    const track = $("pt-opps"), sx = track ? track.scrollLeft : 0;
+    wrap.innerHTML = `<div class="pt-stage">${RENDER[S.stage]()}</div>`;
+    const t2 = $("pt-opps"); if (t2) t2.scrollLeft = sx;
+    if (fk){ const el = wrap.querySelector(`[data-fk="${fk}"]`); if (el) el.focus({ preventScroll:true }); }
+  }
+
+  function ensureVisible(){
+    const mh = (document.querySelector(".masthead") || {}).offsetHeight || 0;
+    const top = deck.getBoundingClientRect().top;
+    if (top < mh) scrollTo({ top: scrollY + top - mh - 8, behavior: semMov() ? "auto" : "smooth" });
+  }
+
+  function go(n){
+    n = Math.max(0, Math.min(LAST, n));
+    if (n === S.stage) return;
+    const dir = n > S.stage ? 1 : -1;
+    const hadFocusInside = wrap.contains(document.activeElement);
+    S.stage = n;
+    paint(true, dir);
+    $("pt-live").textContent = L.ui.live(n + 1, RENDER.length, titulo(n));
+    if (hadFocusInside) wrap.focus({ preventScroll:true });
+    ensureVisible();
+  }
+
+  function restart(){ Object.assign(S, INICIAL); go(0); }
+
+  deck.addEventListener("click", e => {
+    const el = e.target.closest("[data-act]");
+    if (!el || !deck.contains(el)) return;
+    const a = el.dataset.act;
+    if (a === "go") return go(Number(el.dataset.n));
+    if (a === "opp"){ const id = Number(el.dataset.id); S.opp = S.opp === id ? null : id; return repaint(); }
+    if (a === "closeopp"){ const id = S.opp; S.opp = null; repaint(); const b = wrap.querySelector(`[data-fk="opp-${id}"]`); if (b) b.focus({ preventScroll:true }); return; }
+    if (a === "goopp"){ S.opp = Number(el.dataset.id); return go(OPPS_STAGE); }
+    if (a === "role"){ S.role = el.dataset.key; return repaint(); }
+    if (a === "crit"){ S.crit = Number(el.dataset.i); return repaint(); }
+    if (a === "tab"){ S.tab = el.dataset.tab; repaint(); if (el.dataset.fk === "challenge"){ const t = wrap.querySelector('[data-fk="tab-review"]'); if (t) t.focus({ preventScroll:true }); } return; }
+    if (a === "sel"){ S.sel = Number(el.dataset.id); return repaint(); }
+    if (a === "contender"){ S.contender = Number(el.dataset.id); return repaint(); }
+    if (a === "lane"){ S.lane = Number(el.dataset.i); return repaint(); }
+  });
+
+  $("pt-prev").addEventListener("click", () => go(S.stage - 1));
+  $("pt-next").addEventListener("click", () => go(S.stage + 1));
+  $("pt-back").addEventListener("click", () => go(S.stage - 1));
+  $("pt-fwd").addEventListener("click", () => { if (S.stage === LAST) restart(); else go(S.stage + 1); });
+
+  /* teclado: setas trocam de etapa, exceto dentro de um trilho horizontal */
+  deck.addEventListener("keydown", e => {
+    if (e.altKey || e.ctrlKey || e.metaKey || e.target.closest("[data-noswipe]")) return;
+    if (e.key === "ArrowRight"){ e.preventDefault(); go(S.stage + 1); }
+    if (e.key === "ArrowLeft"){ e.preventDefault(); go(S.stage - 1); }
+  });
+
+  /* swipe: gesto horizontal claro, fora de trilhos que já rolam na horizontal */
+  let sx = null, sy = null;
+  wrap.addEventListener("touchstart", e => {
+    if (e.touches.length !== 1 || e.target.closest("[data-noswipe]")){ sx = null; return; }
+    sx = e.touches[0].clientX; sy = e.touches[0].clientY;
+  }, { passive:true });
+  wrap.addEventListener("touchend", e => {
+    if (sx === null) return;
+    const t = e.changedTouches[0], dx = t.clientX - sx, dy = t.clientY - sy;
+    sx = null;
+    if (Math.abs(dx) > 56 && Math.abs(dx) > Math.abs(dy) * 1.5) go(S.stage + (dx < 0 ? 1 : -1));
+  }, { passive:true });
+
+  /* troca de idioma: mantém etapa e seleções, só troca o texto */
+  onLang.push(() => { L = TX[LANG]; renderSteps(); repaint(); chrome(); });
+
+  renderSteps();
+  paint(false, 1);
+})();
+
+/* aplica o idioma salvo (ou português) depois que tudo foi montado */
+aplicaIdioma(LANG, false);
+</script>
+
+<script>
+/* ============================================================
+   MOVIMENTO — JS nativo, sem biblioteca.
+   IntersectionObserver para entrar na tela (nunca listener de scroll),
+   rAF só para interpolar ponteiro e contagem de números.
+   ============================================================ */
+(function(){
+  const reduz = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const fino = matchMedia("(hover: hover) and (pointer: fine)");
+
+  /* ---------- título do hero: uma máscara por palavra ---------- */
+  function divide(el){
+    let i = 0;
+    const anda = node => {
+      [...node.childNodes].forEach(ch => {
+        if (ch.nodeType === 3){
+          const frag = document.createDocumentFragment();
+          ch.textContent.split(/(\s+)/).forEach(p => {
+            if (!p) return;
+            if (/^\s+$/.test(p)){ frag.appendChild(document.createTextNode(p)); return; }
+            const w = document.createElement("span"); w.className = "w";
+            const s = document.createElement("span"); s.textContent = p; s.style.setProperty("--i", i++);
+            w.appendChild(s); frag.appendChild(w);
+          });
+          ch.replaceWith(frag);
+        } else if (ch.nodeType === 1 && !ch.classList.contains("w")) anda(ch);
+      });
+    };
+    anda(el);
+  }
+  const titulo = document.querySelector(".hero-title");
+  if (titulo){ divide(titulo); titulo.classList.add("play"); }
+  onLang.push(() => { if (titulo){ titulo.classList.remove("play"); divide(titulo); } });
+
+  /* ---------- blocos entram ao aparecer na tela ---------- */
+  const alvos = ["#work .sec-label", "#rail-work", "#thinking .sec-label", "#pt-deck", "#personal .sec-label", "#rail-personal", "#contact .sec-label", "#contact-card"];
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); }
+  }), { rootMargin: "0px 0px -8% 0px", threshold: 0.12 });
+  alvos.forEach(sel => { const el = document.querySelector(sel); if (el){ el.classList.add("reveal"); io.observe(el); } });
+
+  /* ---------- números contam até o valor (uma vez por slide) ---------- */
+  const RE = /\d+(?:[.,]\d+)?/g;
+  function conta(el){
+    const final = el.textContent, nums = [...final.matchAll(RE)];
+    if (!nums.length || reduz()) return;
+    const alvo = nums.map(m => parseFloat(m[0].replace(",", ".")));
+    const seta = final.includes("→");
+    const de = alvo.map((t, k) => seta ? (k === alvo.length - 1 ? alvo[0] : t) : 0);
+    const casas = nums.map(m => (m[0].split(/[.,]/)[1] || "").length);
+    const sep = nums.map(m => m[0].includes(",") ? "," : ".");
+    const dur = 1100, t0 = performance.now();
+    const quadro = agora => {
+      const p = Math.min(1, (agora - t0) / dur), e = 1 - Math.pow(1 - p, 4);
+      let k = 0;
+      el.textContent = final.replace(RE, () => { const v = de[k] + (alvo[k] - de[k]) * e; const s = v.toFixed(casas[k]).replace(".", sep[k]); k++; return s; });
+      if (p < 1) requestAnimationFrame(quadro); else el.textContent = final;
+    };
+    requestAnimationFrame(quadro);
+  }
+
+  /* ---------- slides: painel se escreve e número conta ao ficar visível ---------- */
+  const vistos = { work: new Set(), personal: new Set() };
+  const ioSlide = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    const s = e.target, rail = s.dataset.rail, idx = Number(s.dataset.idx);
+    s.classList.add("in"); ioSlide.unobserve(s);
+    if (!vistos[rail].has(idx)){ vistos[rail].add(idx); s.querySelectorAll(".impact-item .n").forEach(conta); }
+  }), { threshold: 0.55 });
+  function observaSlides(){
+    ["work", "personal"].forEach(rail => {
+      document.querySelectorAll(`#track-${rail} > .slide`).forEach((s, idx) => {
+        s.dataset.rail = rail; s.dataset.idx = idx;
+        if (vistos[rail].has(idx)) s.classList.add("in"); else ioSlide.observe(s);
+      });
+    });
+  }
+  observaSlides();
+  onLang.push(observaSlides);
+
+  /* ---------- luz que segue o cursor nos painéis, com inércia ---------- */
+  const luz = new WeakMap();
+  function segue(el){
+    const st = luz.get(el);
+    st.x += (st.tx - st.x) * 0.16; st.y += (st.ty - st.y) * 0.16;
+    el.style.setProperty("--mx", st.x.toFixed(1) + "px");
+    el.style.setProperty("--my", st.y.toFixed(1) + "px");
+    if (Math.abs(st.tx - st.x) > 0.3 || Math.abs(st.ty - st.y) > 0.3) st.raf = requestAnimationFrame(() => segue(el));
+    else st.raf = 0;
+  }
+  document.addEventListener("pointermove", e => {
+    if (!fino.matches || reduz()) return;
+    const el = e.target.closest && e.target.closest(".artifact");
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    let st = luz.get(el);
+    if (!st){ st = { x: e.clientX - r.left, y: e.clientY - r.top, raf: 0 }; luz.set(el, st); }
+    st.tx = e.clientX - r.left; st.ty = e.clientY - r.top;
+    if (!st.raf) st.raf = requestAnimationFrame(() => segue(el));
+  }, { passive: true });
+
+  /* ---------- botão principal do hero: atração magnética sutil ---------- */
+  const cta = document.querySelector(".hero .btn-solid");
+  if (cta){
+    cta.classList.add("magnet");
+    const m = { x: 0, y: 0, tx: 0, ty: 0, raf: 0 };
+    const passo = () => {
+      m.x += (m.tx - m.x) * 0.18; m.y += (m.ty - m.y) * 0.18;
+      cta.style.transform = `translate(${m.x.toFixed(2)}px, ${m.y.toFixed(2)}px)`;
+      if (Math.abs(m.tx - m.x) > 0.05 || Math.abs(m.ty - m.y) > 0.05) m.raf = requestAnimationFrame(passo);
+      else { m.raf = 0; if (!m.tx && !m.ty) cta.style.transform = ""; }
+    };
+    const mira = (x, y) => { m.tx = x; m.ty = y; if (!m.raf) m.raf = requestAnimationFrame(passo); };
+    cta.addEventListener("pointermove", e => {
+      if (!fino.matches || reduz()) return;
+      const r = cta.getBoundingClientRect();
+      mira((e.clientX - r.left - r.width / 2) * 0.18, (e.clientY - r.top - r.height / 2) * 0.28);
+    });
+    cta.addEventListener("pointerleave", () => mira(0, 0));
+  }
+
+  /* ---------- menu marca a seção atual ---------- */
+  const links = [...document.querySelectorAll('.nav a[href^="#"]')];
+  const ioNav = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    links.forEach(a => a.setAttribute("aria-current", String(a.getAttribute("href") === "#" + e.target.id)));
+  }), { rootMargin: "-45% 0px -50% 0px" });
+  links.forEach(a => { const s = document.querySelector(a.getAttribute("href")); if (s) ioNav.observe(s); });
+})();
+</script>
+
+
+<script>
+/* contato: copiar e-mail */
+document.querySelectorAll(".cc-copy[data-copy]").forEach(b => {
+  let t;
+  b.addEventListener("click", async () => {
+    const texto = b.dataset.copy;
+    try { await navigator.clipboard.writeText(texto); }
+    catch (_) {
+      const a = document.createElement("textarea"); a.value = texto; a.style.position = "fixed"; a.style.opacity = "0";
+      document.body.appendChild(a); a.select(); try { document.execCommand("copy"); } catch (__) {} a.remove();
+    }
+    const rot = b.querySelector("span");
+    b.classList.add("troca");
+    setTimeout(() => { rot.textContent = T("contact.copied"); b.classList.remove("troca"); b.classList.add("ok"); }, 120);
+    clearTimeout(t);
+    t = setTimeout(() => { b.classList.add("troca"); setTimeout(() => { rot.textContent = T("contact.copy"); b.classList.remove("troca", "ok"); }, 120); }, 1800);
+  });
+});
+</script>
+</body></html>
