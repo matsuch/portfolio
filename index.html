@@ -646,6 +646,9 @@ p{margin:0}
 .pt-cover-h{font-size:clamp(46px,7.6vw,108px);line-height:.95;letter-spacing:-.045em;max-width:10ch}
 .pt-cover-q{margin-top:clamp(20px,2.6vw,32px);font-size:clamp(17px,1.5vw,21px);line-height:1.5;color:var(--ink-2);font-weight:300;max-width:42ch}
 .pt-ratio{display:flex;flex-direction:column;gap:20px}
+.pt-note{border-left:2px solid var(--accent);background:var(--accent-wash);padding:12px 16px;display:grid;gap:4px}
+.pt-note-k{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.pt-note p{font-size:13.5px;line-height:1.45;color:var(--ink-2)}
 
 /* 02 — empresa e restrições */
 .pt-split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.8fr);gap:clamp(32px,6vw,88px);align-items:start}
@@ -890,6 +893,7 @@ p{margin:0}
   .pt-cover{align-items:start}
   .pt-ratio{flex-direction:row;flex-wrap:wrap;gap:22px 36px}
   .pt-ratio .signal-rule{display:none}
+  .pt-note{flex-basis:100%}
   .pt-opps{grid-auto-columns:44%}
   .pt-cap{--cols:minmax(0,1fr) repeat(4,34px) 50px}
   .pt-role .full{display:none}
@@ -2134,7 +2138,8 @@ try { const t = localStorage.getItem("tema"); if (t) root.setAttribute("data-the
       stages:["Desafio","HealthOS","Oportunidades","Espectro","Capacidade","Critérios","Scores","Decisão","Roadmap","Conclusão"],
       cover:{ q:"Com seis oportunidades e capacidade para apenas duas apostas, onde devemos investir, e em que ordem?",
         aria:"A restrição", opps:"oportunidades na mesa", bets:"apostas que o squad consegue entregar",
-        months:"6 meses", monthsSub:"um squad, uma aposta por vez" },
+        months:"6 meses", monthsSub:"um squad, uma aposta por vez",
+        noteK:"Exercício estratégico", noteV:"Empresa fictícia e dados sintéticos. O objetivo é mostrar a lógica de priorização: como critérios explícitos levam de seis oportunidades a duas apostas." },
       company:{ lede:"Uma health tech B2B fictícia que fornece software para clínicas e redes de saúde.",
         figs:[["120","clientes B2B"],["5.500","profissionais de saúde"],["380 mil","pacientes por mês"],["760 mil","consultas por mês"]],
         squad:["Product Manager","Product Designer","Engenheiros full-stack","Engenheiro de dados/ML"],
@@ -2268,7 +2273,8 @@ try { const t = localStorage.getItem("tema"); if (t) root.setAttribute("data-the
       stages:["Challenge","HealthOS","Opportunities","Spectrum","Team capacity","Framework","Scores","Decision","Roadmap","Takeaway"],
       cover:{ q:"With six opportunities and capacity for only two bets, where should we invest, and in what order?",
         aria:"The constraint", opps:"opportunities on the table", bets:"bets the squad can deliver",
-        months:"6 months", monthsSub:"one squad, one bet at a time" },
+        months:"6 months", monthsSub:"one squad, one bet at a time",
+        noteK:"Strategic exercise", noteV:"Fictional company and synthetic data. The goal is to show the prioritization logic: how explicit criteria narrow six opportunities down to two bets." },
       company:{ lede:"A fictional B2B health tech that provides software to clinics and healthcare networks.",
         figs:[["120","B2B customers"],["5,500","healthcare professionals"],["380k","patients per month"],["760k","appointments per month"]],
         squad:["Product Manager","Product Designer","Full-stack Engineers","Data/ML Engineer"],
@@ -2425,6 +2431,7 @@ try { const t = localStorage.getItem("tema"); if (t) root.setAttribute("data-the
         <p class="pt-cover-q">${esc(c.q)}</p>
       </div>
       <aside class="pt-ratio" aria-label="${esc(c.aria)}">
+        <div class="pt-note"><span class="pt-note-k">${esc(c.noteK)}</span><p>${esc(c.noteV)}</p></div>
         ${sig(String(DATA.opps.length), c.opps)}
         <div class="signal-rule"></div>
         ${sig(String(DATA.bets), c.bets)}
