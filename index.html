@@ -611,6 +611,34 @@ p{margin:0}
 .pt-step[aria-current="step"]{border-top-color:var(--accent);color:var(--ink)}
 @media (hover:hover) and (pointer:fine){ .pt-step:hover{color:var(--ink)} }
 .pt-now{display:none}
+.pt-phases{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:6px;margin-top:18px}
+.pt-phase{
+  font-family:var(--font-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);
+  padding:0 0 7px;border-bottom:1px solid var(--rule);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  transition:color 200ms ease,border-color 260ms var(--ease-out);
+}
+.pt-phase .n{margin-right:8px;opacity:.6}
+.pt-phase.on{color:var(--accent);border-bottom-color:var(--accent)}
+.pt-phases + .pt-steps{margin-top:10px}
+
+/* "na prática": o trabalho de PM por trás de cada etapa */
+.pt-practice{
+  margin-top:clamp(28px,3.4vw,44px);border-left:2px solid var(--accent);padding:2px 0 2px 16px;
+  display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 18px;align-items:baseline;max-width:980px;
+}
+.pt-practice-k{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);white-space:nowrap}
+.pt-practice p{font-size:14.5px;line-height:1.55;color:var(--ink-2)}
+
+/* 10 — pitch para a diretoria */
+.pt-pitch{display:grid;grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr);gap:clamp(28px,5vw,72px);align-items:start}
+.pt-memo{margin:0;border-bottom:1px solid var(--rule)}
+.pt-memo-row{display:grid;grid-template-columns:150px minmax(0,1fr);gap:18px;padding-block:12px;border-top:1px solid var(--rule)}
+.pt-memo dt{font-size:13px;color:var(--ink-3);padding-top:2px}
+.pt-memo dd{margin:0;font-size:15px;line-height:1.5;color:var(--ink-2)}
+.pt-memo-row.ask{background:var(--accent-wash);border-top-color:var(--accent);padding-inline:14px;margin-inline:-14px}
+.pt-memo-row.ask dt{color:var(--accent);font-weight:500}
+.pt-memo-row.ask dd{color:var(--ink)}
+.pt-pitch + .pt-final{font-size:clamp(26px,3.4vw,46px);margin-top:clamp(36px,4.6vw,64px)}
 .pt-short{display:none}
 
 .pt-stage-wrap{padding-block:clamp(30px,4vw,56px) clamp(24px,3vw,40px);min-height:clamp(430px,38vw,540px);touch-action:pan-y;outline:none}
@@ -860,7 +888,6 @@ p{margin:0}
 /* 10 — conclusão */
 .pt-final{max-width:21ch}
 .pt-final .soft{color:var(--ink-3)}
-.pt-end{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-top:clamp(28px,4vw,44px)}
 
 /* barras crescem só ao entrar na etapa — resposta à navegação */
 .pt-stage.in .pt-bar i,.pt-stage.in .pt-track .a{animation:ptGrow 760ms var(--ease-out) both}
@@ -884,6 +911,12 @@ p{margin:0}
   .pt-step{height:20px;padding:0}
   .pt-step .n,.pt-step .t{display:none}
   .pt-now{display:block;margin-top:10px;font-size:13.5px;color:var(--ink-2)}
+  .pt-now .ph{margin-left:10px;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+  .pt-phases{display:none}
+  .pt-phases + .pt-steps{margin-top:16px}
+  .pt-practice{grid-template-columns:1fr}
+  .pt-pitch{grid-template-columns:1fr}
+  .pt-memo-row{grid-template-columns:1fr;gap:2px}
   .pt-now .n{font-family:var(--font-mono);font-size:11px;color:var(--ink-3);margin-right:8px;letter-spacing:.08em}
   .pt-stage-wrap{min-height:0}
   .pt-cover,.pt-split,.pt-detail-grid,.pt-fw-grid,.pt-score-grid,.pt-bets,.pt-thesis{grid-template-columns:1fr}
@@ -1382,6 +1415,7 @@ img{max-width:100%}
         <p class="pt-kicker" id="pt-kicker"></p>
         <p class="label" data-i18n="pt.tag">Exercício estratégico · Dados sintéticos</p>
       </div>
+      <div class="pt-phases" id="pt-phases" aria-hidden="true"></div>
       <ol class="pt-steps" id="pt-steps" data-i18n-aria="pt.steps" aria-label="Etapas do case"></ol>
       <p class="pt-now" id="pt-now" aria-hidden="true"></p>
       <div class="pt-stage-wrap" id="pt-stage" tabindex="-1"></div>
@@ -2135,11 +2169,25 @@ try { const t = localStorage.getItem("tema"); if (t) root.setAttribute("data-the
         title:"Onde devemos usar IA?", next:"Próximo", restart:"Recomeçar", tag:"Exercício estratégico · Dados sintéticos",
         live:(n,t,s) => `Etapa ${n} de ${t}: ${s}`, weeks:"semanas", wk:"sem", of5:"de 5"
       },
-      stages:["Desafio","HealthOS","Oportunidades","Espectro","Capacidade","Critérios","Scores","Decisão","Roadmap","Conclusão"],
+      stages:["Desafio","HealthOS","Oportunidades","Espectro","Capacidade","Critérios","Scores","Decisão","Roadmap","Pitch"],
+      phases:["Entender","Explorar","Decidir","Medir","Convencer"],
+      practiceK:"Na prática",
+      practice:[
+        "Antes de qualquer resposta, alinhar a pergunta: qual objetivo da empresa esta decisão serve, quem decide e até quando.",
+        "Pesquisa de mercado e contexto: tamanho e tendências do segmento, o que concorrentes já lançaram com IA e onde a empresa ganha ou perde clientes.",
+        "Entender a dor do cliente e do negócio com evidência: entrevistas com profissionais e clínicas, tickets de suporte, dados de uso e do funil. Cada oportunidade precisa de um número que mostre o tamanho do problema.",
+        "Encontrar a solução junto com negócio e tecnologia: sessões com operações, atendimento e engenharia para mapear alternativas, do ajuste de processo ao modelo, validando a mais barata primeiro com protótipo ou teste manual.",
+        "Validar o esforço com engenharia e dados: estimativas em faixas, dependências e o que o time ainda precisa aprender. A capacidade real define o tamanho da ambição.",
+        "Combinar critérios e pesos com as lideranças antes de pontuar. Em saúde, risco inclui LGPD, segurança do paciente e compliance, e entra como critério, não como detalhe.",
+        "Pontuar em grupo e registrar as discordâncias. O número organiza a conversa, e as divergências costumam apontar o que ainda falta descobrir.",
+        "Alinhar com os stakeholders um a um antes da reunião formal, explicar por que as outras quatro ficaram de fora e registrar o que faria a decisão mudar.",
+        "Definir para cada aposta a métrica de sucesso, as métricas de proteção e o critério de parada. Para IA, incluir avaliação de qualidade (evals) antes e depois do rollout.",
+        "Depois da aprovação: comunicar o plano ao time e às áreas afetadas, lançar em piloto, medir contra a linha de base e voltar à diretoria com o resultado."
+      ],
       cover:{ q:"Com seis oportunidades e capacidade para apenas duas apostas, onde devemos investir, e em que ordem?",
         aria:"A restrição", opps:"oportunidades na mesa", bets:"apostas que o squad consegue entregar",
         months:"6 meses", monthsSub:"um squad, uma aposta por vez",
-        noteK:"Exercício estratégico", noteV:"Empresa fictícia e dados sintéticos. O objetivo é mostrar a lógica de priorização: como critérios explícitos levam de seis oportunidades a duas apostas." },
+        noteK:"Exercício estratégico", noteV:"Empresa fictícia e dados sintéticos. O objetivo é mostrar a lógica de priorização e o caminho de um PM do problema à aprovação: entender, explorar, decidir, medir e convencer." },
       company:{ lede:"Uma health tech B2B fictícia que fornece software para clínicas e redes de saúde.",
         figs:[["120","clientes B2B"],["5.500","profissionais de saúde"],["380 mil","pacientes por mês"],["760 mil","consultas por mês"]],
         squad:["Product Manager","Product Designer","Engenheiros full-stack","Engenheiro de dados/ML"],
@@ -2262,6 +2310,17 @@ try { const t = localStorage.getItem("tema"); if (t) root.setAttribute("data-the
         measure:"Medir, depois decidir", delivery:w => ` Entrega estimada: ${w}.`,
         check:(a,b,s,t,r) => `Checagem de capacidade: no pior caso são <b>${a} + ${b} = ${s} semanas</b> de ~${t}, sobrando ${r} para rollout e medição.`
       },
+      pitch:{
+        h:"O pitch para a diretoria.", lede:"Todo o trabalho anterior cabe em uma página. É isso que vai para a reunião de aprovação.",
+        memo:"Memo · Diretoria HealthOS", aria:"Memo para a diretoria",
+        rows:["Problema","Proposta","Investimento","Retorno esperado","Riscos","Como vamos medir","O pedido"],
+        problem:"Seis oportunidades reais disputam um único squad por seis meses. Sem critério explícito, a escolha vira a opinião de quem fala mais alto.",
+        proposal:(a,wa,b,wb) => `Duas apostas em sequência: ${a} (${wa}) e depois ${b} (${wb}).`,
+        invest:(w,t) => `O squad atual, sem novas contratações. ${w} semanas no pior caso, de ~${t} disponíveis.`,
+        risks:"Dados de saúde sob a LGPD e risco de erro em texto clínico. Mitigação: avaliação de qualidade antes do rollout e revisão do profissional em cada rascunho.",
+        measure:"Linha de base antes de cada aposta, métricas de proteção (satisfação dos profissionais, correções nos rascunhos) e um checkpoint no mês 3.",
+        ask:"Aprovar o plano de seis meses, com revisão no mês 3 e critério de parada: se o piloto do Copiloto não reduzir o tempo de documentação em pelo menos 20%, a vaga é redirecionada."
+      },
       takeaway:["IA não é a estratégia.","É uma das ferramentas disponíveis para executar a estratégia."]
     },
 
@@ -2270,11 +2329,25 @@ try { const t = localStorage.getItem("tema"); if (t) root.setAttribute("data-the
         title:"Where should we use AI?", next:"Next", restart:"Start over", tag:"Strategic exercise · Synthetic data",
         live:(n,t,s) => `Stage ${n} of ${t}: ${s}`, weeks:"weeks", wk:"wk", of5:"of 5"
       },
-      stages:["Challenge","HealthOS","Opportunities","Spectrum","Team capacity","Framework","Scores","Decision","Roadmap","Takeaway"],
+      stages:["Challenge","HealthOS","Opportunities","Spectrum","Team capacity","Framework","Scores","Decision","Roadmap","Pitch"],
+      phases:["Understand","Explore","Decide","Measure","Convince"],
+      practiceK:"In practice",
+      practice:[
+        "Before any answer, align on the question: which company goal this decision serves, who decides and by when.",
+        "Market research and context: segment size and trends, what competitors have already shipped with AI, and where the company wins or loses customers.",
+        "Understand the customer and business pain with evidence: interviews with professionals and clinics, support tickets, usage and funnel data. Every opportunity needs a number that sizes the problem.",
+        "Find the solution together with business and technology: sessions with operations, support and engineering to map alternatives, from process changes to models, validating the cheapest one first with a prototype or a manual test.",
+        "Validate effort with engineering and data: ranged estimates, dependencies and what the team still needs to learn. Real capacity sets the size of the ambition.",
+        "Agree on criteria and weights with leadership before scoring. In healthcare, risk includes privacy law, patient safety and compliance, and it enters as a criterion, not a footnote.",
+        "Score as a group and record the disagreements. The number organizes the conversation, and the disagreements usually point to what is still unknown.",
+        "Align with stakeholders one by one before the formal meeting, explain why the other four were left out and record what would change the decision.",
+        "Define each bet's success metric, guardrail metrics and stop criterion. For AI, include quality evaluation (evals) before and after rollout.",
+        "After approval: communicate the plan to the team and affected areas, launch as a pilot, measure against the baseline and report the result back to leadership."
+      ],
       cover:{ q:"With six opportunities and capacity for only two bets, where should we invest, and in what order?",
         aria:"The constraint", opps:"opportunities on the table", bets:"bets the squad can deliver",
         months:"6 months", monthsSub:"one squad, one bet at a time",
-        noteK:"Strategic exercise", noteV:"Fictional company and synthetic data. The goal is to show the prioritization logic: how explicit criteria narrow six opportunities down to two bets." },
+        noteK:"Strategic exercise", noteV:"Fictional company and synthetic data. The goal is to show the prioritization logic and a PM's path from problem to approval: understand, explore, decide, measure and convince." },
       company:{ lede:"A fictional B2B health tech that provides software to clinics and healthcare networks.",
         figs:[["120","B2B customers"],["5,500","healthcare professionals"],["380k","patients per month"],["760k","appointments per month"]],
         squad:["Product Manager","Product Designer","Full-stack Engineers","Data/ML Engineer"],
@@ -2396,6 +2469,17 @@ try { const t = localStorage.getItem("tema"); if (t) root.setAttribute("data-the
         ],
         measure:"Measure, then decide", delivery:w => ` Estimated delivery: ${w}.`,
         check:(a,b,s,t,r) => `Capacity check: worst case is <b>${a} + ${b} = ${s} weeks</b> of ~${t}, leaving ${r} for rollout and measurement.`
+      },
+      pitch:{
+        h:"The pitch to leadership.", lede:"All the work before fits on one page. This is what goes into the approval meeting.",
+        memo:"Memo · HealthOS leadership", aria:"Memo to leadership",
+        rows:["Problem","Proposal","Investment","Expected return","Risks","How we measure","The ask"],
+        problem:"Six real opportunities compete for a single squad for six months. Without explicit criteria, the choice becomes the opinion of whoever speaks loudest.",
+        proposal:(a,wa,b,wb) => `Two bets in sequence: ${a} (${wa}), then ${b} (${wb}).`,
+        invest:(w,t) => `The current squad, no new hires. ${w} weeks in the worst case, out of ~${t} available.`,
+        risks:"Health data under privacy law and the risk of errors in clinical text. Mitigation: quality evaluation before rollout and professional review of every draft.",
+        measure:"A baseline before each bet, guardrail metrics (professional satisfaction, edits to drafts) and a checkpoint in month 3.",
+        ask:"Approve the six-month plan, with a month-3 review and a stop criterion: if the Copilot pilot doesn't cut documentation time by at least 20%, the slot is redirected."
       },
       takeaway:["AI is not the strategy.","It is one of the tools available to execute the strategy."]
     }
@@ -2695,23 +2779,42 @@ try { const t = localStorage.getItem("tema"); if (t) root.setAttribute("data-the
 
   const palavras = (t, i0) => t.split(" ").map((w, k) => `<span class="w"><span style="--i:${i0 + k}">${esc(w)}</span></span>`).join(" ");
 
-  function sTakeaway(){
+  function sPitch(){
+    const u = L.pitch, TW = DATA.totalWeeks;
+    const [b1, b2] = DATA.betIds.map(byId), [t1, t2] = DATA.betIds.map(txt);
+    const when = i => L.decision.bets[i].when.toLowerCase();
+    const cap = x => x.charAt(0).toUpperCase() + x.slice(1);
+    const ret = [t1, t2].filter(t => t.outcome).map(t => `${cap(t.outcome[1])}: ${t.outcome[0]}`).join(". ") + ".";
+    const vals = [u.problem, u.proposal(t1.name, when(0), t2.name, when(1)), u.invest(b1.weeks[1] + b2.weeks[1], TW), ret, u.risks, u.measure, u.ask];
+    const rows = u.rows.map((k, i) => `<div class="pt-memo-row${i === u.rows.length - 1 ? " ask" : ""}"><dt>${esc(k)}</dt><dd>${esc(vals[i])}</dd></div>`).join("");
     return `
-    <p class="statement pt-final">${palavras(L.takeaway[0], 0)}<br><span class="soft">${palavras(L.takeaway[1], L.takeaway[0].split(" ").length)}</span></p>
-    <div class="pt-end"><span class="label">${esc(L.ui.tag)}</span></div>`;
+    <div class="pt-pitch">
+      <div>
+        ${head(u.h, u.lede)}
+        <p class="label">${esc(u.memo)}</p>
+      </div>
+      <dl class="pt-memo" aria-label="${esc(u.aria)}">${rows}</dl>
+    </div>
+    <p class="statement pt-final">${palavras(L.takeaway[0], 0)}<br><span class="soft">${palavras(L.takeaway[1], L.takeaway[0].split(" ").length)}</span></p>`;
   }
 
-  const RENDER = [sCover, sCompany, sOpps, sSpectrum, sCapacity, sFramework, sScores, sDecision, sRoadmap, sTakeaway];
+  const RENDER = [sCover, sCompany, sOpps, sSpectrum, sCapacity, sFramework, sScores, sDecision, sRoadmap, sPitch];
+  /* fases do trabalho de PM: [índice da primeira etapa, da última] */
+  const PHASES = [[0, 2], [3, 4], [5, 7], [8, 8], [9, 9]];
+  const faseDe = n => PHASES.findIndex(([a, b]) => n >= a && n <= b);
+  const pratica = n => `<aside class="pt-practice"><span class="pt-practice-k">${esc(L.practiceK)}</span><p>${esc(L.practice[n])}</p></aside>`;
   const OPPS_STAGE = RENDER.indexOf(sOpps);
   const LAST = RENDER.length - 1;
   const titulo = n => L.stages[n];
 
   /* ---------- montagem e navegação ---------- */
   const $ = id => document.getElementById(id);
-  const wrap = $("pt-stage"), steps = $("pt-steps");
+  const wrap = $("pt-stage"), steps = $("pt-steps"), fases = $("pt-phases");
   const semMov = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   function renderSteps(){
+    fases.innerHTML = PHASES.map(([a, b], i) =>
+      `<span class="pt-phase" style="grid-column:${a + 1} / ${b + 2}"><span class="n">${i + 1}</span>${esc(L.phases[i])}</span>`).join("");
     steps.innerHTML = RENDER.map((_, i) => `
       <li><button class="pt-step" type="button" data-act="go" data-n="${i}" aria-label="${i + 1}. ${esc(titulo(i))}">
         <span class="n">${pad(i + 1)}</span><span class="t">${esc(titulo(i))}</span>
@@ -2725,7 +2828,8 @@ try { const t = localStorage.getItem("tema"); if (t) root.setAttribute("data-the
       b.classList.toggle("done", i < n);
     });
     $("pt-count").textContent = pad(n + 1) + " / " + pad(RENDER.length);
-    $("pt-now").innerHTML = `<span class="n">${pad(n + 1)}</span>${esc(titulo(n))}`;
+    fases.querySelectorAll(".pt-phase").forEach((f, i) => f.classList.toggle("on", i === faseDe(n)));
+    $("pt-now").innerHTML = `<span class="n">${pad(n + 1)}</span>${esc(titulo(n))}<span class="ph">${esc(L.phases[faseDe(n)])}</span>`;
     $("pt-kicker").textContent = n ? L.ui.title : "";
     $("pt-prev").disabled = n === 0;
     $("pt-next").disabled = n === LAST;
@@ -2734,7 +2838,7 @@ try { const t = localStorage.getItem("tema"); if (t) root.setAttribute("data-the
   }
 
   function paint(anim, dir){
-    wrap.innerHTML = `<div class="pt-stage${anim ? " in" : ""}" style="--dir:${dir || 1}">${RENDER[S.stage]()}</div>`;
+    wrap.innerHTML = `<div class="pt-stage${anim ? " in" : ""}" style="--dir:${dir || 1}">${RENDER[S.stage]()}${pratica(S.stage)}</div>`;
     chrome();
     if (S.stage === OPPS_STAGE && S.opp){
       const track = $("pt-opps"), btn = track && track.querySelector(`[data-id="${S.opp}"]`);
@@ -2746,7 +2850,7 @@ try { const t = localStorage.getItem("tema"); if (t) root.setAttribute("data-the
   function repaint(){
     const fk = document.activeElement && document.activeElement.dataset ? document.activeElement.dataset.fk : null;
     const track = $("pt-opps"), sx = track ? track.scrollLeft : 0;
-    wrap.innerHTML = `<div class="pt-stage">${RENDER[S.stage]()}</div>`;
+    wrap.innerHTML = `<div class="pt-stage">${RENDER[S.stage]()}${pratica(S.stage)}</div>`;
     const t2 = $("pt-opps"); if (t2) t2.scrollLeft = sx;
     if (fk){ const el = wrap.querySelector(`[data-fk="${fk}"]`); if (el) el.focus({ preventScroll:true }); }
   }
