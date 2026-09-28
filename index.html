@@ -1094,6 +1094,111 @@ html[data-vt="theme"]::view-transition-new(root){animation:vtCirculo 620ms var(-
   .cc-links li{grid-template-columns:minmax(0,1fr) auto;row-gap:2px}
   .cc-k{grid-column:1 / -1}
 }
+
+/* ============================================================
+   MOTION GRAPHICS — dados, produto e IA
+   SVG + CSS puro. Laço de 6s, só roda com a seção na tela
+   (.live via IntersectionObserver); com movimento reduzido,
+   cada painel vira uma composição estática e completa.
+   ============================================================ */
+.mg-grid-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,1.6vw,24px)}
+.mg-card{margin:0;background:var(--paper-2);box-shadow:inset 0 0 0 1px var(--rule-soft);padding:clamp(18px,2vw,26px);display:grid;gap:16px;align-content:start}
+.mg-top{display:flex;justify-content:space-between;gap:12px}
+.mg-art{background:var(--paper);box-shadow:inset 0 0 0 1px var(--rule-soft);aspect-ratio:16 / 9;overflow:hidden}
+.mg-svg{display:block;width:100%;height:100%}
+.mg-h{font-size:clamp(19px,1.7vw,23px);letter-spacing:-.025em;line-height:1.15}
+.mg-p{margin-top:8px;font-size:14.5px;line-height:1.5;color:var(--ink-2);max-width:40ch}
+@media (max-width:980px){ .mg-grid-cards{grid-template-columns:1fr} .mg-art{aspect-ratio:auto} }
+
+.mg svg *{transform-box:fill-box}
+.mg-grid path,.mg-lanes path,.mg-base{fill:none;stroke:var(--rule);stroke-width:1}
+.mg-grid path{stroke-dasharray:2 4}
+.mg text{font-family:var(--font-mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;fill:var(--ink-3)}
+
+/* 01 · dados */
+.mg-dot{fill:var(--ink-3);transform-origin:center}
+.mg-band{fill:var(--accent);opacity:.12}
+.mg-trend{fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round;stroke-dasharray:1}
+.mg-scan{fill:var(--accent);opacity:0}
+.mg-core{fill:var(--accent)}
+.mg-ring{fill:none;stroke:var(--accent);stroke-width:1.5;transform-origin:center;opacity:0}
+.mg-tag path{fill:none;stroke:var(--accent);stroke-width:1}
+.mg-tag text{fill:var(--accent)}
+
+/* 02 · produto */
+.mg-pass{fill:var(--accent)}
+.mg-drop{fill:var(--ink-3)}
+.mg-pass,.mg-drop{transform:translateX(var(--sx))}
+.mg-drop{opacity:.55}
+.mg-bars rect{fill:var(--ink);transform-origin:50% 100%}
+.mg-bars rect:last-child{fill:var(--accent)}
+
+/* 03 · IA */
+.mg-doc rect{fill:var(--paper-2);stroke:var(--rule);stroke-width:1}
+.mg-doc path{fill:none;stroke:var(--ink-3);stroke-width:2;stroke-linecap:round;opacity:.5}
+.mg-doc-hit rect{stroke:var(--accent)}
+.mg-link{fill:none;stroke:var(--rule);stroke-width:1}
+.mg-link-hit{stroke:var(--accent);stroke-width:1.5;stroke-dasharray:3 5}
+.mg-orbit{fill:none;stroke:var(--accent);stroke-width:1;stroke-dasharray:2 5;opacity:.7}
+.mg-spark{fill:var(--accent)}
+.mg-node{transform-origin:center}
+[data-mg="ai"] .mg-core{transform-origin:center}
+.mg-tokens circle{fill:var(--accent);opacity:0}
+.mg-out rect{fill:var(--ink-2);transform-origin:0 50%}
+.mg-out rect:nth-child(3n){fill:var(--accent)}
+.mg-caret{fill:var(--accent)}
+
+/* ponto do nome: um "ping" discreto, sinal de que está ativo */
+.pulse{position:relative}
+.pulse::after{content:"";position:absolute;inset:0;border-radius:inherit;background:var(--accent);opacity:0}
+
+@media (prefers-reduced-motion: no-preference){
+  @keyframes mgPing{0%{transform:scale(1);opacity:.55}100%{transform:scale(3.2);opacity:0}}
+  .pulse::after{animation:mgPing 2.4s var(--ease-out) infinite}
+
+  @keyframes mgDot{0%{opacity:0;transform:scale(0)}8%,86%{opacity:1;transform:scale(1)}96%,100%{opacity:0;transform:scale(1)}}
+  @keyframes mgScan{0%{transform:translateX(0);opacity:0}4%{opacity:.5}40%{transform:translateX(280px);opacity:.5}44%,100%{transform:translateX(280px);opacity:0}}
+  @keyframes mgDraw{0%,30%{stroke-dashoffset:1;opacity:1}56%,86%{stroke-dashoffset:0;opacity:1}96%,100%{stroke-dashoffset:0;opacity:0}}
+  @keyframes mgBand{0%,48%{opacity:0}62%,86%{opacity:.12}96%,100%{opacity:0}}
+  @keyframes mgHit{0%,56%{opacity:0;transform:scale(0)}62%,86%{opacity:1;transform:scale(1)}96%,100%{opacity:0;transform:scale(1)}}
+  @keyframes mgRing{0%{transform:scale(1);opacity:.7}100%{transform:scale(3);opacity:0}}
+  @keyframes mgTag{0%,62%{opacity:0;transform:translateY(4px)}70%,86%{opacity:1;transform:none}96%,100%{opacity:0}}
+  .mg-dot{animation:mgDot 6s var(--ease-out) calc(var(--k) * 45ms) infinite both}
+  .mg-scan{animation:mgScan 6s var(--ease-in-out) infinite both}
+  .mg-trend{animation:mgDraw 6s var(--ease-in-out) infinite both}
+  .mg-band{animation:mgBand 6s ease infinite both}
+  .mg-hit{transform-origin:center;animation:mgHit 6s var(--ease-out) infinite both}
+  .mg-ring{animation:mgRing 1.5s var(--ease-out) infinite}
+  .mg-tag{animation:mgTag 6s var(--ease-out) infinite both}
+
+  @keyframes mgPass{0%{transform:translateX(0);opacity:0}6%{opacity:1}58%{transform:translateX(214px);opacity:1}66%,100%{transform:translateX(226px);opacity:0}}
+  @keyframes mgDrop{0%{transform:translate(0,0);opacity:0}6%{opacity:.8}30%{transform:translate(80px,0);opacity:.8}42%,100%{transform:translate(84px,16px);opacity:0}}
+  @keyframes mgBar{0%,52%{transform:scaleY(0)}70%,88%{transform:scaleY(1)}98%,100%{transform:scaleY(0)}}
+  .mg-pass{animation:mgPass 6s var(--ease-in-out) var(--d) infinite both}
+  .mg-drop{animation:mgDrop 6s var(--ease-in-out) var(--d) infinite both}
+  .mg-bars rect{animation:mgBar 6s var(--ease-out) calc(var(--k) * 120ms) infinite both}
+
+  @keyframes mgDoc{0%,8%{transform:none}14%,30%{transform:translateX(4px)}40%,100%{transform:none}}
+  @keyframes mgFlow{to{stroke-dashoffset:-32}}
+  @keyframes mgSpin{to{transform:rotate(360deg)}}
+  @keyframes mgThink{0%,24%{transform:scale(1)}32%{transform:scale(1.14)}40%,100%{transform:scale(1)}}
+  @keyframes mgTok{0%,34%{transform:translateX(0);opacity:0}38%{opacity:1}48%,100%{transform:translateX(22px);opacity:0}}
+  @keyframes mgType{0%,40%{transform:scaleX(0)}52%,88%{transform:scaleX(1)}97%,100%{transform:scaleX(0)}}
+  @keyframes mgBlink{0%,49%{opacity:1}50%,100%{opacity:0}}
+  .mg-doc-hit{animation:mgDoc 6s var(--ease-out) calc(var(--k) * 150ms) infinite both}
+  .mg-link-hit{animation:mgFlow 1.2s linear infinite}
+  .mg-node{animation:mgSpin 9s linear infinite}
+  [data-mg="ai"] .mg-core{animation:mgThink 6s var(--ease-out) infinite}
+  .mg-tokens circle{animation:mgTok 6s var(--ease-in-out) calc(var(--k) * 260ms) infinite both}
+  .mg-out rect{animation:mgType 6s var(--ease-out) calc(var(--k) * 160ms) infinite both}
+  .mg-caret{animation:mgBlink 1s steps(1) infinite}
+
+  /* só anima com a seção visível (economiza CPU e bateria) */
+  .js .mg:not(.live) svg *,.js .mg:not(.live) svg{animation-play-state:paused}
+}
+@media (prefers-reduced-motion: reduce){
+  .mg-drop,.mg-tokens circle,.mg-scan,.mg-ring{opacity:0}
+}
 </style>
 <style>
 /* Acompanha o tema da página: afeta scrollbars e controles nativos. */
@@ -1169,6 +1274,70 @@ img{max-width:100%}
           </div>
         </div>
       </aside>
+    </div>
+  </section>
+
+  <div class="shell" aria-hidden="true"><hr class="sep"></div>
+
+  <!-- ===================== MOTION: dados, produto e IA ===================== -->
+  <section class="shell band-tight mg" id="motion" data-i18n-aria="mg.aria" aria-label="Como eu trabalho">
+    <div class="sec-label">
+      <span class="sec-title" data-i18n="mg.title">Do dado à decisão</span>
+      <span class="label" data-i18n="mg.tag">Dados · Produto · IA</span>
+    </div>
+    <div class="mg-grid-cards">
+      <figure class="mg-card" data-mg="data">
+        <div class="mg-top"><span class="label">01</span><span class="label" data-i18n="mg.data.k">Dados</span></div>
+        <div class="mg-art">
+          <svg class="mg-svg" viewBox="0 0 320 180" aria-hidden="true" focusable="false">
+            <g class="mg-grid"><path d="M20 158H304M20 118H304M20 78H304M20 38H304"/></g>
+            <polygon class="mg-band" points="24.0,122.0 300.0,39.2 300.0,71.2 24.0,154.0"/>
+            <g><circle class="mg-dot" cx="24.0" cy="147.0" r="3" style="--k:25"/><circle class="mg-dot" cx="34.6" cy="144.1" r="3" style="--k:25"/><circle class="mg-dot" cx="45.2" cy="109.0" r="3" style="--k:25"/><circle class="mg-dot" cx="55.8" cy="140.0" r="3" style="--k:25"/><circle class="mg-dot" cx="66.4" cy="136.2" r="3" style="--k:25"/><circle class="mg-dot" cx="77.0" cy="104.4" r="3" style="--k:25"/><circle class="mg-dot" cx="87.6" cy="125.7" r="3" style="--k:25"/><circle class="mg-dot" cx="98.2" cy="117.5" r="3" style="--k:25"/><circle class="mg-dot" cx="108.8" cy="111.1" r="3" style="--k:25"/><circle class="mg-dot" cx="119.4" cy="114.6" r="3" style="--k:25"/><circle class="mg-dot" cx="130.0" cy="91.9" r="3" style="--k:25"/><circle class="mg-dot" cx="140.6" cy="114.3" r="3" style="--k:25"/><circle class="mg-dot" cx="151.2" cy="108.8" r="3" style="--k:25"/><circle class="mg-dot" cx="161.8" cy="73.7" r="3" style="--k:25"/><circle class="mg-dot" cx="172.4" cy="105.5" r="3" style="--k:25"/><circle class="mg-dot" cx="183.0" cy="99.5" r="3" style="--k:25"/><circle class="mg-dot" cx="193.6" cy="71.9" r="3" style="--k:25"/><circle class="mg-dot" cx="204.2" cy="90.4" r="3" style="--k:25"/><circle class="mg-dot" cx="214.8" cy="79.5" r="3" style="--k:25"/><circle class="mg-dot" cx="225.4" cy="79.4" r="3" style="--k:25"/><circle class="mg-dot" cx="236.0" cy="79.4" r="3" style="--k:25"/><circle class="mg-dot" cx="246.6" cy="54.6" r="3" style="--k:25"/><circle class="mg-dot" cx="257.2" cy="81.2" r="3" style="--k:25"/><circle class="mg-dot" cx="267.8" cy="73.2" r="3" style="--k:25"/><circle class="mg-dot" cx="278.4" cy="39.0" r="3" style="--k:25"/><circle class="mg-dot" cx="289.0" cy="70.7" r="3" style="--k:25"/></g>
+            <path class="mg-trend" pathLength="1" d="M24 138 L300 55.2"/>
+            <rect class="mg-scan" x="20" y="24" width="1.5" height="134"/>
+            <g transform="translate(236 34)"><g class="mg-hit"><circle class="mg-ring" r="5"/><circle class="mg-core" r="4"/></g></g>
+            <g class="mg-tag"><path d="M236 34 L252 20 H300"/><text x="300" y="15" text-anchor="end" data-i18n="mg.signal">sinal</text></g>
+          </svg>
+        </div>
+        <figcaption>
+          <h3 class="mg-h" data-i18n="mg.data.h">Achar o sinal no ruído</h3>
+          <p class="mg-p" data-i18n="mg.data.p">Métricas, experimentos e análise para separar tendência de acaso antes de decidir.</p>
+        </figcaption>
+      </figure>
+      <figure class="mg-card" data-mg="pm">
+        <div class="mg-top"><span class="label">02</span><span class="label" data-i18n="mg.pm.k">Produto</span></div>
+        <div class="mg-art">
+          <svg class="mg-svg" viewBox="0 0 320 180" aria-hidden="true" focusable="false">
+            <g class="mg-grid"><path d="M104 26V142M196 26V142"/></g>
+            <g class="mg-lanes"><path d="M18 36H228 M18 58H228 M18 80H228 M18 102H228 M18 124H228"/></g>
+            <g><circle class="mg-pass" cx="18" cy="36" r="4" style="--d:0s;--sx:182px"/><circle class="mg-drop" cx="18" cy="58" r="4" style="--d:0.35s;--sx:70px"/><circle class="mg-pass" cx="18" cy="80" r="4" style="--d:0.7s;--sx:150px"/><circle class="mg-drop" cx="18" cy="102" r="4" style="--d:1.05s;--sx:58px"/><circle class="mg-pass" cx="18" cy="124" r="4" style="--d:1.4s;--sx:212px"/><circle class="mg-drop" cx="18" cy="36" r="4" style="--d:1.9s;--sx:40px"/><circle class="mg-drop" cx="18" cy="80" r="4" style="--d:2.25s;--sx:86px"/><circle class="mg-pass" cx="18" cy="58" r="4" style="--d:2.6s;--sx:120px"/><circle class="mg-pass" cx="18" cy="102" r="4" style="--d:2.95s;--sx:196px"/><circle class="mg-drop" cx="18" cy="124" r="4" style="--d:3.3s;--sx:76px"/></g>
+            <g class="mg-bars"><rect x="248" y="104" width="14" height="38" style="--k:0"/><rect x="268" y="82" width="14" height="60" style="--k:1"/><rect x="288" y="52" width="14" height="90" style="--k:2"/></g>
+            <path class="mg-base" d="M244 142H306"/>
+            <g class="mg-stage"><text x="18" y="166" data-i18n="mg.s1">Descoberta</text><text x="104" y="166" data-i18n="mg.s2">Priorização</text><text x="196" y="166" data-i18n="mg.s3">Entrega</text><text x="306" y="166" text-anchor="end" data-i18n="mg.s4">Impacto</text></g>
+          </svg>
+        </div>
+        <figcaption>
+          <h3 class="mg-h" data-i18n="mg.pm.h">Filtrar antes de construir</h3>
+          <p class="mg-p" data-i18n="mg.pm.p">Descoberta e priorização para que só o que move a métrica chegue à entrega.</p>
+        </figcaption>
+      </figure>
+      <figure class="mg-card" data-mg="ai">
+        <div class="mg-top"><span class="label">03</span><span class="label" data-i18n="mg.ai.k">IA</span></div>
+        <div class="mg-art">
+          <svg class="mg-svg" viewBox="0 0 320 180" aria-hidden="true" focusable="false">
+            <g><path class="mg-link" d="M86 35 C116 35 118 90 142 90"/><path class="mg-link mg-link-hit" d="M86 71 C116 71 118 90 142 90"/><path class="mg-link" d="M86 107 C116 107 118 90 142 90"/><path class="mg-link mg-link-hit" d="M86 143 C116 143 118 90 142 90"/></g>
+            <g><g class="mg-doc" style="--k:0"><rect x="14" y="22" width="72" height="26"/><path d="M22 31H70M22 39H56"/></g><g class="mg-doc mg-doc-hit" style="--k:1"><rect x="14" y="58" width="72" height="26"/><path d="M22 67H70M22 75H56"/></g><g class="mg-doc" style="--k:2"><rect x="14" y="94" width="72" height="26"/><path d="M22 103H70M22 111H56"/></g><g class="mg-doc mg-doc-hit" style="--k:3"><rect x="14" y="130" width="72" height="26"/><path d="M22 139H70M22 147H56"/></g></g>
+            <g transform="translate(160 90)"><g class="mg-node"><circle r="30" fill="none"/><circle class="mg-orbit" r="27"/><circle class="mg-spark" r="3" cx="27"/></g><circle class="mg-core" r="15"/></g>
+            <g class="mg-tokens"><circle cx="180" cy="90" r="2.5" style="--k:0"/><circle cx="180" cy="90" r="2.5" style="--k:1"/><circle cx="180" cy="90" r="2.5" style="--k:2"/></g>
+            <g class="mg-out"><rect x="206" y="52" width="96" height="5" style="--k:0"/><rect x="206" y="66" width="82" height="5" style="--k:1"/><rect x="206" y="80" width="100" height="5" style="--k:2"/><rect x="206" y="94" width="70" height="5" style="--k:3"/><rect x="206" y="108" width="88" height="5" style="--k:4"/><rect x="206" y="122" width="52" height="5" style="--k:5"/></g>
+            <rect class="mg-caret" x="260" y="120" width="2" height="9"/>
+          </svg>
+        </div>
+        <figcaption>
+          <h3 class="mg-h" data-i18n="mg.ai.h">Contexto certo, resposta útil</h3>
+          <p class="mg-p" data-i18n="mg.ai.p">Recuperação, agentes e avaliação para que a IA responda com base no que importa.</p>
+        </figcaption>
+      </figure>
     </div>
   </section>
 
@@ -1297,6 +1466,11 @@ const SITE = {
     "skills.ai":"IA", "skills.aiSub":"Agentes, RAG, UX de IA e avaliação",
     "skills.data":"Dados", "skills.dataSub":"Métricas, experimentação e análise de dados",
     "skills.build":"Construção", "skills.buildSub":"Automação, prototipagem, APIs e engenharia",
+    "mg.title":"Do dado à decisão", "mg.tag":"Dados · Produto · IA", "mg.aria":"Como eu trabalho: dados, produto e IA",
+    "mg.data.k":"Dados", "mg.data.h":"Achar o sinal no ruído", "mg.data.p":"Métricas, experimentos e análise para separar tendência de acaso antes de decidir.",
+    "mg.pm.k":"Produto", "mg.pm.h":"Filtrar antes de construir", "mg.pm.p":"Descoberta e priorização para que só o que move a métrica chegue à entrega.",
+    "mg.ai.k":"IA", "mg.ai.h":"Contexto certo, resposta útil", "mg.ai.p":"Recuperação, agentes e avaliação para que a IA responda com base no que importa.",
+    "mg.signal":"sinal", "mg.s1":"Descoberta", "mg.s2":"Priorização", "mg.s3":"Entrega", "mg.s4":"Impacto",
     "work.title":"Trabalho profissional", "work.prev":"Case anterior", "work.next":"Próximo case", "work.aria":"Carrossel de cases profissionais",
     "pt.title":"Estratégia de produto", "pt.prev":"Etapa anterior", "pt.next":"Próxima etapa",
     "pt.aria":"Case interativo: Onde devemos usar IA?", "pt.tag":"Exercício estratégico · Dados sintéticos",
@@ -1305,7 +1479,7 @@ const SITE = {
     /* dinâmicos */
     "c.featured":"Destaque", "c.open":"Ver o case", "c.close":"Fechar o case",
     "c.problem":"Problema", "c.role":"Meu papel", "c.decisions":"Decisões-chave", "c.solution":"Solução", "c.impact":"Impacto",
-    "c.tech":"Abordagem de IA", "c.priv":"Produto proprietário, código fechado. Apresento o produto ao vivo em uma call.",
+    "c.tech":"Abordagem de IA",
     "p.kind":"Projeto pessoal", "p.open":"Ver o projeto", "p.close":"Fechar o projeto", "p.repo":"Repositório ↗",
     "p.what":"O que é", "p.why":"Por que construí", "p.tech":"Abordagem técnica", "p.github":"Ver no GitHub ↗"
   },
@@ -1323,6 +1497,11 @@ const SITE = {
     "skills.ai":"AI", "skills.aiSub":"Agents, RAG, AI UX and evaluation",
     "skills.data":"Data", "skills.dataSub":"Metrics, experimentation and data analysis",
     "skills.build":"Building", "skills.buildSub":"Automation, prototyping, APIs and engineering",
+    "mg.title":"From data to decision", "mg.tag":"Data · Product · AI", "mg.aria":"How I work: data, product and AI",
+    "mg.data.k":"Data", "mg.data.h":"Find the signal in the noise", "mg.data.p":"Metrics, experiments and analysis to tell trend from chance before deciding.",
+    "mg.pm.k":"Product", "mg.pm.h":"Filter before building", "mg.pm.p":"Discovery and prioritization so only what moves the metric reaches delivery.",
+    "mg.ai.k":"AI", "mg.ai.h":"Right context, useful answer", "mg.ai.p":"Retrieval, agents and evaluation so AI answers from what actually matters.",
+    "mg.signal":"signal", "mg.s1":"Discovery", "mg.s2":"Prioritize", "mg.s3":"Delivery", "mg.s4":"Impact",
     "work.title":"Professional work", "work.prev":"Previous case", "work.next":"Next case", "work.aria":"Professional cases carousel",
     "pt.title":"Product Thinking", "pt.prev":"Previous stage", "pt.next":"Next stage",
     "pt.aria":"Interactive case: Where should we use AI?", "pt.tag":"Strategic exercise · Synthetic data",
@@ -1330,7 +1509,7 @@ const SITE = {
     "personal.title":"Personal projects", "personal.prev":"Previous project", "personal.next":"Next project", "personal.aria":"Personal projects carousel",
     "c.featured":"Featured", "c.open":"See the case", "c.close":"Close the case",
     "c.problem":"Problem", "c.role":"My role", "c.decisions":"Key decisions", "c.solution":"Solution", "c.impact":"Impact",
-    "c.tech":"AI approach", "c.priv":"Proprietary product, closed source. I can walk through it live on a call.",
+    "c.tech":"AI approach",
     "p.kind":"Personal project", "p.open":"See the project", "p.close":"Close the project", "p.repo":"Repository ↗",
     "p.what":"What it is", "p.why":"Why I built it", "p.tech":"Technical approach", "p.github":"View on GitHub ↗"
   }
@@ -1707,7 +1886,6 @@ function conteudoDetalhe(c){
     </div>
     <div>
       <div class="pblock"><h4>${esc(c.rotuloTecnica || T("c.tech"))}</h4><ul class="tech-list">${c.tecnica.split(" · ").map(t => `<li>${esc(t)}</li>`).join("")}</ul></div>
-      <p class="priv">${esc(c.priv || T("c.priv"))}</p>
     </div>
   </div>`;
 }
@@ -2678,6 +2856,15 @@ aplicaIdioma(LANG, false);
     if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); }
   }), { rootMargin: "0px 0px -8% 0px", threshold: 0.12 });
   alvos.forEach(sel => { const el = document.querySelector(sel); if (el){ el.classList.add("reveal"); io.observe(el); } });
+
+  /* ---------- motion graphics: só animam enquanto a seção está na tela ---------- */
+  const mg = document.getElementById("motion");
+  if (mg){
+    mg.querySelector(".sec-label").classList.add("reveal");
+    mg.querySelector(".mg-grid-cards").classList.add("reveal");
+    mg.querySelectorAll(".reveal").forEach(el => io.observe(el));
+    new IntersectionObserver(es => es.forEach(e => mg.classList.toggle("live", e.isIntersecting)), { threshold: 0.15 }).observe(mg);
+  }
 
   /* ---------- números contam até o valor (uma vez por slide) ---------- */
   const RE = /\d+(?:[.,]\d+)?/g;

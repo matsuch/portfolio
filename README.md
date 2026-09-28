@@ -13,7 +13,8 @@ projetos pessoais e um case estratégico interativo em 10 etapas.
 A única dependência externa é a fonte servida pelo Google Fonts
 (Bricolage Grotesque, Geist e Geist Mono). Tudo o mais é inline.
 
-Recursos da página: tema claro/escuro (segue o sistema, com alternância manual),
+Recursos da página: seção "Do dado à decisão" com três motion graphics em SVG + CSS
+(dados, produto e IA), tema claro/escuro (segue o sistema, com alternância manual),
 idioma PT/EN, navegação por teclado no case interativo e `prefers-reduced-motion`
 respeitado em todas as animações.
 
