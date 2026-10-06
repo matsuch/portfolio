@@ -318,6 +318,32 @@ p{margin:0}
 }
 .priv{font-size:12.5px;color:var(--ink-3);margin-top:16px}
 
+/* ETL / ML motion graphic (projeto de classificação de eixos) */
+.etl{grid-column:1 / -1;background:var(--paper-2);padding:clamp(14px,2.4vw,28px) clamp(10px,2vw,24px) clamp(8px,1.4vw,16px)}
+.etl svg{display:block;width:100%;height:auto;overflow:visible}
+.etl-track{fill:none;stroke:var(--rule);stroke-width:1.5;stroke-dasharray:4 6}
+.etl-box{fill:var(--paper);stroke:var(--ink-3);stroke-width:1.2}
+.etl-row{stroke:var(--ink-3);stroke-width:2;opacity:.55}
+.etl-lbl{font-family:var(--font-mono);font-size:17px;letter-spacing:.06em;text-transform:uppercase;fill:var(--ink-2);text-anchor:middle}
+.etl-lbl.acc{fill:var(--accent)}
+.etl-raw{fill:var(--ink-3)}
+.etl-pill rect{fill:var(--accent)}
+.etl-pill text{font-family:var(--font-mono);font-size:13px;font-weight:500;fill:var(--accent-ink);text-anchor:middle;dominant-baseline:central}
+.etl-edge{stroke:var(--rule);stroke-width:1}
+.etl-node{fill:var(--accent);animation:etlPulse 1.6s ease-in-out infinite;animation-delay:calc(var(--d) * 160ms)}
+.etl-gate{fill:var(--paper);stroke:var(--accent);stroke-width:1.5}
+.etl-check{fill:none;stroke:var(--accent);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:36;animation:etlCheck 2.4s var(--ease-out) infinite}
+.etl-scan{fill:var(--accent);opacity:.18;animation:etlScan 1.2s ease-in-out infinite alternate}
+@media (max-width:600px){ .etl-lbl{font-size:26px;letter-spacing:.02em} .etl-pill text{font-size:16px} }
+@keyframes etlPulse{0%,100%{opacity:.25}50%{opacity:1}}
+@keyframes etlCheck{0%{stroke-dashoffset:36}35%,85%{stroke-dashoffset:0}100%{stroke-dashoffset:-36}}
+@keyframes etlScan{from{transform:translateY(0)}to{transform:translateY(44px)}}
+@media (prefers-reduced-motion: reduce){
+  .etl-node,.etl-check,.etl-scan{animation:none}
+  .etl-node{opacity:.8}
+  .etl-check{stroke-dashoffset:0}
+}
+
 /* ============================================================
    STATEMENT BANDS
    ============================================================ */
@@ -1632,6 +1658,29 @@ const CASES = {
 const PERSONAIS = {
   pt: [
     {
+      nome: "Classificação de Eixos",
+      repo: "classificacao-eixos",
+      tags: "ETL · Machine Learning · Humano no loop",
+      papelCurto: "Piloto · da API à produção",
+      corpo: "Dados extraídos via API, classificados com ML e devolvidos à plataforma corrigidos, depois de revisão humana.",
+      marca: "Privado · piloto",
+      sinalRotulo: "Sinal do produto",
+      sinal: ["extração via API", "classificação com ML", "envio corrigido"],
+      oque: "Caminhões captados em rodovia precisavam ser classificados por eixos (2C, 3S3, 3T6…) à mão, evento a evento. Montei um fluxo que extrai os dados via API, classifica com ML e só devolve à plataforma depois da revisão humana. No piloto, 3.934 eventos foram corrigidos e enviados, com 0 falhas.",
+      porque: "Tirar da revisão manual um trabalho repetitivo e de alto volume, sem perder a conferência humana.",
+      tecnica: [
+        "Extração via API REST",
+        "LLM de visão vs. YOLO treinado localmente → abordagem híbrida",
+        "App de revisão com humano no loop",
+        "Envio idempotente e retomável"
+      ],
+      etl: {
+        etapas: ["Plataforma", "Extração", "ML", "Revisão", "Dados corrigidos"],
+        aria: "Fluxo animado: dados saem da plataforma via API, são classificados com ML, passam por revisão humana e voltam corrigidos."
+      },
+      situacao: "Projeto privado · resultados de piloto."
+    },
+    {
       nome: "Prumo",
       repo: "prumo",
       tags: "Finanças pessoais · Open Finance · IA",
@@ -1709,6 +1758,29 @@ const PERSONAIS = {
     }
   ],
   en: [
+    {
+      nome: "Axle Classification",
+      repo: "axle-classification",
+      tags: "ETL · Machine Learning · Human in the loop",
+      papelCurto: "Pilot · from API to production",
+      corpo: "Data extracted via API, classified with ML and sent back to the platform corrected, after human review.",
+      marca: "Private · pilot",
+      sinalRotulo: "Product signal",
+      sinal: ["API extraction", "ML classification", "corrected upload"],
+      oque: "Highway trucks had to be classified by axles (2C, 3S3, 3T6…) by hand, event by event. I built a flow that extracts the data via API, classifies it with ML and only sends it back to the platform after human review. In the pilot, 3,934 events were corrected and uploaded with 0 failures.",
+      porque: "To take a repetitive, high-volume task out of manual review without losing the human check.",
+      tecnica: [
+        "REST API extraction",
+        "Vision LLM vs. locally trained YOLO → hybrid approach",
+        "Review app with a human in the loop",
+        "Idempotent, resumable upload"
+      ],
+      etl: {
+        etapas: ["Platform", "Extract", "ML", "Review", "Corrected data"],
+        aria: "Animated flow: data leaves the platform via API, is classified with ML, goes through human review and returns corrected."
+      },
+      situacao: "Private project · pilot results."
+    },
     {
       nome: "Prumo",
       repo: "prumo",
@@ -1898,12 +1970,49 @@ document.getElementById("track-work").addEventListener("click", e => {
   if (caseAberto === idx) fechaCase(); else abreCase(idx);
 });
 
+/* ---------- motion graphic ETL + ML (só para projetos com "etl") ----------
+   Plataforma → extração via API → classificação com ML → revisão humana
+   → dados corrigidos de volta à plataforma. */
+function etlGrafico(r){
+  const A = "M110,95 H335";
+  const B = "M455,95 H670 Q700,95 700,125 V175 Q700,200 670,200 H95 Q65,200 65,170 V140";
+  const brutos = [0, .4, .8].map(t =>
+    `<circle class="etl-raw" r="6"><animateMotion dur="1.2s" begin="-${t}s" repeatCount="indefinite" path="${A}"/></circle>`).join("");
+  const pills = ["2C", "3S3", "3T6", "2S3"].map((cod, k) =>
+    `<g class="etl-pill"><rect x="-22" y="-12" width="44" height="24"/><text>${cod}</text><animateMotion dur="4.8s" begin="-${k * 1.2}s" repeatCount="indefinite" path="${B}"/></g>`).join("");
+  const c1 = [70, 95, 120], c2 = [58, 83, 108, 133], c3 = [82, 108];
+  const arestas = [[360, c1, 395, c2], [395, c2, 430, c3]].map(([xa, ya, xb, yb]) =>
+    ya.map(a => yb.map(b => `<line class="etl-edge" x1="${xa}" y1="${a}" x2="${xb}" y2="${b}"/>`).join("")).join("")).join("");
+  const nos = [[360, c1], [395, c2], [430, c3]].map(([x, ys], i) =>
+    ys.map((y, j) => `<circle class="etl-node" cx="${x}" cy="${y}" r="5" style="--d:${i * 3 + j}"/>`).join("")).join("");
+  const linhas = [72, 90, 108, 126].map(y => `<line class="etl-row" x1="36" y1="${y}" x2="${y % 36 ? 94 : 80}" y2="${y}"/>`).join("");
+  return `
+  <div class="etl">
+    <svg viewBox="0 0 720 236" role="img" aria-label="${esc(r.aria)}">
+      <path class="etl-track" d="${A}"/><path class="etl-track" d="${B}"/>
+      ${brutos}${pills}
+      <rect class="etl-box" x="20" y="50" width="90" height="90"/>${linhas}
+      <rect class="etl-box" x="185" y="65" width="90" height="60"/>
+      <line class="etl-row" x1="200" y1="82" x2="260" y2="82"/><line class="etl-row" x1="200" y1="95" x2="248" y2="95"/><line class="etl-row" x1="200" y1="108" x2="254" y2="108"/>
+      <rect class="etl-scan" x="186" y="66" width="88" height="14"/>
+      <rect class="etl-box" x="335" y="40" width="120" height="110"/>${arestas}${nos}
+      <circle class="etl-gate" cx="560" cy="95" r="26"/><path class="etl-check" d="M548,96 l8,8 l16,-17"/>
+      <text class="etl-lbl" x="65" y="28">${esc(r.etapas[0])}</text>
+      <text class="etl-lbl" x="230" y="28">${esc(r.etapas[1])}</text>
+      <text class="etl-lbl acc" x="395" y="28">${esc(r.etapas[2])}</text>
+      <text class="etl-lbl" x="560" y="28">${esc(r.etapas[3])}</text>
+      <text class="etl-lbl acc" x="383" y="230">${esc(r.etapas[4])}</text>
+    </svg>
+  </div>`;
+}
+
 /* ---------- detalhe do projeto pessoal ---------- */
 function conteudoProjeto(c){
   const itens = c.tecnica.map(t => `<li>${esc(t)}</li>`).join("");
   const situacao = c.situacao ? `<p class="priv">${esc(c.situacao)}</p>` : "";
   return `
   <div class="panel-grid">
+    ${c.etl ? etlGrafico(c.etl) : ""}
     <div>
       <p class="detail-title">${esc(c.nome)}</p>
       <div class="pblock"><h4>${esc(T("p.what"))}</h4><p>${esc(c.oque)}</p></div>
@@ -1931,6 +2040,8 @@ function fechaTodosProjetos(){
 function abreProjeto(idx){
   fechaTodosProjetos();
   corpoP.innerHTML = conteudoProjeto(PERSONAIS[LANG][idx]);
+  const svgEtl = corpoP.querySelector(".etl svg");
+  if (svgEtl && matchMedia("(prefers-reduced-motion: reduce)").matches){ svgEtl.setCurrentTime(1); svgEtl.pauseAnimations(); }
   detalheP.dataset.open = "true";
   const b = document.querySelector(`.projeto-open[data-projeto="${idx}"]`);
   if (b){
