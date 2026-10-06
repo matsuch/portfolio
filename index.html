@@ -1759,7 +1759,7 @@ const PERSONAIS = {
   ],
   en: [
     {
-      nome: "Axle Classification",
+      nome: "ML Classification",
       repo: "axle-classification",
       tags: "ETL · Machine Learning · Human in the loop",
       papelCurto: "Pilot · from API to production",
@@ -1767,7 +1767,7 @@ const PERSONAIS = {
       marca: "Private · pilot",
       sinalRotulo: "Product signal",
       sinal: ["API extraction", "ML classification", "corrected upload"],
-      oque: "Highway trucks had to be classified by axles (2C, 3S3, 3T6…) by hand, event by event. I built a flow that extracts the data via API, classifies it with ML and only sends it back to the platform after human review. In the pilot, 3,934 events were corrected and uploaded with 0 failures.",
+      oque: "Highway trucks had to be classified by axles (2C, 3S3, 3T6…) by hand, event by event. I built a flow that extracts the data via API, classifies it with ML and sends it back to the platform. With a 80% accuracy, the ML reduced hours of manual review.",
       porque: "To take a repetitive, high-volume task out of manual review without losing the human check.",
       tecnica: [
         "REST API extraction",
@@ -1976,10 +1976,17 @@ document.getElementById("track-work").addEventListener("click", e => {
 function etlGrafico(r){
   const A = "M110,95 H335";
   const B = "M455,95 H670 Q700,95 700,125 V175 Q700,200 670,200 H95 Q65,200 65,170 V140";
-  const brutos = [0, .4, .8].map(t =>
-    `<circle class="etl-raw" r="6"><animateMotion dur="1.2s" begin="-${t}s" repeatCount="indefinite" path="${A}"/></circle>`).join("");
-  const pills = ["2C", "3S3", "3T6", "2S3"].map((cod, k) =>
-    `<g class="etl-pill"><rect x="-22" y="-12" width="44" height="24"/><text>${cod}</text><animateMotion dur="4.8s" begin="-${k * 1.2}s" repeatCount="indefinite" path="${B}"/></g>`).join("");
+  // Ritmo: um item a cada PASSO segundos nos dois trechos. B (≈1007u) tem
+  // ~4,5× o comprimento de A (≈225u), então 2 bolinhas em A e 9 etiquetas em B
+  // andam na mesma velocidade, e cada etiqueta sai do ML quando uma bolinha entra.
+  const PASSO = 1.4;                                   // aumente para deixar mais lento
+  const codigos = ["2C", "3S3", "3T6", "2S3"];
+  const durA = 2 * PASSO, durB = codigos.length * PASSO;
+  const inicio = k => `-${(k * PASSO).toFixed(2)}s`;
+  const brutos = [0, 1].map(k =>
+    `<circle class="etl-raw" r="6"><animateMotion dur="${durA}s" begin="${inicio(k)}" repeatCount="indefinite" path="${A}"/></circle>`).join("");
+  const pills = codigos.map((cod, k) =>
+    `<g class="etl-pill"><rect x="-22" y="-12" width="44" height="24"/><text>${cod}</text><animateMotion dur="${durB}s" begin="${inicio(k)}" repeatCount="indefinite" path="${B}"/></g>`).join("");
   const c1 = [70, 95, 120], c2 = [58, 83, 108, 133], c3 = [82, 108];
   const arestas = [[360, c1, 395, c2], [395, c2, 430, c3]].map(([xa, ya, xb, yb]) =>
     ya.map(a => yb.map(b => `<line class="etl-edge" x1="${xa}" y1="${a}" x2="${xb}" y2="${b}"/>`).join("")).join("")).join("");
