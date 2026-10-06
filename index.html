@@ -1632,6 +1632,27 @@ const CASES = {
 const PERSONAIS = {
   pt: [
     {
+      nome: "Classificação de Eixos",
+      repo: "classificacao-eixos",
+      tags: "Visão computacional · ML · Humano no loop",
+      papelCurto: "Piloto · da API à produção",
+      corpo: "Eventos de caminhões em rodovia classificados por número de eixos: dados extraídos via API, tratados com ML e devolvidos à plataforma já corrigidos, só depois de revisão humana.",
+      marca: "Privado · piloto",
+      sinalRotulo: "Sinal do produto",
+      sinal: ["extração via API", "classificação com ML", "revisão e envio corrigido"],
+      oque: "Em uma plataforma de monitoramento rodoviário com câmera fixa, cada caminhão precisa receber a categoria por eixos e unidades (2C, 3C, 2S3, 3S3, 3T6…), e isso dependia de revisão manual evento a evento. O fluxo que montei tem três etapas: extrai os eventos e as imagens via API (tratando falhas do endpoint sem travar o lote), classifica com ML e devolve à plataforma os dados corretos. Testei duas abordagens: um LLM de visão que descreve unidades e grupos de eixos, com uma regra determinística que converte para a categoria (85,2% de acerto no melhor modelo, a cerca de US$ 0,014 por imagem), e um classificador YOLO treinado localmente em ~3 mil imagens validadas por pessoas, testado em um dia que nunca entrou no treino (74,8% na validação, 85% no top-2). O resultado levou a uma abordagem híbrida: classificador primeiro, LLM como reforço nos casos difíceis, como diferença de um eixo ou oclusão. Por cima, um app local de revisão: a pessoa escolhe o lote, o app extrai e classifica, mostra tudo numa tela de conferência e só envia depois da aprovação. No teste real, um lote de 4.552 eventos teve 3.934 classificações enviadas com 0 falhas, com envio retomável e sem duplicar. Os números são de um piloto.",
+      porque: "Para tirar da revisão manual um trabalho repetitivo e de alto volume, sem abrir mão da conferência humana antes de gravar em produção.",
+      tecnica: [
+        "Extração via API REST, com lista separada de falhas",
+        "LLMs de visão comparados por custo e acurácia",
+        "YOLO treinado localmente em GPU, testado em dia separado",
+        "Abordagem híbrida: classificador com LLM como fallback",
+        "App local de revisão com humano no loop",
+        "Envio idempotente e retomável, com reconciliação automática"
+      ],
+      situacao: "Projeto privado. Sem imagens reais publicadas."
+    },
+    {
       nome: "Prumo",
       repo: "prumo",
       tags: "Finanças pessoais · Open Finance · IA",
@@ -1709,6 +1730,27 @@ const PERSONAIS = {
     }
   ],
   en: [
+    {
+      nome: "Axle Classification",
+      repo: "axle-classification",
+      tags: "Computer vision · ML · Human in the loop",
+      papelCurto: "Pilot · from API to production",
+      corpo: "Highway truck events classified by number of axles: data extracted via API, processed with ML and sent back to the platform corrected, only after human review.",
+      marca: "Private · pilot",
+      sinalRotulo: "Product signal",
+      sinal: ["API extraction", "ML classification", "review and corrected upload"],
+      oque: "On a highway monitoring platform with a fixed camera, every truck needs a category by axles and units (2C, 3C, 2S3, 3S3, 3T6…), and that relied on manual review, event by event. The flow I built has three steps: extract events and images via API (handling endpoint failures without blocking the batch), classify them with ML, and send the correct data back to the platform. I tested two approaches: a vision LLM that describes units and axle groups, with a deterministic rule mapping them to the category (85.2% accuracy with the best model, at about US$0.014 per image), and a YOLO classifier trained locally on ~3k human-validated images, tested on a day never used in training (74.8% on validation, 85% top-2). The result pointed to a hybrid approach: classifier first, LLM as backup for hard cases such as a one-axle difference or occlusion. On top of that, a local review app: the user picks the batch, the app extracts and classifies it, shows everything on a review screen and only uploads after approval. In the real test, a batch of 4,552 events had 3,934 classifications uploaded with 0 failures, with resumable, duplicate-free uploads. These are pilot results.",
+      porque: "To take a repetitive, high-volume task out of manual review, without giving up a human check before writing to production.",
+      tecnica: [
+        "REST API extraction, with a separate failure list",
+        "Vision LLMs compared on cost and accuracy",
+        "YOLO trained locally on GPU, tested on a held-out day",
+        "Hybrid approach: classifier with LLM fallback",
+        "Local review app with a human in the loop",
+        "Idempotent, resumable upload with automatic reconciliation"
+      ],
+      situacao: "Private project. No real images published."
+    },
     {
       nome: "Prumo",
       repo: "prumo",
