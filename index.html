@@ -2019,7 +2019,6 @@ function conteudoProjeto(c){
   const situacao = c.situacao ? `<p class="priv">${esc(c.situacao)}</p>` : "";
   return `
   <div class="panel-grid">
-    ${c.etl ? etlGrafico(c.etl) : ""}
     <div>
       <p class="detail-title">${esc(c.nome)}</p>
       <div class="pblock"><h4>${esc(T("p.what"))}</h4><p>${esc(c.oque)}</p></div>
@@ -2030,6 +2029,7 @@ function conteudoProjeto(c){
       ${situacao}
       ${c.repoUrl ? `<p class="priv"><a class="repo-link" href="${esc(c.repoUrl)}" target="_blank" rel="noopener">${esc(T("p.github"))}</a></p>` : ""}
     </div>
+    ${c.etl ? etlGrafico(c.etl) : ""}
   </div>`;
 }
 
