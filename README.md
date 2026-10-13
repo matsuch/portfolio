@@ -1,44 +1,24 @@
-# Portfólio — Matheus Rosa Such
+# Matheus Rosa Such
 
-Site estático de página única: produto, IA, dados e CRM, com cases profissionais,
-projetos pessoais e um case estratégico interativo em 10 etapas.
+**Produto, IA, dados e CRM** — transformo dado em decisão e decisão em produto.
 
-## Conteúdo
+## 👉 Veja o portfólio completo: [matheus-such.vercel.app](https://matheus-such.vercel.app)
 
-| Arquivo | Descrição |
-| --- | --- |
-| `index.html` | A página inteira — HTML, CSS e JS em um único arquivo, sem build e sem dependências. |
-| `vercel.json` | Configuração de deploy: `cleanUrls`, cabeçalhos de segurança e cache do HTML. |
+---
 
-A única dependência externa é a fonte servida pelo Google Fonts
-(Bricolage Grotesque, Geist e Geist Mono). Tudo o mais é inline.
+## O que você encontra no site
 
-Recursos da página: seção "Do dado à decisão" com três motion graphics em SVG + CSS
-(dados, produto e IA), tema claro/escuro (segue o sistema, com alternância manual),
-idioma PT/EN, navegação por teclado no case interativo e `prefers-reduced-motion`
-respeitado em todas as animações.
+- **Cases profissionais** — produtos de IA, dados e CRM, com contexto, decisões e resultados.
+- **Projetos pessoais** — como o Passar Concursos Brasil.
+- **Case estratégico interativo** — 10 etapas para você decidir junto comigo.
+- **Do dado à decisão** — três animações que mostram como dados, produto e IA se conectam.
+- Tema claro/escuro e versão em português e inglês.
 
-## Rodando localmente
+## Vamos conversar?
 
-Abrir `index.html` no navegador já basta. Para servir por HTTP:
+- 🌐 Site: [matheus-such.vercel.app](https://matheus-such.vercel.app)
+- 💼 LinkedIn: [linkedin.com/in/matheus-such](https://www.linkedin.com/in/matheus-such)
 
-```bash
-python3 -m http.server 8000
-# http://localhost:8000
-```
+---
 
-## Deploy na Vercel
-
-Não há etapa de build — a Vercel serve a raiz do repositório como estático.
-
-O projeto `matheus-such` já está conectado a este repositório: cada push na
-branch de produção gera um deploy de produção, e as demais branches geram
-deploys de preview. Framework Preset fica em **Other**, com Build e Output
-vazios.
-
-Deploy manual pela CLI, se precisar:
-
-```bash
-npx vercel        # preview
-npx vercel --prod # produção
-```
+<sub>Site estático em HTML, CSS e JS puros, publicado na Vercel. Para rodar localmente, abra o `index.html` no navegador.</sub>
