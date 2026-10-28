@@ -1,0 +1,33 @@
+# Matheus Rosa Such
+
+> Product Manager com mais de 6 anos em produtos, IA, dados, crescimento e CRM. Baseado em Joinville, Brasil; trabalha remoto e está aberto a novas oportunidades. / Product Manager with 6+ years in product, AI, data, growth and CRM, based in Joinville, Brazil, working remotely and open to new opportunities.
+
+O site é uma página única (https://matheus-such.vercel.app/) disponível em português e inglês. Os resumos abaixo espelham o conteúdo do site.
+
+## Contato
+- Site: https://matheus-such.vercel.app/
+- LinkedIn: https://www.linkedin.com/in/matheus-such
+- GitHub: https://github.com/matsuch
+- E-mail: matsuch@gmail.com
+
+## Competências
+- Produto: estratégia, descoberta e priorização
+- IA: agentes, RAG, UX de IA e avaliação
+- Dados: métricas, experimentação e análise de dados
+- Construção: automação, prototipagem, APIs e engenharia
+
+## Cases profissionais (Product Manager)
+- Assistente de Atendimento com IA (AI Product Lead): sistema RAG de atendimento para serviços financeiros; cerca de 50% das interações atendidas pelo assistente, com fonte citada e transferência para humano quando não há fonte confiável.
+- Retenção em Renda Fixa: identificação antecipada de clientes perto do vencimento, oferta personalizada e abordagem automatizada; 45% de retenção contra 30% do comportamento orgânico.
+- CRM e Inteligência Comercial: lead scoring, priorização de fila e automação; conversão de SDR de 8% para 20%.
+- Plataforma de Conteúdo com IA: geração de conteúdo já dentro das diretrizes jurídicas e de marketing, reduzindo o tempo de criação.
+
+## Projetos pessoais
+- Classificação de Eixos (ML Classification): ETL + ML com humano no loop para classificar caminhões por eixos (cerca de 80% de acerto), reduzindo horas de revisão manual.
+- Prumo: produto próprio de finanças pessoais com Open Finance, classificação de gastos e assistente financeiro.
+- Passar Concursos Brasil: plataforma de quiz para concursos com conta, assinatura via Stripe e gestão de conteúdo. https://github.com/matsuch/concursos-quiz-brasil
+- Meu Apito: projeto em dupla para árbitros de futebol acompanharem a carreira com dados.
+- Diário do Bebê: web app com dados compartilhados e notificação push entre os pais. https://github.com/matsuch/diario-do-bebe
+
+## Estratégia de produto
+- Product Thinking: caso interativo de 10 etapas ("Onde devemos usar IA?") com dados sintéticos, do diagnóstico ao pitch.
