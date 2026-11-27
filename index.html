@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="author" content="Matheus Rosa Such">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
-<meta name="theme-color" content="#F7F5F2">
+<meta name="theme-color" content="#F7F5F2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121211" media="(prefers-color-scheme: dark)">
+<script>try{var t=localStorage.getItem("tema");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(_){}</script>
 <link rel="canonical" href="https://matheus-such.vercel.app/">
 <meta name="google-site-verification" content="KnKQLxQsXIo_PWMeTBLkUe5SLRJIDslTUPUQVzJtOZI">
 <link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt">
@@ -1576,7 +1578,12 @@ img{max-width:100%}
    (com marcação) e data-i18n-aria (aria-label).
    ============================================================ */
 const LANGS = ["pt", "en"];
-let LANG = (() => { try { const l = localStorage.getItem("idioma"); if (LANGS.includes(l)) return l; } catch (_) {} return "en"; })();
+/* Idioma: escolha salva > idioma do navegador/sistema (pt* → PT, senão EN) */
+let LANG = (() => {
+  try { const l = localStorage.getItem("idioma"); if (LANGS.includes(l)) return l; } catch (_) {}
+  const prefs = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || "en"]);
+  return /^pt/i.test(prefs[0] || "") ? "pt" : "en";
+})();
 const onLang = []; // quem precisa re-renderizar quando o idioma muda
 
 const SITE = {
