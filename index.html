@@ -1166,6 +1166,30 @@ html[data-vt="theme"]::view-transition-new(root){animation:vtCirculo 620ms var(-
 
 /* competências: rótulo em caixa normal (limite de rótulos em caixa-alta por página) */
 .skills-title{font-size:13px;font-weight:500;color:var(--ink-3)}
+
+/* competências: seção própria, logo abaixo do hero */
+.skills-lead{font-size:clamp(17px,1.5vw,20px);color:var(--ink-2);max-width:52ch;margin:-8px 0 clamp(22px,3vw,36px);line-height:1.5}
+.skills-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--rule)}
+.skill-card{display:flex;flex-direction:column;gap:10px;padding:22px 22px 24px 0;text-decoration:none;color:inherit;border-bottom:1px solid var(--rule);transition:background-color .2s}
+.skill-card + .skill-card{padding-left:22px;border-left:1px solid var(--rule)}
+.skill-card:hover{background:var(--rule-soft,transparent)}
+.skill-card:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.skill-n{font-size:12px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.skill-card h3{font-family:var(--font-display);font-size:clamp(24px,2.4vw,32px);font-weight:500;letter-spacing:-.03em;line-height:1.1}
+.skill-card > p:not(.skill-proof){font-size:14.5px;line-height:1.5;color:var(--ink-2)}
+.skill-tags{list-style:none;margin:4px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.skill-tags li{font-size:12.5px;padding:3px 10px;border:1px solid var(--rule);border-radius:999px;color:var(--ink-2)}
+.skill-proof{margin-top:auto;padding-top:14px;font-size:13.5px;line-height:1.45;color:var(--ink-3)}
+.skill-proof strong{display:block;font-family:var(--font-display);font-size:clamp(22px,2vw,28px);font-weight:500;letter-spacing:-.03em;color:var(--accent);font-variant-numeric:tabular-nums}
+@media (max-width:980px){
+  .skills-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .skill-card:nth-child(odd){padding-left:0;border-left:0}
+  .skill-card:nth-child(even){padding-left:22px;border-left:1px solid var(--rule)}
+}
+@media (max-width:560px){
+  .skills-cards{grid-template-columns:1fr}
+  .skill-card,.skill-card + .skill-card,.skill-card:nth-child(even){padding:20px 0;border-left:0}
+}
 .tech-inline{list-style:none;margin:0;padding:0;display:grid;gap:6px}
 .tech-inline li{font-size:14.5px;line-height:1.5;color:var(--ink-2)}
 
@@ -1334,6 +1358,7 @@ img{max-width:100%}
       <a class="mail" href="https://www.linkedin.com/in/matheus-such" target="_blank" rel="noopener">LinkedIn ↗</a>
     </div>
     <nav class="nav">
+      <a href="#skills" class="hide-xs" data-i18n="nav.skills">Skills</a>
       <a href="#work" class="hide-xs" data-i18n="nav.work">Work</a>
       <a href="#thinking" class="hide-sm" data-i18n="nav.thinking">Thinking</a>
       <a href="#personal" class="hide-sm" data-i18n="nav.projects">Projects</a>
@@ -1396,22 +1421,47 @@ img{max-width:100%}
           <span class="k" data-i18n="hero.place">Joinville, Brazil</span>
           <span class="v" data-i18n="hero.placeSub">remote · open to new opportunities</span>
         </div>
-
-        <div class="skills">
-          <p class="skills-title" data-i18n="skills.title">Skills</p>
-          <div class="signal-rule"></div>
-          <div class="skills-grid">
-            <div class="skill"><h3 data-i18n="skills.product">Product</h3><p data-i18n="skills.productSub">Strategy, discovery and prioritization</p></div>
-            <div class="skill"><h3 data-i18n="skills.ai">AI</h3><p data-i18n="skills.aiSub">Agents, RAG, AI UX and evaluation</p></div>
-            <div class="skill"><h3 data-i18n="skills.data">Data</h3><p data-i18n="skills.dataSub">Metrics, experimentation and data analysis</p></div>
-            <div class="skill"><h3 data-i18n="skills.build">Building</h3><p data-i18n="skills.buildSub">Automation, prototyping, APIs and engineering</p></div>
-          </div>
-        </div>
       </aside>
     </div>
   </section>
 
   <div class="shell" aria-hidden="true"><hr class="sep"></div>
+
+  <!-- ===================== COMPETENCIAS ===================== -->
+  <section class="shell band-tight" id="skills">
+    <div class="sec-label"><span class="sec-title" data-i18n="skills.title">Skills</span></div>
+    <p class="skills-lead" data-i18n="skills.lead">What I do, and where you can see it working.</p>
+    <div class="skills-cards">
+      <a class="skill-card" href="#work">
+        <span class="skill-n" aria-hidden="true">01</span>
+        <h3 data-i18n="skills.product">Product</h3>
+        <p data-i18n="skills.productSub">Strategy, discovery and prioritization</p>
+        <ul class="skill-tags"><li data-i18n="skills.product.t1">Roadmap</li><li data-i18n="skills.product.t2">Discovery</li><li data-i18n="skills.product.t3">Prioritization</li><li data-i18n="skills.product.t4">Growth and CRM</li></ul>
+        <p class="skill-proof"><strong data-i18n="skills.product.k">8% → 20%</strong> <span data-i18n="skills.product.v">SDR conversion with lead scoring</span></p>
+      </a>
+      <a class="skill-card" href="#work">
+        <span class="skill-n" aria-hidden="true">02</span>
+        <h3 data-i18n="skills.ai">AI</h3>
+        <p data-i18n="skills.aiSub">Agents, RAG, AI UX and evaluation</p>
+        <ul class="skill-tags"><li>RAG</li><li data-i18n="skills.ai.t2">Agents</li><li data-i18n="skills.ai.t3">AI UX</li><li data-i18n="skills.ai.t4">Evaluation</li></ul>
+        <p class="skill-proof"><strong data-i18n="skills.ai.k">~50%</strong> <span data-i18n="skills.ai.v">of customer interactions handled by the AI assistant</span></p>
+      </a>
+      <a class="skill-card" href="#work">
+        <span class="skill-n" aria-hidden="true">03</span>
+        <h3 data-i18n="skills.data">Data</h3>
+        <p data-i18n="skills.dataSub">Metrics, experimentation and data analysis</p>
+        <ul class="skill-tags"><li data-i18n="skills.data.t1">Metrics</li><li data-i18n="skills.data.t2">Experiments</li><li data-i18n="skills.data.t3">Analysis</li><li data-i18n="skills.data.t4">Machine learning</li></ul>
+        <p class="skill-proof"><strong data-i18n="skills.data.k">45% vs 30%</strong> <span data-i18n="skills.data.v">retention, targeted outreach vs organic</span></p>
+      </a>
+      <a class="skill-card" href="#personal">
+        <span class="skill-n" aria-hidden="true">04</span>
+        <h3 data-i18n="skills.build">Building</h3>
+        <p data-i18n="skills.buildSub">Automation, prototyping, APIs and engineering</p>
+        <ul class="skill-tags"><li data-i18n="skills.build.t1">Automation</li><li data-i18n="skills.build.t2">Prototyping</li><li>APIs</li><li data-i18n="skills.build.t4">Web apps</li></ul>
+        <p class="skill-proof"><strong data-i18n="skills.build.k">5 projects</strong> <span data-i18n="skills.build.v">built and shipped on my own</span></p>
+      </a>
+    </div>
+  </section>
 
   <div class="shell" aria-hidden="true"><hr class="sep"></div>
 
@@ -1539,6 +1589,15 @@ const SITE = {
     "hero.cta":"Ver os cases", "hero.aside":"Resumo",
     "hero.years":"6+ anos", "hero.yearsSub":"em produtos e IA",
     "hero.place":"Joinville, Brasil", "hero.placeSub":"remoto · aberto a novas oportunidades",
+    "nav.skills":"Competências", "skills.lead":"O que eu faço e onde você pode ver funcionando.",
+    "skills.product.t1":"Roadmap", "skills.product.t2":"Descoberta", "skills.product.t3":"Priorização", "skills.product.t4":"Growth e CRM",
+    "skills.product.k":"8% → 20%", "skills.product.v":"de conversão de SDR com lead scoring",
+    "skills.ai.t2":"Agentes", "skills.ai.t3":"UX de IA", "skills.ai.t4":"Avaliação",
+    "skills.ai.k":"~50%", "skills.ai.v":"dos atendimentos resolvidos pelo assistente de IA",
+    "skills.data.t1":"Métricas", "skills.data.t2":"Experimentos", "skills.data.t3":"Análise", "skills.data.t4":"Machine learning",
+    "skills.data.k":"45% vs 30%", "skills.data.v":"de retenção, abordagem ativa vs orgânico",
+    "skills.build.t1":"Automação", "skills.build.t2":"Prototipagem", "skills.build.t4":"Apps web",
+    "skills.build.k":"5 projetos", "skills.build.v":"construídos e publicados por conta própria",
     "skills.title":"Competências",
     "skills.product":"Produto", "skills.productSub":"Estratégia, descoberta e priorização",
     "skills.ai":"IA", "skills.aiSub":"Agentes, RAG, UX de IA e avaliação",
@@ -1570,6 +1629,15 @@ const SITE = {
     "hero.cta":"See the cases", "hero.aside":"Summary",
     "hero.years":"6+ years", "hero.yearsSub":"in product and AI",
     "hero.place":"Joinville, Brazil", "hero.placeSub":"remote · open to new opportunities",
+    "nav.skills":"Skills", "skills.lead":"What I do, and where you can see it working.",
+    "skills.product.t1":"Roadmap", "skills.product.t2":"Discovery", "skills.product.t3":"Prioritization", "skills.product.t4":"Growth and CRM",
+    "skills.product.k":"8% → 20%", "skills.product.v":"SDR conversion with lead scoring",
+    "skills.ai.t2":"Agents", "skills.ai.t3":"AI UX", "skills.ai.t4":"Evaluation",
+    "skills.ai.k":"~50%", "skills.ai.v":"of customer interactions handled by the AI assistant",
+    "skills.data.t1":"Metrics", "skills.data.t2":"Experiments", "skills.data.t3":"Analysis", "skills.data.t4":"Machine learning",
+    "skills.data.k":"45% vs 30%", "skills.data.v":"retention, targeted outreach vs organic",
+    "skills.build.t1":"Automation", "skills.build.t2":"Prototyping", "skills.build.t4":"Web apps",
+    "skills.build.k":"5 projects", "skills.build.v":"built and shipped on my own",
     "skills.title":"Skills",
     "skills.product":"Product", "skills.productSub":"Strategy, discovery and prioritization",
     "skills.ai":"AI", "skills.aiSub":"Agents, RAG, AI UX and evaluation",
@@ -3094,7 +3162,7 @@ aplicaIdioma(LANG, false);
   onLang.push(() => { if (titulo){ titulo.classList.remove("play"); divide(titulo); } });
 
   /* ---------- blocos entram ao aparecer na tela ---------- */
-  const alvos = ["#work .sec-label", "#rail-work", "#thinking .sec-label", "#pt-deck", "#personal .sec-label", "#rail-personal", "#contact .sec-label", "#contact-card"];
+  const alvos = ["#skills .sec-label", "#skills .skills-cards", "#work .sec-label", "#rail-work", "#thinking .sec-label", "#pt-deck", "#personal .sec-label", "#rail-personal", "#contact .sec-label", "#contact-card"];
   const io = new IntersectionObserver(es => es.forEach(e => {
     if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); }
   }), { rootMargin: "0px 0px -8% 0px", threshold: 0.12 });
